@@ -44,14 +44,19 @@ class NavBar extends React.Component {
                     </a>
 
                     <div id="search-bar">
-                        <i id="search-icon" className="fas fa-search"/>
-                        <input type="search" placeholder="Search Quora"/>
+                        {/* will use to expand when clicked on */}
+                        <div id="search-container">
+                            <i id="search-icon" className="fas fa-search"/>
+                            <input type="search" placeholder="Search Quora"/>
+                        </div>
                     </div>
                     <div id="profile-icon">
                         <img src={defaultPic} alt=""/>
                     </div>
                     <div id="ask-question">
-                        
+                        <div id="ask-button-container">
+                            <button>Ask Question</button>
+                        </div>
                     </div>
                 </div>
             </nav>
