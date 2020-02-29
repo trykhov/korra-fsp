@@ -1,6 +1,15 @@
 import React from 'react';
+import defaultPic from '../images/blank-prof-pic.jpeg';
 
 class NavBar extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            // currentTab: 'home'
+        }
+    }
+    
 
     render() {
         return (
@@ -35,11 +44,11 @@ class NavBar extends React.Component {
                     </a>
 
                     <div id="search-bar">
-                        <i className="fas fa-search"/>
+                        <i id="search-icon" className="fas fa-search"/>
                         <input type="search" placeholder="Search Quora"/>
                     </div>
                     <div id="profile-icon">
-                        <img src="" alt=""/>
+                        <img src={defaultPic} alt=""/>
                     </div>
                     <div id="ask-question">
                         
