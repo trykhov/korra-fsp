@@ -3,10 +3,16 @@
 
 #main-nav-bar {
     background-color: $primaryWhite;
+    border-width: 1px;
+    box-shadow:rgba(0, 0, 0, 0.04) 0px 3px 6px;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 3;
 }
 
 #nav-container {
     align-items: center;
+    border-color: rgb(222, 224, 225);
     display: flex;
     flex-wrap: wrap;
     font-family: sans-serif;
@@ -83,7 +89,7 @@
 #profile-icon {
     height: 3vw;
     @include verticalCenter;
-    padding: 0.5% 0%;
+    padding: 0.5% 0;
     width: 4%;
     &:hover {
         cursor: pointer;
