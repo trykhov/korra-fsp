@@ -16,7 +16,7 @@ class NavBar extends React.Component {
             <nav id="main-nav-bar">
                 <div id="nav-container">
                     <a href="" id="logo-container">
-                        <h1>Korra</h1>  
+                        <h1 className="logo">Korra</h1>  
                     </a>
                     <a href="" id="home-nav">
                         <div className="inner-container">

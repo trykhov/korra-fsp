@@ -25,7 +25,15 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif)$/i,
         use: [{loader: 'url-loader'}]
-      }
+      },
+      {
+                 test: /\.s[ac]ss$/,
+                 use: [
+                   'style-loader',
+                   'css-loader',
+                   'sass-loader'
+                 ],
+               }
     ]
   },
   devtool: 'source-map'
