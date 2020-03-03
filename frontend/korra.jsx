@@ -8,13 +8,24 @@ import * as SessionAction from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("root");
-    const store = configureStore();
+    let preloadedState = undefined;
+    // to tell the window that the user is logged in
+    if (window.currentUser) {
+        preloadedState = {
+        session: {
+            currentUser: window.currentUser
+            }
+        };
+    }
+    console.log();
+    
+    const store = configureStore(preloadedState);
     // TESTING: BEGIN
     window.store = store;
     window.signInUser = SessionAction.signInUser;
     window.signOutUser = SessionAction.signOutUser;
-    const example = {id: 1, username: "Peter Parker", email: "spiderman@avg.org", password: "tonystark"};
-    store.dispatch(signInUser(example))
+    // const example = {id: 1, username: "Peter Parker", email: "spiderman@avg.org", password: "tonystark"};
+    // store.dispatch(signInUser(example))
     // window.createUser = UserAction.createUser;
     // store.dispatch(createUser(example));
     // window.fetchUser = UserAction.fetchUser;

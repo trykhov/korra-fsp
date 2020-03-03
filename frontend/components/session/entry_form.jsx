@@ -1,9 +1,29 @@
 import React from 'react';
 
 class EntryForm extends React.Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+            errors: ''
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInput(field) {
+        return (e) => this.setState({[field]: e.target.value})
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.login(this.state).then(this.props.history.push("/"));
+        this.setState({username: '', email: '', password: ''});
+    }
 
     render() {
+        const { username, email, password } = this.state;
         return (
             <main id="login-info">
                 <div id="main-login-container">
@@ -31,13 +51,23 @@ class EntryForm extends React.Component {
                             </div>
                         </div>
                         <div id="login-form-container">
-                            <form>
+                            <form onSubmit={e => this.handleSubmit(e)}>
                                 <div id="login-title">Login</div>
                                 <div id="email">
-                                    <input type="text" placeholder="Email"/>
+                                    <input 
+                                        onChange={this.handleInput('email')}
+                                        type="text" 
+                                        placeholder="Email"
+                                        value={email}
+                                    />
                                 </div>
                                 <div id="password">
-                                    <input type="password" placeholder="Password"/>
+                                    <input 
+                                        onChange={this.handleInput('password')}
+                                        type="password" 
+                                        placeholder="Password"
+                                        value={password}
+                                    />
                                 </div>
                                 <button>Login</button>
                             </form>
@@ -50,3 +80,4 @@ class EntryForm extends React.Component {
 }
 
 export default EntryForm;
+

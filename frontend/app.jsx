@@ -1,17 +1,12 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import NavBar from './components/nav_bar/nav_bar';
-import EntryForm from './components/session/entry_form';
-import { Provider } from 'react-redux';
-import { HashRouter, Route } from 'react-router-dom';
+import SessionContainer from './components/session/session_container';
 
 
 const App = () => {
     return (
-        <EntryForm />
-        // <HashRouter>
-        // <NavBar/>
-        //     <Route path="/login" component={}/>
-        // </HashRouter>
+        <NavBar/>
     )
 }
 
