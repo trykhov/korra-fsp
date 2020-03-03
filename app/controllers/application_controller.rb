@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
     # handles logic of user login and logout
 
     def current_user
-        @current_user ||= User.find_by(session: session_token)
+        @current_user ||= User.find_by(session_token: session[:session_token])
     end
 
     def login(user)
