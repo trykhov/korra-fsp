@@ -10,15 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("root");
     let preloadedState = undefined;
     // to tell the window that the user is logged in
+    // (look at the application.html.erb in the app/views folder)
     if (window.currentUser) {
         preloadedState = {
-        session: {
-            currentUser: window.currentUser
+            session: {
+                currentUser: window.currentUser
             }
         };
     }
-    console.log();
-    
     const store = configureStore(preloadedState);
     // TESTING: BEGIN
     window.store = store;
