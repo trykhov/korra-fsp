@@ -1,4 +1,5 @@
 import React from 'react';
+import defaultPic from '../images/blank-prof-pic.jpeg';
 
 // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 class AskQuestion extends React.Component {
@@ -15,13 +16,17 @@ class AskQuestion extends React.Component {
                 {/* will be the container that holds the container for the question */}
                 {/* will be used to center the container */}
                 <div id="outter-question-container">
+                    <section id="top-options">
+                        <div id="add-question-container" className="question-container">
+                            <div>Add Question</div>
+                            <i className="fas fa-times"></i>
+                        </div>
+                    </section>
+                    <section id="asker-container" className="question-container">
+                        <img src={defaultPic}/>
+                        <span>User asked</span>
+                    </section>
                     <form id="main-question-container">
-                        <section id="top-options">
-                            <div id="add-question-container">
-                                <div>Add Question</div>
-                                <i className="fas fa-times"></i>
-                            </div>
-                        </section>
                         <section id="question-area">
                             <textarea placeholder={questionPlaceholder}/>
                         </section>
