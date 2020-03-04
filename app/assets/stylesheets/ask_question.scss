@@ -55,6 +55,8 @@
     background-color: rgba(0,0,0,0.65);
     @include verticalCenter;
     height: 100%;
+    position: absolute;
+    z-index: 100;
     width: 100%;
 }
 

@@ -6,10 +6,14 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // currentTab: 'home'
+            
         }
     }
     
+    askQuestion() {
+        const questionComponent = document.getElementById("question-component");
+        questionComponent.classList.toggle('disappear')
+    }
 
     render() {
         return (
@@ -55,7 +59,9 @@ class NavBar extends React.Component {
                     </div>
                     <div id="ask-question">
                         <div id="ask-button-container">
-                            <button>Ask Question</button>
+                            <button
+                                onClick={this.askQuestion}
+                            >Ask Question</button>
                         </div>
                     </div>
                 </div>
