@@ -31,12 +31,26 @@ body {
 a {
     color: #fff;
     text-decoration: none;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 p {
     margin: 2%;
 }
 
-.login-form-button {
+.form-button {
     @include buttonDesign();
+}
+
+.button-container {
+    overflow: hidden;
+    text-align: right;
+    a {
+        margin-right: 3%;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }

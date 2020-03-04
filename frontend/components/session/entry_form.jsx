@@ -56,11 +56,11 @@ class EntryForm extends React.Component {
                             />
                         </div>
                     </div>
-                    <div id="sign-up-button-container">
+                    <div className="button-container">
                             <a 
                                 onClick={() => this.setState({showSignUp: false})} 
                             >Cancel</a>
-                            <button className="login-form-button">Sign Up</button>
+                            <button className="form-button">Sign Up</button>
                     </div>
                 </form>
             </div>
@@ -142,7 +142,7 @@ class EntryForm extends React.Component {
                                         value={password}
                                     />
                                 </div>
-                                <button className="login-form-button">Login</button>
+                                <button className="login-form-button form-button">Login</button>
                             </form>
                         </div>
                     </section>

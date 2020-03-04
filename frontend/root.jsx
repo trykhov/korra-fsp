@@ -10,8 +10,9 @@ import { ProtectedRoute, AuthRoute } from './util/route_util';
 const Root = ({store}) => (
     <Provider store={store}>
         <HashRouter>
-            <AuthRoute path="/login" component={SessionContainer}/>
-            <ProtectedRoute path="/" component={App} />
+            <App />
+            {/* <AuthRoute path="/login" component={SessionContainer}/>
+            <ProtectedRoute path="/" component={App} /> */}
         </HashRouter>
     </Provider>
 )
