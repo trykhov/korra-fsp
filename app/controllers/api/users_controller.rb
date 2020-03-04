@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-
+    
     # be able to retrieve a particular user
     # allows any profile
     def show

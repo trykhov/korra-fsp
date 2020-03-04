@@ -4,41 +4,62 @@ class EntryForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            email: '',
-            password: '',
-            errors: '',
+            login: {
+                email: "",
+                password: ""
+            },
+            signup: {
+                username: "",
+                email: "",
+                password: ""
+            },
+            errors: "",
             showSignUp: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     leftSideComponent() {
+        const { username, email, password } = this.state.signup;
         if(this.state.showSignUp) {
            return (
             <div>
                 <h2 id="sign-up-header">Sign Up</h2>
-                <form id="sign-up-form">
+                <form id="sign-up-form" onSubmit={e => this.handleSubmit(e, "Sign Up")}>
                     <div>
                         <label>Username:</label>
                         <div className="sign-up-input-container">
-                            <input type="text"/>
+                            <input 
+                                onChange={this.handleInput('username', 'signup')}
+                                value={username}
+                                type="text"
+                            />
                         </div>
                     </div>
                     <div>
                         <label>Email:</label>
                         <div className="sign-up-input-container">
-                            <input type="text"/>
+                            <input 
+                                onChange={this.handleInput('email', 'signup')}
+                                value={email}
+                                type="text"
+                            />
                         </div>
                     </div>
                     <div>
                         <label>Password: </label>
                         <div className="sign-up-input-container">
-                            <input type="password"/>
+                            <input 
+                                onChange={this.handleInput('password', 'signup')}
+                                value={password}
+                                type="password"
+                            />
                         </div>
                     </div>
                     <div id="sign-up-button-container">
-                            <a>Cancel</a>
+                            <a 
+                                onClick={() => this.setState({showSignUp: false})} 
+                            >Cancel</a>
                             <button className="login-form-button">Sign Up</button>
                     </div>
                 </form>
@@ -52,7 +73,7 @@ class EntryForm extends React.Component {
                     </div>
                     <div className="signup-right-side">
                         <span>
-                            <a  id="show-sign-up"
+                            <a id="show-sign-up"
                                 onClick={() => this.setState({showSignUp: true})} 
                             >Sign Up</a>
                         </span>
@@ -62,18 +83,25 @@ class EntryForm extends React.Component {
         }
     }
 
-    handleInput(field) {
-        return (e) => this.setState({[field]: e.target.value})
+    handleInput(field, formType) {
+        // ...this.state[formType] prevents prior values from being undefined
+        return (e) => this.setState({[formType]: {...this.state[formType], [field]: e.target.value}})
     }
 
-    handleSubmit(e) {
+    handleSubmit(e, formType) {
         e.preventDefault();
-        this.props.login(this.state).then(this.props.history.push("/"));
-        this.setState({username: '', email: '', password: ''});
+        if(formType === "Log In") {
+            this.props.login(this.state.login)
+                .then(this.props.history.push("/")); // push to home
+        } else {
+            this.props.signup(this.state.signup)
+                .then(this.props.history.push("/"))
+        }
+        this.setState({[formType]: {username: '', email: '', password: ''}});
     }
 
     render() {
-        const { username, email, password } = this.state;
+        const { email, password } = this.state.login;
         return (
             <main id="login-info">
                 <div id="main-login-container">
@@ -94,12 +122,12 @@ class EntryForm extends React.Component {
                             </div>
                         </div>
                         <div id="login-form-container">
-                            <form onSubmit={e => this.handleSubmit(e)}>
+                            <form onSubmit={e => this.handleSubmit(e, "Log In")}>
                                 <div id="login-title">Login</div>
                                 <div id="email">
                                     <input 
                                         className="login-form-input"
-                                        onChange={this.handleInput('email')}
+                                        onChange={this.handleInput('email', 'login')}
                                         type="text" 
                                         placeholder="Email"
                                         value={email}
@@ -108,7 +136,7 @@ class EntryForm extends React.Component {
                                 <div id="password">
                                     <input 
                                         className="login-form-input"
-                                        onChange={this.handleInput('password')}
+                                        onChange={this.handleInput('password', 'login')}
                                         type="password" 
                                         placeholder="Password"
                                         value={password}

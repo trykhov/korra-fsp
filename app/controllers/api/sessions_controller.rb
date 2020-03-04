@@ -2,10 +2,6 @@ class Api::SessionsController < ApplicationController
 
     # allow the user to sign in and sign out
     # login or sign in page
-    # def new
-    #     render :new
-    # end
-
 
     # sign in
     def create

@@ -12,4 +12,11 @@
 #
 
 class Question < ApplicationRecord
+    validates :title, presence: true
+
+    belongs_to :user
+    # belongs_to :topic 
+
+    has_many :comments
+    has_many :answers
 end

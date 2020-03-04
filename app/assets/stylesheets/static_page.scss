@@ -33,6 +33,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    margin: 2%;
+}
+
 .login-form-button {
     @include buttonDesign();
 }
