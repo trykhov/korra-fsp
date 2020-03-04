@@ -14,8 +14,8 @@ class AskQuestion extends React.Component {
             <div id="question-overlay-container">
                 {/* will be the container that holds the container for the question */}
                 {/* will be used to center the container */}
-                <div id="flex-question-container">
-                    <form id="main-question container">
+                <div id="outter-question-container">
+                    <form id="main-question-container">
                         <section id="top-options">
                             <div id="add-question-container">
                                 <div>Add Question</div>
@@ -25,7 +25,7 @@ class AskQuestion extends React.Component {
                         <section id="question-area">
                             <textarea placeholder={questionPlaceholder}/>
                         </section>
-                        <div id="question-submit">
+                        <div id="question-submit" className="button-container">
                             <a>Cancel</a>
                             <button className="form-button">Add Question</button>
                         </div>

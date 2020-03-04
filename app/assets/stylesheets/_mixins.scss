@@ -24,9 +24,22 @@
     float: right;
     font-size: 1.25vw;
     font-weight: bold;
-    white-space: nowrap;
     padding: 3%;
+    overflow: auto;
+    white-space: nowrap;
     &:hover {
         cursor: pointer;
+    }
+}
+
+@mixin hover {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin removeFocus {
+    &:focus {
+        outline: none;
     }
 }

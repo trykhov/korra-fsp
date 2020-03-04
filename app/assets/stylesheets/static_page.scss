@@ -31,9 +31,7 @@ body {
 a {
     color: #fff;
     text-decoration: none;
-    &:hover {
-        cursor: pointer;
-    }
+    @include hover;
 }
 
 p {
@@ -45,12 +43,11 @@ p {
 }
 
 .button-container {
-    overflow: hidden;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
     a {
         margin-right: 3%;
-        &:hover {
-            cursor: pointer;
-        }
+        @include hover;
     }
 }

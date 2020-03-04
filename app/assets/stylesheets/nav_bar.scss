@@ -39,9 +39,7 @@
 .inner-container {
     height: 100%;
     @include verticalCenter;
-    &:hover {
-        cursor: pointer;
-    }
+    @include hover;
     span {
         margin-left: 5px;
     }
@@ -65,9 +63,7 @@
         border-style: none;
         font-size: 1.5vw;
         width: 100%;
-        &:focus {
-            outline: none; // removes the active highlight
-        }
+        @include removeFocus;
     }
     // removes the x button in the search bar
     input[type="search"]::-webkit-search-decoration,
@@ -108,8 +104,6 @@
         color: #fff;
         font-size: 1vw;
         font-weight: 500;
-        &:hover {
-            cursor: pointer;
-        }
+        @include hover;
     }
 }
