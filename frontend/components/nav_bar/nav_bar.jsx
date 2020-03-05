@@ -1,7 +1,7 @@
 import React from 'react';
 // import defaultPic from '../images/blank-prof-pic.jpeg';
 import ProfileDropdownContainer from './profile_dropdown_container';
-
+import { Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
     
@@ -26,15 +26,15 @@ class NavBar extends React.Component {
         return (
             <nav id="main-nav-bar">
                 <div id="nav-container">
-                    <a href="" id="logo-container">
+                    <Link to="/" id="logo-container">
                         <h1 className="logo">Korra</h1>  
-                    </a>
-                    <a href="" id="home-nav">
+                    </Link>
+                    <Link to="/" id="home-nav">
                         <div className="inner-container">
                             <i className="far fa-newspaper"/>
                             <span>Home</span>
                         </div>
-                    </a>
+                    </Link>
                     <a href="" id="answer-nav">
                         <div className="inner-container">
                             <i className="far fa-edit"/>

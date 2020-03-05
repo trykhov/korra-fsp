@@ -18,9 +18,11 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
     attr_reader :password
 
-    has_many :comments
-    has_many :questions
-
+    # by deleting the user, you delete all their comments and questions as well
+    has_many :comments, dependent: :destroy
+    has_many :questions, dependent: :destroy
+    has_many :answers, dependent: :destroy
+    
     # user specific logic (password, session_tokens)
 
     def self.find_by_credentials(email, password)

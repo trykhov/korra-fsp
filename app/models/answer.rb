@@ -11,4 +11,9 @@
 #
 
 class Answer < ApplicationRecord
+    validates :answer, :question_id, :user_id, presence: true
+    validates :user_id, uniqueness: { scope: :question_id, message: "user can only answer once" }
+    
+    belongs_to :user
+    belongs_to :question 
 end

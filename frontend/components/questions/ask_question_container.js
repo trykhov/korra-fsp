@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import AskQuestion from "./ask_question";
-import { askQuestion } from "../../actions/question_action";
+import { askQuestion } from "../../actions/question_actions";
 
 
 const mapStateToProps = state => ({

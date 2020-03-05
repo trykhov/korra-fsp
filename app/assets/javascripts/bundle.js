@@ -86,10 +86,10 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./frontend/actions/question_action.js":
-/*!*********************************************!*\
-  !*** ./frontend/actions/question_action.js ***!
-  \*********************************************/
+/***/ "./frontend/actions/question_actions.js":
+/*!**********************************************!*\
+  !*** ./frontend/actions/question_actions.js ***!
+  \**********************************************/
 /*! exports provided: RECEIVE_QUESTION, RECEIVE_ALL_QUESTIONS, REMOVE_QUESTION, receiveQuestion, receiveAllQuestions, removeQuestion, askQuestion, fetchQuestion, fetchAllQuestions */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -331,6 +331,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _profile_dropdown_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile_dropdown_container */ "./frontend/components/nav_bar/profile_dropdown_container.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -350,6 +351,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
  // import defaultPic from '../images/blank-prof-pic.jpeg';
+
 
 
 
@@ -387,13 +389,13 @@ function (_React$Component) {
         id: "main-nav-bar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "nav-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/",
         id: "logo-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
         className: "logo"
-      }, "Korra")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
+      }, "Korra")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+        to: "/",
         id: "home-nav"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inner-container"
@@ -655,7 +657,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _ask_question__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ask_question */ "./frontend/components/questions/ask_question.jsx");
-/* harmony import */ var _actions_question_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/question_action */ "./frontend/actions/question_action.js");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/question_actions */ "./frontend/actions/question_actions.js");
 
 
 
@@ -669,7 +671,7 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     askQuestion: function askQuestion(question) {
-      return dispatch(Object(_actions_question_action__WEBPACK_IMPORTED_MODULE_2__["askQuestion"])(question));
+      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["askQuestion"])(question));
     }
   };
 };
@@ -941,11 +943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _util_question_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/question_util */ "./frontend/util/question_util.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/user_actions */ "./frontend/actions/user_actions.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-
-
+/* harmony import */ var _util_answer_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/answer_util */ "./frontend/util/answer_util.js");
 
 
 
@@ -967,14 +965,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState); // TESTING: BEGIN
 
   window.store = store;
-  var question = {
-    title: "Who is the best Avenger?",
-    text: "Please say Spiderman"
-  };
-  window.askQuestion = _util_question_util__WEBPACK_IMPORTED_MODULE_4__["askQuestion"];
-  window.fetchQuestion = _util_question_util__WEBPACK_IMPORTED_MODULE_4__["fetchQuestion"];
-  window.fetchAllQuestions = _util_question_util__WEBPACK_IMPORTED_MODULE_4__["fetchAllQuestions"];
-  window.signOutUser = _actions_session_actions__WEBPACK_IMPORTED_MODULE_6__["signOutUser"]; // TESTING: END
+  window.postAnswer = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["postAnswer"];
+  window.fetchAnswer = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["fetchAnswer"];
+  window.fetchAllAnswers = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["fetchAllAnswers"]; // TESTING: END
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
@@ -1018,7 +1011,7 @@ var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_question_action__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/question_action */ "./frontend/actions/question_action.js");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/question_actions */ "./frontend/actions/question_actions.js");
 
 
 var questionReducer = function questionReducer() {
@@ -1028,14 +1021,14 @@ var questionReducer = function questionReducer() {
   var newState = Object.assign({}, prevState);
 
   switch (action.type) {
-    case _actions_question_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_QUESTIONS"]:
+    case _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_QUESTIONS"]:
       return action.questions;
 
-    case _actions_question_action__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_QUESTION"]:
+    case _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_QUESTION"]:
       newState[action.question.id] = action.question;
       return newState;
 
-    case _actions_question_action__WEBPACK_IMPORTED_MODULE_0__["REMOVE_QUESTION"]:
+    case _actions_question_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_QUESTION"]:
       newState[action.questionId] = undefined;
       return newState;
 
@@ -1212,6 +1205,42 @@ var configureStore = function configureStore() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
+
+/***/ }),
+
+/***/ "./frontend/util/answer_util.js":
+/*!**************************************!*\
+  !*** ./frontend/util/answer_util.js ***!
+  \**************************************/
+/*! exports provided: postAnswer, fetchAnswer, fetchAllAnswers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postAnswer", function() { return postAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAnswer", function() { return fetchAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAnswers", function() { return fetchAllAnswers; });
+var postAnswer = function postAnswer(answer) {
+  return $.ajax({
+    url: '/api/answers',
+    method: 'POST',
+    data: {
+      answer: answer
+    }
+  });
+};
+var fetchAnswer = function fetchAnswer(answerId) {
+  return $.ajax({
+    url: "/api/answers/".concat(answerId),
+    method: 'GET'
+  });
+};
+var fetchAllAnswers = function fetchAllAnswers() {
+  return $.ajax({
+    url: '/api/answers',
+    method: 'GET'
+  });
+}; // will do editting and deleting when front end is up
 
 /***/ }),
 

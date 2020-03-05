@@ -17,6 +17,6 @@ class Question < ApplicationRecord
     belongs_to :user
     # belongs_to :topic 
 
-    has_many :comments
-    has_many :answers
+    has_many :comments, dependent: :destroy
+    has_many :answers, dependent: :destroy
 end
