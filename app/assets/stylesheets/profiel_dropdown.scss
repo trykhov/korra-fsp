@@ -2,7 +2,6 @@
 
 #profile-dropdown {
     background-color: $primaryWhite;
-    padding: 15px;
     position: absolute;
     top: 100%;
     ul {
@@ -17,5 +16,6 @@
     }
     section {
         border-top: 1px solid black;
+        padding: 0 15px;
     }
 }
