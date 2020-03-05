@@ -1,5 +1,7 @@
+@import './variables';
+
 #profile-dropdown {
-    background-color: red;
+    background-color: $primaryWhite;
     padding: 15px;
     position: absolute;
     top: 100%;
@@ -9,5 +11,11 @@
     }
     li {
         list-style: none;
+        &:hover {
+            background-color: green;
+        }
+    }
+    section {
+        border-top: 1px solid black;
     }
 }

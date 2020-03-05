@@ -24,7 +24,7 @@ const ProfileDropdown = props => (
                 <li>Settings</li>
                 <li>Languages</li>
                 <li>Help</li>
-                <li>Logout</li>
+                <li onClick={props.signOutUser}>Logout</li>
             </ul>
         </section>
     </div>
