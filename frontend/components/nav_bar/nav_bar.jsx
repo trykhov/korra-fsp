@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultPic from '../images/blank-prof-pic.jpeg';
+// import defaultPic from '../images/blank-prof-pic.jpeg';
 import ProfileDropdownContainer from './profile_dropdown_container';
 
 
@@ -62,7 +62,7 @@ class NavBar extends React.Component {
                         </div>
                     </div>
                     <div onClick={this.callDropDown} id="profile-icon">
-                        <img src={defaultPic} alt=""/>
+                        <img src={window.defaultImage} alt=""/>
                         <ProfileDropdownContainer />
                     </div>
                     <div id="ask-question">

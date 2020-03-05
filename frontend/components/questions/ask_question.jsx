@@ -1,5 +1,4 @@
 import React from 'react';
-import defaultPic from '../images/blank-prof-pic.jpeg';
 
 // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 class AskQuestion extends React.Component {
@@ -47,7 +46,7 @@ class AskQuestion extends React.Component {
                             </div>
                         </section>
                         <section id="asker-container" className="question-container">
-                            <img src={defaultPic}/>
+                            <img src={window.defaultImage}/>
                             <span>{currentUser.username} asked</span>
                         </section>
                         <form id="main-question-container" onSubmit={e => this.handleSubmit(e)}>
