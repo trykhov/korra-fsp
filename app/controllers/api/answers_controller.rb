@@ -14,7 +14,15 @@ class Api::AnswersController < ApplicationController
 
     # show all answers (for feed)
     def index 
-        @answers = Answer.all
+        if params.has_key?(:question_id)
+            question = Question.find_by(id: params[:question_id])
+            @answers = question.answers 
+        elsif params.has_key?(:user_id)
+            user = User.find_by(id: params[:user_id])
+            @answers = user.answers 
+        else  
+            @answers = Answer.all 
+        end
         render :index
     end
 

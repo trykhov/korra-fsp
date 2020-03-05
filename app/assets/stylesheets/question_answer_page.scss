@@ -1,0 +1,36 @@
+.answer-follow-container {
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+    width: 30%;
+    .interact-component {
+        overflow: auto;
+        width: 100%;
+    }
+    span {
+        margin-left: 5%;
+    }
+}
+
+.interact-options {
+    display: flex;
+    font-size: 1.5vw;
+    justify-content: space-between;
+    padding: 2% 0;
+    width: 100%;
+}
+
+.QA-container {
+    width: 100%;
+}
+
+.question-answer-page {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding-top: 5%;
+    width: 90%;
+}
+
+

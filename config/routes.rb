@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do # for the backend controllers
     resource :session, only:[:create, :destroy] # for the session (sign up, log in, log out)
  
-    resources :users
+    resources :users do 
+      resources :answer, only:[:index]
+    end 
+    
     resources :questions do 
-      # see all answers to a question
       resources :answers, only:[:index]
-    end
-  
+    end 
+
     resources :answers do 
       # comments can only be seen in relation to an answer
       resources :comments

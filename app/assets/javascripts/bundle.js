@@ -86,6 +86,74 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/answer_actions.js":
+/*!********************************************!*\
+  !*** ./frontend/actions/answer_actions.js ***!
+  \********************************************/
+/*! exports provided: RECEIVE_ANSWER, RECEIVE_ALL_ANSWERS, REMOVE_ANSWER, receiveAnswer, receiveAllAnswers, removeAnswer, postAnswer, fetchAnswer, fetchAllAnswers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ANSWER", function() { return RECEIVE_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ALL_ANSWERS", function() { return RECEIVE_ALL_ANSWERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_ANSWER", function() { return REMOVE_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAnswer", function() { return receiveAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAllAnswers", function() { return receiveAllAnswers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeAnswer", function() { return removeAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postAnswer", function() { return postAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAnswer", function() { return fetchAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAnswers", function() { return fetchAllAnswers; });
+/* harmony import */ var _util_answer_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/answer_util */ "./frontend/util/answer_util.js");
+ // action constants
+
+var RECEIVE_ANSWER = "RECEIVE_ANSWERS";
+var RECEIVE_ALL_ANSWERS = "RECEIVE_ALL_ANSWERS";
+var REMOVE_ANSWER = "REMOVE_ANSWER"; // regular action creators
+
+var receiveAnswer = function receiveAnswer(answer) {
+  return {
+    type: RECEIVE_ANSWER,
+    answer: answer
+  };
+};
+var receiveAllAnswers = function receiveAllAnswers(answers) {
+  return {
+    type: RECEIVE_ALL_ANSWERS,
+    answers: answers
+  };
+};
+var removeAnswer = function removeAnswer(answerId) {
+  return {
+    type: REMOVE_ANSWER,
+    answerId: answerId
+  };
+}; // thunk action creators
+
+var postAnswer = function postAnswer(answer) {
+  return function (dispatch) {
+    return _util_answer_util__WEBPACK_IMPORTED_MODULE_0__["postAnswer"](answer).then(function (answer) {
+      return dispatch(receiveAnswer(answer));
+    });
+  };
+};
+var fetchAnswer = function fetchAnswer(answerId) {
+  return function (dispatch) {
+    return _util_answer_util__WEBPACK_IMPORTED_MODULE_0__["fetchAnswer"](answerId).then(function (answer) {
+      return dispatch(receiveAnswer(answer));
+    });
+  };
+};
+var fetchAllAnswers = function fetchAllAnswers() {
+  return function (dispatch) {
+    return _util_answer_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllAnswers"]().then(function (answers) {
+      return dispatch(receiveAllAnswers(answers));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/question_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/question_actions.js ***!
@@ -301,10 +369,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/nav_bar/nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
-/* harmony import */ var _components_session_session_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/session/session_container */ "./frontend/components/session/session_container.jsx");
-/* harmony import */ var _components_questions_ask_question__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/questions/ask_question */ "./frontend/components/questions/ask_question.jsx");
-/* harmony import */ var _components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/questions/ask_question_container */ "./frontend/components/questions/ask_question_container.js");
-
+/* harmony import */ var _components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/questions/ask_question_container */ "./frontend/components/questions/ask_question_container.js");
+/* harmony import */ var _components_questions_question_page_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/questions/question_page_container */ "./frontend/components/questions/question_page_container.js");
 
 
 
@@ -312,7 +378,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    id: "page-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    path: "/question/:questionId",
+    component: _components_questions_question_page_container__WEBPACK_IMPORTED_MODULE_4__["default"]
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -680,6 +751,156 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/questions/question_page.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/questions/question_page.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var QuestionPage =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(QuestionPage, _React$Component);
+
+  function QuestionPage(props) {
+    _classCallCheck(this, QuestionPage);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(QuestionPage).call(this, props));
+  }
+
+  _createClass(QuestionPage, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      // remember to put a route for this
+      var _this$props = this.props,
+          fetchQuestion = _this$props.fetchQuestion,
+          fetchAllAnswersQuestion = _this$props.fetchAllAnswersQuestion;
+      var questionId = this.props.match.params.questionId; // remplacing box shadow of nav bar
+
+      var navBar = document.getElementById("main-nav-bar");
+      navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"; // document.body.style.backgroundColor = "rgb(255, 255, 255)";
+      // puts the question into the state
+
+      fetchQuestion(questionId); // puts all the answers into the state
+
+      fetchAllAnswersQuestion(questionId);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props2 = this.props,
+          question = _this$props2.question,
+          answers = _this$props2.answers;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        className: "question-answer-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "QA-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, question ? question.title : ""), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "interact-options"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-follow-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "interact-component"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-edit",
+        color: "#329bff"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Answer")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "interact-component"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-rss"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Follow")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "interact-component"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-people-carry"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Request"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "share-options"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "num-answers"
+      }, "Num Answers")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "related-questions"
+      }));
+    }
+  }]);
+
+  return QuestionPage;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (QuestionPage);
+
+/***/ }),
+
+/***/ "./frontend/components/questions/question_page_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/questions/question_page_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _question_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./question_page */ "./frontend/components/questions/question_page.jsx");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/question_actions */ "./frontend/actions/question_actions.js");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
+
+
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    question: state.entities.questions[ownProps.match.params.questionId],
+    answers: state.answers,
+    users: state.users
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    // make one for users that answered
+    fetchQuestion: function fetchQuestion(questionId) {
+      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestion"])(questionId));
+    },
+    // receives answers for this specific question
+    fetchAllAnswersQuestion: function fetchAllAnswersQuestion(questionId) {
+      return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_4__["fetchAllQuestionAnswers"])(questionId).then(function (answers) {
+        return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["receiveAllAnswers"])(answers));
+      });
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_question_page__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/session/entry_form.jsx":
 /*!****************************************************!*\
   !*** ./frontend/components/session/entry_form.jsx ***!
@@ -976,6 +1197,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /***/ }),
 
+/***/ "./frontend/reducers/answer_reducer.js":
+/*!*********************************************!*\
+  !*** ./frontend/reducers/answer_reducer.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+
+
+var answerReducer = function answerReducer() {
+  var prevState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(prevState);
+  var newState = Object.assign({}, prevState);
+
+  switch (action.type) {
+    case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_ANSWERS"]:
+      return action.answers;
+
+    case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ANSWER"]:
+      newState[action.answer.id] = action.answer;
+      return newState;
+
+    case _actions_answer_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_ANSWER"]:
+      newState[action.answerId] = undefined;
+      return newState;
+
+    default:
+      return prevState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (answerReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -988,14 +1248,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_reducer */ "./frontend/reducers/user_reducer.js");
 /* harmony import */ var _question_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./question_reducer */ "./frontend/reducers/question_reducer.js");
+/* harmony import */ var _answer_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./answer_reducer */ "./frontend/reducers/answer_reducer.js");
+
 
 
 
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _user_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  questions: _question_reducer__WEBPACK_IMPORTED_MODULE_2__["default"] // questions
-  // answers
-  // comments
+  questions: _question_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  answers: _answer_reducer__WEBPACK_IMPORTED_MODULE_3__["default"] // comments
 
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
@@ -1241,6 +1502,27 @@ var fetchAllAnswers = function fetchAllAnswers() {
     method: 'GET'
   });
 }; // will do editting and deleting when front end is up
+
+/***/ }),
+
+/***/ "./frontend/util/question_answer_util.js":
+/*!***********************************************!*\
+  !*** ./frontend/util/question_answer_util.js ***!
+  \***********************************************/
+/*! exports provided: fetchAllQuestionAnswers */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllQuestionAnswers", function() { return fetchAllQuestionAnswers; });
+// pertains to the question answers association
+// fetch all the answers for a particular question
+var fetchAllQuestionAnswers = function fetchAllQuestionAnswers(questionId) {
+  return $.ajax({
+    url: "/api/questions/".concat(questionId, "/answers"),
+    method: 'GET'
+  });
+};
 
 /***/ }),
 

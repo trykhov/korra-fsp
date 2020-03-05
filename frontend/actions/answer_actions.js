@@ -10,9 +10,9 @@ export const receiveAnswer = answer => ({
     type: RECEIVE_ANSWER,
     answer 
 })
-
+ 
 export const receiveAllAnswers = answers => ({
-    type: RECEIVE_ALL_ANSWER,
+    type: RECEIVE_ALL_ANSWERS,
     answers
 })
 
