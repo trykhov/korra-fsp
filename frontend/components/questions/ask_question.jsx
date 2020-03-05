@@ -17,7 +17,9 @@ class AskQuestion extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.askQuestion(this.state).then(this.cancelQuestion());
+        this.props.askQuestion(this.state)
+        .then(this.setState({title: '', text: ''}))
+        .then(this.cancelQuestion());
     }
 
     cancelQuestion() {

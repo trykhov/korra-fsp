@@ -1,5 +1,6 @@
 import React from 'react';
 import defaultPic from '../images/blank-prof-pic.jpeg';
+import ProfileDropdown from './profile_dropdown';
 
 class NavBar extends React.Component {
     
@@ -8,6 +9,11 @@ class NavBar extends React.Component {
         this.state = {
             
         }
+    }
+
+    callDropDown() {
+        const profileDropdown = document.getElementById("profile-dropdown");
+        profileDropdown.classList.toggle('disappear');
     }
     
     askQuestion() {
@@ -54,8 +60,9 @@ class NavBar extends React.Component {
                             <input type="search" placeholder="Search Quora"/>
                         </div>
                     </div>
-                    <div id="profile-icon">
+                    <div onClick={this.callDropDown} id="profile-icon">
                         <img src={defaultPic} alt=""/>
+                        <ProfileDropdown />
                     </div>
                     <div id="ask-question">
                         <div id="ask-button-container">

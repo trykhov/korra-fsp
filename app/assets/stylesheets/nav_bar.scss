@@ -77,6 +77,7 @@
     height: 3vw;
     @include verticalCenter;
     padding: 0.5% 0;
+    position: relative;
     width: 4%;
     &:hover {
         cursor: pointer;
