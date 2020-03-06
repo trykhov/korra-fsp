@@ -41,6 +41,14 @@ a {
     @include hover;
 }
 
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+}
+
 p {
     margin: 2%;
 }
@@ -67,4 +75,11 @@ p {
     background-color: $primaryWhite;
     height: inherit;
     width: 100%;
+}
+
+.answer {
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    margin: 0;
+    padding: 2% 0;
 }

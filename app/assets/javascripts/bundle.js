@@ -551,7 +551,9 @@ function (_React$Component) {
     // return individual answers
     value: function render() {
       var answer = this.props.answer;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, answer.text));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "answer"
+      }, answer.text));
     }
   }]);
 
