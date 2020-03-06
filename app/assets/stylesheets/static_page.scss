@@ -74,6 +74,7 @@ p {
 #page-container {
     background-color: $primaryWhite;
     height: inherit;
+    overflow: auto;
     width: 100%;
 }
 
