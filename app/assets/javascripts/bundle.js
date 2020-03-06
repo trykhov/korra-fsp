@@ -406,14 +406,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _answer_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_index */ "./frontend/components/answers/answer_index.jsx");
 /* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
 /* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 
 
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    answers: state.entities.answers
+    questionId: ownProps.questionId,
+    answers: state.entities.answers,
+    users: state.entities.users
   };
 };
 
@@ -422,6 +426,11 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchAllQuestionAnswers: function fetchAllQuestionAnswers(questionId) {
       return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__["fetchAllQuestionAnswers"])(questionId).then(function (answers) {
         return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__["receiveAllAnswers"])(answers));
+      });
+    },
+    fetchAllAnswerers: function fetchAllAnswerers(questionId) {
+      return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__["fetchAllAnswerers"])(questionId).then(function (users) {
+        return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["receiveAllUsers"])(users));
       });
     }
   };
@@ -479,21 +488,29 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchAllQuestionAnswers(this.props.questionId);
+      this.props.fetchAllAnswerers(this.props.questionId);
     } // should return a list of answer index items
 
   }, {
     key: "render",
     value: function render() {
-      if (!(this.props.answers instanceof Array)) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No answers yet.");
+      var _this$props = this.props,
+          answers = _this$props.answers,
+          users = _this$props.users; // have the answers and the people that answered already loaded
+
+      var shouldRender = Object.keys(answers).length && Object.keys(users).length;
+
+      if (shouldRender) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(answers).map(function (id) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: id,
+            answer: answers[id],
+            users: users
+          });
+        }));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.answers.map(function (answer) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: answer.id,
-          answer: answer
-        });
-      }));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "No answers yet.");
     }
   }]);
 
@@ -515,6 +532,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -535,6 +554,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
 var AnswerIndexItem =
 /*#__PURE__*/
 function (_React$Component) {
@@ -550,8 +571,17 @@ function (_React$Component) {
     key: "render",
     // return individual answers
     value: function render() {
-      var answer = this.props.answer;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      var _this$props = this.props,
+          answer = _this$props.answer,
+          users = _this$props.users;
+      var user = users[answer.user_id];
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "answer-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-user-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "username"
+      }, user.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "answer"
       }, answer.text));
     }
@@ -1002,6 +1032,7 @@ function (_React$Component) {
       var _this$props = this.props,
           question = _this$props.question,
           answers = _this$props.answers;
+      var numAnswers = Object.keys(answers).length;
 
       if (question === undefined) {
         return null;
@@ -1032,7 +1063,7 @@ function (_React$Component) {
         className: "share-options"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "num-answers"
-      }, answers.length, " ", answers.length > 1 ? "Answers" : "Answer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, numAnswers, " ", numAnswers > 1 ? "Answers" : numAnswers === 1 ? "Answer" : "No answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "related-questions"
@@ -1696,17 +1727,26 @@ var fetchAllAnswers = function fetchAllAnswers() {
 /*!***********************************************!*\
   !*** ./frontend/util/question_answer_util.js ***!
   \***********************************************/
-/*! exports provided: fetchAllQuestionAnswers */
+/*! exports provided: fetchAllQuestionAnswers, fetchAllAnswerers */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllQuestionAnswers", function() { return fetchAllQuestionAnswers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAnswerers", function() { return fetchAllAnswerers; });
 // pertains to the question answers association
 // fetch all the answers for a particular question
 var fetchAllQuestionAnswers = function fetchAllQuestionAnswers(questionId) {
   return $.ajax({
     url: "/api/questions/".concat(questionId, "/answers"),
+    method: 'GET'
+  });
+}; // will populate the state with the users that responded
+// allows use to extract who answered the question
+
+var fetchAllAnswerers = function fetchAllAnswerers(questionId) {
+  return $.ajax({
+    url: "/api/questions/".concat(questionId, "/users"),
     method: 'GET'
   });
 };

@@ -3,11 +3,13 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do # for the backend controllers
     resource :session, only:[:create, :destroy] # for the session (sign up, log in, log out)
  
+  
     resources :users do 
-      resources :answer, only:[:index]
+      resources :answer, only:[:index] # get all answers from specific user
     end 
     
     resources :questions do 
+      resources :users, only:[:index]
       resources :answers, only:[:index]
     end 
 

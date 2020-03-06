@@ -9,7 +9,12 @@ class Api::UsersController < ApplicationController
     end
 
     def index
-        @users = User.all
+        if params.has_key?(:question_id)
+            question = Question.find_by(id: params[:question_id])
+            @users = question.people_who_answered
+        else
+            @users = User.all
+        end
         render :index 
     end
 

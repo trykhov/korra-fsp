@@ -18,4 +18,8 @@ class Question < ApplicationRecord
 
     has_many :comments, dependent: :destroy
     has_many :answers, dependent: :destroy
+
+    has_many :people_who_answered,
+        through: :answers,
+        source: :user
 end

@@ -8,3 +8,11 @@ export const fetchAllQuestionAnswers = questionId => (
     })
 )
 
+// will populate the state with the users that responded
+// allows use to extract who answered the question
+export const fetchAllAnswerers = questionId => (
+    $.ajax({
+        url: `/api/questions/${questionId}/users`,
+        method: 'GET'
+    })
+)

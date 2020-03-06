@@ -33,6 +33,7 @@ class QuestionPage extends React.Component {
 
     render() {
         const { question, answers} = this.props;
+        const numAnswers = Object.keys(answers).length;
         if(question === undefined) {
             return null;
         }
@@ -59,7 +60,7 @@ class QuestionPage extends React.Component {
                             {/* icons */}
                         </div>
                     </div>
-                    <div id="num-answers">{answers.length} {answers.length > 1 ? "Answers" : "Answer"}</div>
+                    <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                     <AnswerContainer questionId={question.id}/>
                 </div>
                 <div className="related-questions">
