@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     overflow: auto;
-    width: 30%;
+    width: 50%;
     .interact-component {
         overflow: auto;
         width: 100%;
@@ -21,13 +21,12 @@
 }
 
 .QA-container {
-    width: 100%;
+    width: 70%;
 }
 
 .question-answer-page {
     color: black;
     display: flex;
-    justify-content: space-between;
     margin: 0 auto;
     padding-top: 5%;
     padding-left: 1%;
@@ -37,3 +36,37 @@
 #num-answers {
     padding-bottom: 2%;
 }
+
+.answer-user-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1vw;
+    .user-info {
+        margin-left: 2%;
+    }
+}
+
+.single-answer-container {
+    font-size: 1.5vw;
+    padding-top: 2%;
+}
+
+#related-q-container {
+    width: 40%;
+    margin-left: 4%;
+    position: relative;
+    #related-questions {
+        h6 {
+            border-bottom: 1px solid #e2e2e2;
+            padding-bottom: 5%;
+        }
+        position: fixed;
+        width: 30%;
+        div {
+            margin: 2% 0 0;
+            width: 100%;
+        }
+    }
+}
+

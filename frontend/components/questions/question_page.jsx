@@ -63,8 +63,18 @@ class QuestionPage extends React.Component {
                     <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                     <AnswerContainer questionId={question.id}/>
                 </div>
-                <div className="related-questions">
-
+                <div id="related-q-container">
+                    <div id="related-questions">
+                        <h6>Related Questions</h6>
+                        <div >
+                            <div>filler</div>
+                            <div>filler</div>
+                            <div>filler</div>
+                            <div>filler</div>
+                            <div>filler</div>
+                            <div>filler</div>
+                        </div>
+                    </div>
                 </div>
             </section>
         )

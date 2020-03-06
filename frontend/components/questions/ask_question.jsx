@@ -46,7 +46,7 @@ class AskQuestion extends React.Component {
                             </div>
                         </section>
                         <section id="asker-container" className="question-container">
-                            <img src={window.defaultImage}/>
+                            <img className="profile-image" src={window.defaultImage}/>
                             <span>{currentUser.username} asked</span>
                         </section>
                         <form id="main-question-container" onSubmit={e => this.handleSubmit(e)}>

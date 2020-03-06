@@ -501,7 +501,9 @@ function (_React$Component) {
       var shouldRender = Object.keys(answers).length && Object.keys(users).length;
 
       if (shouldRender) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, Object.keys(answers).map(function (id) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          id: "all-answers-container"
+        }, Object.keys(answers).map(function (id) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: id,
             answer: answers[id],
@@ -532,8 +534,6 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -551,8 +551,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
 
 
 
@@ -574,14 +572,24 @@ function (_React$Component) {
       var _this$props = this.props,
           answer = _this$props.answer,
           users = _this$props.users;
+      var time = new Date(this.props.answer.created_at);
       var user = users[answer.user_id];
+      var dateAnswered = time.toDateString().substring(4);
+      ;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "answer-container"
+        className: "single-answer-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-user-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "profile-image answer-profile-picture",
+        src: window.defaultImage
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "username"
-      }, user.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      }, user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answered-date"
+      }, "Answered ", dateAnswered))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "answer"
       }, answer.text));
     }
@@ -890,6 +898,7 @@ function (_React$Component) {
           id: "asker-container",
           className: "question-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "profile-image",
           src: window.defaultImage
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username, " asked")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           id: "main-question-container",
@@ -1066,8 +1075,10 @@ function (_React$Component) {
       }, numAnswers, " ", numAnswers > 1 ? "Answers" : numAnswers === 1 ? "Answer" : "No answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "related-questions"
-      }));
+        id: "related-q-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "related-questions"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Related Questions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler")))));
     }
   }]);
 

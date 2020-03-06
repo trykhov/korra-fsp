@@ -77,9 +77,23 @@ p {
     width: 100%;
 }
 
+.single-answer-container {
+    border-top: 1px #e2e2e2 solid;
+
+}
+
 .answer {
-    border-top: 1px black solid;
-    border-bottom: 1px black solid;
+    font-size: 1.25vw;
     margin: 0;
     padding: 2% 0;
+}
+
+.profile-image {
+    border-radius: 100%;
+    height: 3vw;
+    width: 5%;
+}
+
+.answer-profile-picture {
+    width: 4%;
 }

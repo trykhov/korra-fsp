@@ -14,7 +14,7 @@ class AnswerIndex extends React.Component {
         const shouldRender = Object.keys(answers).length && Object.keys(users).length;
         if(shouldRender) {
             return (
-                <ul>
+                <ul id="all-answers-container">
                     {
                         Object.keys(answers).map(id => 
                             <AnswerIndexItem key={id} answer={answers[id]} users={users}/>
