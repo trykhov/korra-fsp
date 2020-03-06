@@ -1,4 +1,5 @@
 import React from 'react';
+import AnswerContainer from '../answers/answer_container';
 
 class QuestionPage extends React.Component {
 
@@ -17,15 +18,20 @@ class QuestionPage extends React.Component {
         // puts the question into the state
         fetchQuestion(questionId);
         // puts all the answers into the state
-        fetchAllAnswersQuestion(questionId);
+        // fetchAllAnswersQuestion(questionId);
     }
 
     render() {
         const { question, answers } = this.props;
+        if(question === undefined || answers === undefined) {
+            return null;
+        }
+        console.log(this.props);
+        
         return (
             <section className="question-answer-page">
                 <div className="QA-container">
-                    <h3>{question ? question.title : ""}</h3>
+                    <h3>{question.title}</h3>
                     <div className="interact-options">
                         <div className="answer-follow-container">
                             <div className="interact-component">
@@ -46,6 +52,7 @@ class QuestionPage extends React.Component {
                         </div>
                     </div>
                     <div id="num-answers">Num Answers</div>
+                    <AnswerContainer questionId={question.id}/>
                 </div>
                 <div className="related-questions">
 

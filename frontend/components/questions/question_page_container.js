@@ -6,14 +6,9 @@ import { fetchAllQuestionAnswers } from "../../util/question_answer_util";
 
 
 
-
-
-
-
-
 const mapStateToProps = (state, ownProps) => ({
     question: state.entities.questions[ownProps.match.params.questionId],
-    answers: state.answers,
+    answers: state.entities.answers,
     users: state.users
 })
 
@@ -23,10 +18,10 @@ const mapDispatchToProps = dispatch => ({
     fetchQuestion: questionId => dispatch(fetchQuestion(questionId)),
 
     // receives answers for this specific question
-    fetchAllAnswersQuestion: questionId => (
-        fetchAllQuestionAnswers(questionId)
-        .then(answers => dispatch(receiveAllAnswers(answers)))
-    )
+    // fetchAllAnswersQuestion: questionId => (
+    //     fetchAllQuestionAnswers(questionId)
+    //     .then(answers => dispatch(receiveAllAnswers(answers)))
+    // )
 
 })
 
