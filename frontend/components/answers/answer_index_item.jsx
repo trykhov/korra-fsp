@@ -7,7 +7,7 @@ class AnswerIndexItem extends React.Component {
         const { answer } = this.props;
         return (
             <li>
-                <p>{answer.answer}</p>
+                <p>{answer.text}</p>
             </li>
         )
     }

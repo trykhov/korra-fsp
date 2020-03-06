@@ -3,7 +3,7 @@
 # Table name: answers
 #
 #  id          :bigint           not null, primary key
-#  answer      :text             not null
+#  text        :text             not null
 #  user_id     :integer          not null
 #  question_id :integer          not null
 #  created_at  :datetime         not null
@@ -11,7 +11,7 @@
 #
 
 class Answer < ApplicationRecord
-    validates :answer, :question_id, :user_id, presence: true
+    validates :text, :question_id, :user_id, presence: true
     validates :user_id, uniqueness: { scope: :question_id, message: "user can only answer once" }
     
     belongs_to :user

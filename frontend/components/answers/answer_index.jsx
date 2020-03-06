@@ -2,10 +2,6 @@ import React from 'react';
 import AnswerIndexItem from './answer_index_item';
 
 class AnswerIndex extends React.Component {
-
-    // getAllAnswers() {
-    //     console.log(this.props.answers);
-    // }
     componentDidMount() {
         this.props.fetchAllQuestionAnswers(this.props.questionId);
     }

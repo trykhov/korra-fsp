@@ -1,5 +1,6 @@
 import React from 'react';
 import AnswerContainer from '../answers/answer_container';
+import { fetchAllAnswers } from '../../util/answer_util';
 
 class QuestionPage extends React.Component {
 
@@ -9,25 +10,32 @@ class QuestionPage extends React.Component {
 
     componentDidMount() {
         // remember to put a route for this
-        const { fetchQuestion, fetchAllAnswersQuestion } = this.props;
+        const { fetchQuestion } = this.props;
         const questionId = this.props.match.params.questionId;
         // remplacing box shadow of nav bar
         const navBar = document.getElementById("main-nav-bar")
         navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"
+        const pageContainer = document.getElementById("page-container");
+        pageContainer.classList.remove("disappear");
         // document.body.style.backgroundColor = "rgb(255, 255, 255)";
         // puts the question into the state
         fetchQuestion(questionId);
-        // puts all the answers into the state
-        // fetchAllAnswersQuestion(questionId);
     }
 
+    componentDidUpdate(prevProps) {
+        const { fetchQuestion } = this.props;
+        const questionId = this.props.match.params.questionId
+        if(prevProps.match.params.questionId !== questionId) {
+            fetchQuestion(questionId)
+        }
+    }
+
+
     render() {
-        const { question, answers } = this.props;
-        if(question === undefined || answers === undefined) {
+        const { question, answers} = this.props;
+        if(question === undefined) {
             return null;
         }
-        console.log(this.props);
-        
         return (
             <section className="question-answer-page">
                 <div className="QA-container">
@@ -51,7 +59,7 @@ class QuestionPage extends React.Component {
                             {/* icons */}
                         </div>
                     </div>
-                    <div id="num-answers">Num Answers</div>
+                    <div id="num-answers">{answers.length} {answers.length > 1 ? "Answers" : "Answer"}</div>
                     <AnswerContainer questionId={question.id}/>
                 </div>
                 <div className="related-questions">

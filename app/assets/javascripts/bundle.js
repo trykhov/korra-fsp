@@ -378,8 +378,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-    id: "page-container"
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "app-container"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_questions_ask_question_container__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+    id: "page-container",
+    className: "disappear"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
     path: "/question/:questionId",
     component: _components_questions_question_page_container__WEBPACK_IMPORTED_MODULE_4__["default"]
@@ -474,9 +477,6 @@ function (_React$Component) {
 
   _createClass(AnswerIndex, [{
     key: "componentDidMount",
-    // getAllAnswers() {
-    //     console.log(this.props.answers);
-    // }
     value: function componentDidMount() {
       this.props.fetchAllQuestionAnswers(this.props.questionId);
     } // should return a list of answer index items
@@ -551,7 +551,7 @@ function (_React$Component) {
     // return individual answers
     value: function render() {
       var answer = this.props.answer;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, answer.answer));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, answer.text));
     }
   }]);
 
@@ -935,6 +935,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _answers_answer_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../answers/answer_container */ "./frontend/components/answers/answer_container.js");
+/* harmony import */ var _util_answer_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/answer_util */ "./frontend/util/answer_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -956,6 +957,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var QuestionPage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -971,30 +973,38 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       // remember to put a route for this
-      var _this$props = this.props,
-          fetchQuestion = _this$props.fetchQuestion,
-          fetchAllAnswersQuestion = _this$props.fetchAllAnswersQuestion;
+      var fetchQuestion = this.props.fetchQuestion;
       var questionId = this.props.match.params.questionId; // remplacing box shadow of nav bar
 
       var navBar = document.getElementById("main-nav-bar");
-      navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"; // document.body.style.backgroundColor = "rgb(255, 255, 255)";
+      navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)";
+      var pageContainer = document.getElementById("page-container");
+      pageContainer.classList.remove("disappear"); // document.body.style.backgroundColor = "rgb(255, 255, 255)";
       // puts the question into the state
 
-      fetchQuestion(questionId); // puts all the answers into the state
-      // fetchAllAnswersQuestion(questionId);
+      fetchQuestion(questionId);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var fetchQuestion = this.props.fetchQuestion;
+      var questionId = this.props.match.params.questionId;
+
+      if (prevProps.match.params.questionId !== questionId) {
+        fetchQuestion(questionId);
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          question = _this$props2.question,
-          answers = _this$props2.answers;
+      var _this$props = this.props,
+          question = _this$props.question,
+          answers = _this$props.answers;
 
-      if (question === undefined || answers === undefined) {
+      if (question === undefined) {
         return null;
       }
 
-      console.log(this.props);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "question-answer-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1020,7 +1030,7 @@ function (_React$Component) {
         className: "share-options"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "num-answers"
-      }, "Num Answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }, answers.length, " ", answers.length > 1 ? "Answers" : "Answer"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "related-questions"
@@ -1068,12 +1078,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     // make one for users that answered
     fetchQuestion: function fetchQuestion(questionId) {
       return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchQuestion"])(questionId));
-    } // receives answers for this specific question
-    // fetchAllAnswersQuestion: questionId => (
-    //     fetchAllQuestionAnswers(questionId)
-    //     .then(answers => dispatch(receiveAllAnswers(answers)))
-    // )
-
+    }
   };
 };
 

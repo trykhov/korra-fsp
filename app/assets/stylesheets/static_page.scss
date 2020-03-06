@@ -25,6 +25,10 @@ body {
     height: inherit; // inherits height of body
 }
 
+#app-container {
+    height: 100%;
+}
+
 .logo {
     color: $primaryRed;
     font-family: sans-serif;
@@ -61,7 +65,6 @@ p {
 
 #page-container {
     background-color: $primaryWhite;
-    
     height: inherit;
     width: 100%;
 }

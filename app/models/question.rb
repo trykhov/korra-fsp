@@ -4,7 +4,6 @@
 #
 #  id         :bigint           not null, primary key
 #  title      :string
-#  text       :string
 #  user_id    :integer
 #  topic_id   :integer
 #  created_at :datetime         not null

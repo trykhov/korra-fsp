@@ -14,15 +14,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
     // make one for users that answered
-
-    fetchQuestion: questionId => dispatch(fetchQuestion(questionId)),
-
-    // receives answers for this specific question
-    // fetchAllAnswersQuestion: questionId => (
-    //     fetchAllQuestionAnswers(questionId)
-    //     .then(answers => dispatch(receiveAllAnswers(answers)))
-    // )
-
+    fetchQuestion: questionId => dispatch(fetchQuestion(questionId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionPage);
