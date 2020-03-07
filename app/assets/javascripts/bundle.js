@@ -664,7 +664,11 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit"));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        placeholder: "Write your answer"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-submit-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
     }
   }]);
 

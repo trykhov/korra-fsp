@@ -17,8 +17,10 @@ class PostAnswer extends React.Component {
     render() {
         return (
                 <form>
-                    <textarea></textarea>
-                    <button>Submit</button>
+                    <textarea placeholder="Write your answer"></textarea>
+                    <div className="answer-submit-container">
+                        <button>Submit</button>
+                    </div>
                 </form>
             
         )

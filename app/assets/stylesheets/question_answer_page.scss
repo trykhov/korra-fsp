@@ -81,8 +81,8 @@
     background-color: $primaryGray;
     box-sizing: border-box;
     border-radius: 4px;
-    height: 30%;
-    margin-bottom: 6%;
+    margin-bottom: 4%;
+    padding-bottom: 1%;
     width: 100%;
     form {
         height: 100%;
@@ -96,10 +96,15 @@
             @include removeFocus;
             box-sizing: border-box;
             border: 1px solid #e2e2e2;
-            height: 90%;
+            font-size: 1.25vw;
+            height: 200px;
             padding: 2%;
             resize: none;
             width: 100%;
         }
     }
+}
+
+.answer-submit-container {
+    margin-left: 1.5%;
 }
