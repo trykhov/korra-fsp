@@ -1,11 +1,19 @@
 import React from 'react';
 import AnswerContainer from '../answers/answer_container';
-import { fetchAllAnswers } from '../../util/answer_util';
+import PostAnswerContainer from '../answers/post_answer_container';
 
 class QuestionPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            clickAnswer: false
+        }
+    }
+
+    answerQuestion() {
+        const writeAnswer = document.getElementById("write-answer");
+        writeAnswer.classList.remove("disappear");
     }
 
     componentDidMount() {
@@ -43,7 +51,7 @@ class QuestionPage extends React.Component {
                     <h3>{question.title}</h3>
                     <div className="interact-options">
                         <div className="answer-follow-container">
-                            <div className="interact-component">
+                            <div className="interact-component answer-button" onClick={this.answerQuestion}>
                                 <i className="far fa-edit"  color="#329bff"/>
                                 <span>Answer</span>
                             </div>
@@ -60,6 +68,7 @@ class QuestionPage extends React.Component {
                             {/* icons */}
                         </div>
                     </div>
+                    <PostAnswerContainer />
                     <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                     <AnswerContainer questionId={question.id}/>
                 </div>

@@ -1,3 +1,6 @@
+@import './mixins';
+@import './variables';
+
 .answer-follow-container {
     display: flex;
     justify-content: space-between;
@@ -10,6 +13,10 @@
     span {
         margin-left: 5%;
     }
+}
+
+.answer-button {
+    @include hover;
 }
 
 .interact-options {
@@ -28,7 +35,6 @@
     color: black;
     display: flex;
     margin: 0 auto;
-    // overflow: auto;
     padding-top: 5%;
     padding-left: 1%;
     width: 90%;
@@ -67,6 +73,20 @@
         div {
             margin: 2% 0 0;
             width: 100%;
+        }
+    }
+}
+
+#write-answer {
+    width: 100%;
+    height: 10%;
+    margin-bottom: 2%;
+    form {
+        width: inherit;
+        height: 100%;
+        textarea {
+            height: 100%;
+            width: inherit;
         }
     }
 }

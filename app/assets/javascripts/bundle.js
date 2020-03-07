@@ -602,6 +602,116 @@ function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/components/answers/post_answer.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/answers/post_answer.jsx ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var PostAnswer =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(PostAnswer, _React$Component);
+
+  function PostAnswer(props) {
+    var _this;
+
+    _classCallCheck(this, PostAnswer);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PostAnswer).call(this, props));
+    _this.state = {
+      answerText: ''
+    };
+    return _this;
+  }
+
+  _createClass(PostAnswer, [{
+    key: "handleInput",
+    value: function handleInput() {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState({
+          answerText: e.target.value
+        });
+      };
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "write-answer",
+        className: "disappear"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null)));
+    }
+  }]);
+
+  return PostAnswer;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (PostAnswer);
+
+/***/ }),
+
+/***/ "./frontend/components/answers/post_answer_container.js":
+/*!**************************************************************!*\
+  !*** ./frontend/components/answers/post_answer_container.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _post_answer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./post_answer */ "./frontend/components/answers/post_answer.jsx");
+/* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    questionId: ownProps.id
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    postAnswer: function postAnswer(answer) {
+      return dispatch(Object(_actions_answer_actions__WEBPACK_IMPORTED_MODULE_2__["postAnswer"])(answer));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_post_answer__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
 /***/ "./frontend/components/nav_bar/nav_bar.jsx":
 /*!*************************************************!*\
   !*** ./frontend/components/nav_bar/nav_bar.jsx ***!
@@ -976,7 +1086,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _answers_answer_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../answers/answer_container */ "./frontend/components/answers/answer_container.js");
-/* harmony import */ var _util_answer_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/answer_util */ "./frontend/util/answer_util.js");
+/* harmony import */ var _answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../answers/post_answer_container */ "./frontend/components/answers/post_answer_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1005,12 +1115,24 @@ function (_React$Component) {
   _inherits(QuestionPage, _React$Component);
 
   function QuestionPage(props) {
+    var _this;
+
     _classCallCheck(this, QuestionPage);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(QuestionPage).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(QuestionPage).call(this, props));
+    _this.state = {
+      clickAnswer: false
+    };
+    return _this;
   }
 
   _createClass(QuestionPage, [{
+    key: "answerQuestion",
+    value: function answerQuestion() {
+      var writeAnswer = document.getElementById("write-answer");
+      writeAnswer.classList.remove("disappear");
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       // remember to put a route for this
@@ -1056,7 +1178,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-follow-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "interact-component"
+        className: "interact-component answer-button",
+        onClick: this.answerQuestion
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-edit",
         color: "#329bff"
@@ -1070,7 +1193,7 @@ function (_React$Component) {
         className: "fas fa-people-carry"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Request"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "share-options"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "num-answers"
       }, numAnswers, " ", numAnswers > 1 ? "Answers" : numAnswers === 1 ? "Answer" : "No answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id
