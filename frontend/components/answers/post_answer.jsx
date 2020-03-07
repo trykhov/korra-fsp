@@ -16,11 +16,11 @@ class PostAnswer extends React.Component {
 
     render() {
         return (
-            <section id="write-answer" className="disappear">
                 <form>
                     <textarea></textarea>
+                    <button>Submit</button>
                 </form>
-            </section>
+            
         )
     }
 }

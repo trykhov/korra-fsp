@@ -664,10 +664,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        id: "write-answer",
-        className: "disappear"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null)));
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit"));
     }
   }]);
 
@@ -1193,7 +1190,10 @@ function (_React$Component) {
         className: "fas fa-people-carry"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Request"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "share-options"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "write-answer",
+        className: "disappear"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "num-answers"
       }, numAnswers, " ", numAnswers > 1 ? "Answers" : numAnswers === 1 ? "Answer" : "No answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id

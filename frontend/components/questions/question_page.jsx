@@ -68,7 +68,9 @@ class QuestionPage extends React.Component {
                             {/* icons */}
                         </div>
                     </div>
-                    <PostAnswerContainer />
+                    <section id="write-answer" className="disappear">
+                        <PostAnswerContainer />
+                    </section>
                     <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                     <AnswerContainer questionId={question.id}/>
                 </div>
