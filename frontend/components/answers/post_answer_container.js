@@ -3,7 +3,8 @@ import PostAnswer from "./post_answer";
 import { postAnswer } from "../../actions/answer_actions";
 
 const mapStateToProps = (state, ownProps) => ({
-    questionId: ownProps.id
+    currentUserId: state.session.currentUser.id,
+    questionId: ownProps.questionId
 })
 
 const mapDispatchToProps = dispatch => ({

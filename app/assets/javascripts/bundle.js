@@ -504,10 +504,12 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
           id: "all-answers-container"
         }, Object.keys(answers).map(function (id) {
+          var answer = answers[id];
+          var user = users[answer.user_id];
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: id,
-            answer: answers[id],
-            users: users
+            answer: answer,
+            user: user
           });
         }));
       }
@@ -571,11 +573,14 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           answer = _this$props.answer,
-          users = _this$props.users;
-      var time = new Date(this.props.answer.created_at);
-      var user = users[answer.user_id];
+          user = _this$props.user;
+      var time = new Date(answer.created_at);
       var dateAnswered = time.toDateString().substring(4);
-      ;
+
+      if (user === undefined) {
+        return null;
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "single-answer-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -623,9 +628,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -645,8 +650,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PostAnswer).call(this, props));
     _this.state = {
-      answerText: ''
+      text: '',
+      question_id: _this.props.questionId,
+      user_id: _this.props.currentUserId
     };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -657,15 +665,31 @@ function (_React$Component) {
 
       return function (e) {
         return _this2.setState({
-          answerText: e.target.value
+          text: e.target.value
         });
       };
     }
   }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.postAnswer(this.state); // reloads the page and refetches the answers, people that answered, etc.
+
+      window.location.reload();
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-        placeholder: "Write your answer"
+      var _this3 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: function onSubmit(e) {
+          return _this3.handleSubmit(e);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        placeholder: "Write your answer",
+        onChange: this.handleInput(),
+        value: this.state.answerText
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-submit-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Submit")));
@@ -697,7 +721,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    questionId: ownProps.id
+    currentUserId: state.session.currentUser.id,
+    questionId: ownProps.questionId
   };
 };
 
@@ -1197,7 +1222,10 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "write-answer",
         className: "disappear"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_post_answer_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        questionId: question.id,
+        currentUser: window.currentUser
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "num-answers"
       }, numAnswers, " ", numAnswers > 1 ? "Answers" : numAnswers === 1 ? "Answer" : "No answers"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
         questionId: question.id

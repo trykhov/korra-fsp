@@ -16,8 +16,11 @@ class AnswerIndex extends React.Component {
             return (
                 <ul id="all-answers-container">
                     {
-                        Object.keys(answers).map(id => 
-                            <AnswerIndexItem key={id} answer={answers[id]} users={users}/>
+                        Object.keys(answers).map(id => {
+                                const answer = answers[id];
+                                const user = users[answer.user_id];
+                                return <AnswerIndexItem key={id} answer={answer} user={user}/>
+                            }
                         )
                     }
                 </ul>

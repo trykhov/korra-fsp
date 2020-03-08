@@ -69,7 +69,7 @@ class QuestionPage extends React.Component {
                         </div>
                     </div>
                     <section id="write-answer" className="disappear">
-                        <PostAnswerContainer />
+                        <PostAnswerContainer questionId={question.id} currentUser={window.currentUser}/>
                     </section>
                     <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                     <AnswerContainer questionId={question.id}/>

@@ -4,10 +4,12 @@ class AnswerIndexItem extends React.Component {
     // return individual answers
 
     render() {
-        const { answer, users } = this.props;
-        const time = new Date(this.props.answer.created_at);
-        const user = users[answer.user_id];
-        const dateAnswered = time.toDateString().substring(4);;
+        const { answer, user } = this.props;
+        const time = new Date(answer.created_at);
+        const dateAnswered = time.toDateString().substring(4);
+        if(user === undefined) {
+            return null;
+        }
         return (
             <li className="single-answer-container">
                 <div className="answer-user-container">
