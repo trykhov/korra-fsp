@@ -3,18 +3,35 @@ import { Link } from 'react-router-dom';
 
 // this will appear in the home page as an answer to a question
 class AnswerTab extends React.Component {
-    
-    expandAnswer() {
-        const answerContainer = document.getElementById("test");
-        const answerContainer2 = document.getElementById("test-2");
-        answerContainer.style.height = "100%";
-        answerContainer2.style.height = "";
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: undefined,
+            answers: undefined
+        }
+    }
+
+    componentDidMount() {
+        const { fetchAllQuestionAnswers, fetchAllAnswerers, question } = this.props;
+        // get all the people that answered
+        fetchAllAnswerers(question.id)
+            .then(users => this.setState({users}));
+        fetchAllQuestionAnswers(question.id)
+            .then(answers => this.setState({answers: Object.values(answers)}))
     }
 
     render() {
         const { question } = this.props;
+        const {users, answers} = this.state;
+        if(users === undefined || answers === undefined) {
+            return null;
+        }
+        const answer = answers[Math.floor(Math.random() * answers.length)];
+        console.log(answer);
+        
         return (
-            <li id="test-2" className="answer-tab-container">
+            <li className="answer-tab-container">
                 <p className="question-asked">
                     <Link to={`/question/${question.id}`}>{question.title}</Link>
                 </p>
@@ -22,77 +39,17 @@ class AnswerTab extends React.Component {
                     <img className="profile-image answer-profile-picture" src={window.defaultImage}/>
                     <div className="user-info">
                         <div className="username">
-                            Username
+                            {users[answer.user_id].username}
                         </div>
                         <div className="answered-date">
                             {"Answer date"}
                         </div>
                     </div>
                 </div>
-                <div id="test" className="user-answer-container">
+                <div className="user-answer-container">
                     <span className="answer">
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    A bunch of gibberish
-
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    vA bunch of gibberish
-
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-
-
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
-                    v
-                    A bunch of gibberish
-                    A bunch of gibberish
+                    {answer.text}
                     </span>
-                    {/* <div className="read-more-container"
-                        onClick={this.expandAnswer}
-                        >(more)</div> */}
                 </div>
             </li>
         )

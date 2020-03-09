@@ -648,26 +648,55 @@ var AnswerTab =
 function (_React$Component) {
   _inherits(AnswerTab, _React$Component);
 
-  function AnswerTab() {
+  function AnswerTab(props) {
+    var _this;
+
     _classCallCheck(this, AnswerTab);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AnswerTab).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AnswerTab).call(this, props));
+    _this.state = {
+      users: undefined,
+      answers: undefined
+    };
+    return _this;
   }
 
   _createClass(AnswerTab, [{
-    key: "expandAnswer",
-    value: function expandAnswer() {
-      var answerContainer = document.getElementById("test");
-      var answerContainer2 = document.getElementById("test-2");
-      answerContainer.style.height = "100%";
-      answerContainer2.style.height = "";
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _this$props = this.props,
+          fetchAllQuestionAnswers = _this$props.fetchAllQuestionAnswers,
+          fetchAllAnswerers = _this$props.fetchAllAnswerers,
+          question = _this$props.question; // get all the people that answered
+
+      fetchAllAnswerers(question.id).then(function (users) {
+        return _this2.setState({
+          users: users
+        });
+      });
+      fetchAllQuestionAnswers(question.id).then(function (answers) {
+        return _this2.setState({
+          answers: Object.values(answers)
+        });
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var question = this.props.question;
+      var _this$state = this.state,
+          users = _this$state.users,
+          answers = _this$state.answers;
+
+      if (users === undefined || answers === undefined) {
+        return null;
+      }
+
+      var answer = answers[Math.floor(Math.random() * answers.length)];
+      console.log(answer);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        id: "test-2",
         className: "answer-tab-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "question-asked"
@@ -682,14 +711,13 @@ function (_React$Component) {
         className: "user-info"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "username"
-      }, "Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, users[answer.user_id].username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answered-date"
       }, "Answer date"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "test",
         className: "user-answer-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "answer"
-      }, "A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish vA bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish")));
+      }, answer.text)));
     }
   }]);
 
@@ -711,6 +739,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_tab_homepage */ "./frontend/components/answers/answer_tab_homepage.jsx");
+/* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
+
 
 
 
@@ -719,7 +749,14 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchAllQuestionAnswers: function fetchAllQuestionAnswers(questionId) {
+      return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__["fetchAllQuestionAnswers"])(questionId);
+    },
+    fetchAllAnswerers: function fetchAllAnswerers(questionId) {
+      return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__["fetchAllAnswerers"])(questionId);
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__["default"]));
