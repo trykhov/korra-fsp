@@ -23,8 +23,8 @@ class QuestionPage extends React.Component {
         // remplacing box shadow of nav bar
         const navBar = document.getElementById("main-nav-bar")
         navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"
-        const pageContainer = document.getElementById("page-container");
-        pageContainer.classList.remove("disappear");
+        const pageContainer = document.getElementById("app-container");
+        pageContainer.style.backgroundColor = "#fff";
         // document.body.style.backgroundColor = "rgb(255, 255, 255)";
         // puts the question into the state
         fetchQuestion(questionId);

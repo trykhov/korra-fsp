@@ -27,6 +27,7 @@ body {
 
 #app-container {
     height: 100%;
+    overflow: auto;
 }
 
 .logo {
@@ -36,8 +37,7 @@ body {
 }
 
 a {
-    color: #fff;
-    text-decoration: none;
+    // text-decoration: none;
     @include hover;
 }
 
@@ -71,7 +71,7 @@ p {
     display: none;
 }
 
-#page-container {
+.page-container {
     background-color: $primaryWhite;
     height: inherit;
     overflow: auto;
@@ -84,7 +84,7 @@ p {
 }
 
 .answer {
-    font-size: 1.25vw;
+    font-size: 1.5vw;
     margin: 0;
     padding: 2% 0;
 }

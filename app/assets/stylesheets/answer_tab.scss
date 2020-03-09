@@ -1,0 +1,38 @@
+.answer-tab-container {
+    background-color: #fff;
+    border: 1px solid rgb(222, 224, 225);
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 1px;
+    height: 20%;
+    margin: 1% auto;
+    padding: 1%;
+    width: 60%;
+    & > * {
+        font-size: 1.75vw;
+        margin: 1.5% auto;
+        width: 95%;
+    }
+    .username, .user-answer {
+        color: black;
+    }
+}
+
+.question-asked {
+    a {
+        color: black;
+        font-size: 2vw;
+        font-weight: bold;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.user-answer {
+    height: 50%;
+    overflow: hidden;
+    p {
+        margin: 0;
+    }
+}
