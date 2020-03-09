@@ -1,16 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // this will appear in the home page as an answer to a question
 class AnswerTab extends React.Component {
     
-
+    expandAnswer() {
+        const answerContainer = document.getElementById("test");
+        const answerContainer2 = document.getElementById("test-2");
+        answerContainer.style.height = "100%";
+        answerContainer2.style.height = "";
+    }
 
     render() {
-        // const { user, answer, question } = this.props;
+        const { question } = this.props;
         return (
-            <li className="answer-tab-container">
+            <li id="test-2" className="answer-tab-container">
                 <p className="question-asked">
-                    <a href="">Insert question here</a>
+                    <Link to={`/question/${question.id}`}>{question.title}</Link>
                 </p>
                 <div className="answer-user-container">
                     <img className="profile-image answer-profile-picture" src={window.defaultImage}/>
@@ -23,8 +29,8 @@ class AnswerTab extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="user-answer">
-                    <p>
+                <div id="test" className="user-answer-container">
+                    <span className="answer">
                     A bunch of gibberish
                     A bunch of gibberish
                     A bunch of gibberish
@@ -46,11 +52,47 @@ class AnswerTab extends React.Component {
                     v
                     A bunch of gibberish
                     A bunch of gibberish
-                    </p>
-                    <div className="read-more">
-                        <span>(more)</span>
-                    </div>
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
 
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+
+
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    v
+                    A bunch of gibberish
+                    A bunch of gibberish
+                    </span>
+                    {/* <div className="read-more-container"
+                        onClick={this.expandAnswer}
+                        >(more)</div> */}
                 </div>
             </li>
         )

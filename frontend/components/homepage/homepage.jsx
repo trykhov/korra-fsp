@@ -1,18 +1,22 @@
 import React from 'react';
-import AnswerTab from '../answers/answer_tab_homepage';
-
+// import AnswerTab from '../answers/answer_tab_homepage';
+import AnswerTabContainer from '../answers/answer_tab_homepage_container';
 class Homepage extends React.Component {
 
     // generate an infinite scroll
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            questions: [],
+            answers: []
+        };
     }
 
     componentDidMount() {
         const tab = document.getElementById("home-nav");
         tab.style.color = "rgb(185, 43, 39)";
         tab.style.borderBottom = "2px solid rgb(185, 43, 39)";
+        this.props.fetchAllQuestions().then(res => this.setState({questions: Object.values(res.questions)}))
     }
 
     componentWillUnmount() {
@@ -22,7 +26,6 @@ class Homepage extends React.Component {
     }
 
     render() {
-        // const { currentUser } = this.props;
         const currentUser = window.currentUser;
         return (
             <div id="homepage-container">
@@ -37,7 +40,9 @@ class Homepage extends React.Component {
                         </section>
                         <div id="question">What is your question?</div>
                     </div>
-                    <AnswerTab />
+                    {this.state.questions.map(question => {
+                        return <AnswerTabContainer key={question.id} question={question}/>
+                    })}
                 </div>
             </div>
         )

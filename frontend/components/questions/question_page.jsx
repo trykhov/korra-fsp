@@ -7,6 +7,7 @@ class QuestionPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            question: '',
             clickAnswer: false
         }
     }
@@ -15,6 +16,10 @@ class QuestionPage extends React.Component {
         const writeAnswer = document.getElementById("write-answer");
         writeAnswer.classList.remove("disappear");
     }
+
+    // componentWillReceiveProps(props) {
+    //     window.location.reload();
+    // }
 
     componentDidMount() {
         // remember to put a route for this
@@ -27,7 +32,8 @@ class QuestionPage extends React.Component {
         pageContainer.style.backgroundColor = "#fff";
         // document.body.style.backgroundColor = "rgb(255, 255, 255)";
         // puts the question into the state
-        fetchQuestion(questionId);
+        fetchQuestion(questionId)
+        // this.setState({question: this.props.question})
     }
 
     componentDidUpdate(prevProps) {
@@ -52,7 +58,7 @@ class QuestionPage extends React.Component {
                     <div className="interact-options">
                         <div className="answer-follow-container">
                             <div className="interact-component answer-button" onClick={this.answerQuestion}>
-                                <i className="far fa-edit"  color="#329bff"/>
+                                <i className="far fa-edit" color="#329bff"/>
                                 <span>Answer</span>
                             </div>
                             <div className="interact-component">

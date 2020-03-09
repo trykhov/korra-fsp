@@ -93,3 +93,24 @@ answer_1_5 = Answer.create({
     user_id: user_8.id,
     question_id: question_1.id
 })
+
+question_2 = Question.create({
+    title: "How smart is Batman in terms of tactics? If he was in the military, what rank would he receive?",
+    user_id: user_7.id
+})
+
+answer_2_1 = Answer.create({
+    text: "Contrary to popular opinion, Batman is, in fact, superhuman.
+
+    I know, I know- canonically Batman is not superhuman and has no powers. Etc.
+    
+    On the other hand, the things Batman has done. One or two of those things are possible. On their own. After a lifetime of training. Not all at once.
+    
+    One cannot be “a master of 127 martial arts” and all the other nonsense things that Batman can and has done.
+    
+    So, in conclusion Batman would quickly prove his merit in any military in the world and be a five/four star general. Or the CJCS. Or the president.
+    
+    Batman can be whatever he wants to be. Frontline, command, whatever.",
+    user_id: user_8.id,
+    question_id: question_2.id
+})

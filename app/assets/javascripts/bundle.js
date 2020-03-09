@@ -621,6 +621,7 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -639,6 +640,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+
  // this will appear in the home page as an answer to a question
 
 var AnswerTab =
@@ -653,16 +655,25 @@ function (_React$Component) {
   }
 
   _createClass(AnswerTab, [{
+    key: "expandAnswer",
+    value: function expandAnswer() {
+      var answerContainer = document.getElementById("test");
+      var answerContainer2 = document.getElementById("test-2");
+      answerContainer.style.height = "100%";
+      answerContainer2.style.height = "";
+    }
+  }, {
     key: "render",
     value: function render() {
-      // const { user, answer, question } = this.props;
+      var question = this.props.question;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        id: "test-2",
         className: "answer-tab-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "question-asked"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: ""
-      }, "Insert question here")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        to: "/question/".concat(question.id)
+      }, question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-user-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         className: "profile-image answer-profile-picture",
@@ -674,10 +685,11 @@ function (_React$Component) {
       }, "Username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answered-date"
       }, "Answer date"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "user-answer"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish vA bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "read-more"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "(more)"))));
+        id: "test",
+        className: "user-answer-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "answer"
+      }, "A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish vA bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish v A bunch of gibberish A bunch of gibberish")));
     }
   }]);
 
@@ -685,6 +697,32 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (AnswerTab);
+
+/***/ }),
+
+/***/ "./frontend/components/answers/answer_tab_homepage_container.js":
+/*!**********************************************************************!*\
+  !*** ./frontend/components/answers/answer_tab_homepage_container.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_tab_homepage */ "./frontend/components/answers/answer_tab_homepage.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {};
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -830,7 +868,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _answers_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../answers/answer_tab_homepage */ "./frontend/components/answers/answer_tab_homepage.jsx");
+/* harmony import */ var _answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../answers/answer_tab_homepage_container */ "./frontend/components/answers/answer_tab_homepage_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -849,6 +887,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+ // import AnswerTab from '../answers/answer_tab_homepage';
 
 
 
@@ -864,16 +903,26 @@ function (_React$Component) {
     _classCallCheck(this, Homepage);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Homepage).call(this, props));
-    _this.state = {};
+    _this.state = {
+      questions: [],
+      answers: []
+    };
     return _this;
   }
 
   _createClass(Homepage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       var tab = document.getElementById("home-nav");
       tab.style.color = "rgb(185, 43, 39)";
       tab.style.borderBottom = "2px solid rgb(185, 43, 39)";
+      this.props.fetchAllQuestions().then(function (res) {
+        return _this2.setState({
+          questions: Object.values(res.questions)
+        });
+      });
     }
   }, {
     key: "componentWillUnmount",
@@ -885,7 +934,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // const { currentUser } = this.props;
       var currentUser = window.currentUser;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "homepage-container"
@@ -903,7 +951,12 @@ function (_React$Component) {
         src: window.defaultImage
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "question"
-      }, "What is your question?")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__["default"], null)));
+      }, "What is your question?")), this.state.questions.map(function (question) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: question.id,
+          question: question
+        });
+      })));
     }
   }]);
 
@@ -925,6 +978,8 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _homepage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./homepage */ "./frontend/components/homepage/homepage.jsx");
+/* harmony import */ var _actions_question_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/question_actions */ "./frontend/actions/question_actions.js");
+
 
 
 
@@ -935,7 +990,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    fetchAllQuestions: function fetchAllQuestions() {
+      return dispatch(Object(_actions_question_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAllQuestions"])());
+    }
+  };
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_homepage__WEBPACK_IMPORTED_MODULE_1__["default"]));
@@ -1351,6 +1410,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(QuestionPage).call(this, props));
     _this.state = {
+      question: '',
       clickAnswer: false
     };
     return _this;
@@ -1361,7 +1421,10 @@ function (_React$Component) {
     value: function answerQuestion() {
       var writeAnswer = document.getElementById("write-answer");
       writeAnswer.classList.remove("disappear");
-    }
+    } // componentWillReceiveProps(props) {
+    //     window.location.reload();
+    // }
+
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -1375,7 +1438,7 @@ function (_React$Component) {
       pageContainer.style.backgroundColor = "#fff"; // document.body.style.backgroundColor = "rgb(255, 255, 255)";
       // puts the question into the state
 
-      fetchQuestion(questionId);
+      fetchQuestion(questionId); // this.setState({question: this.props.question})
     }
   }, {
     key: "componentDidUpdate",
