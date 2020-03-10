@@ -154,6 +154,82 @@ var fetchAllAnswers = function fetchAllAnswers() {
 
 /***/ }),
 
+/***/ "./frontend/actions/comment_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/comment_actions.js ***!
+  \*********************************************/
+/*! exports provided: RECEIVE_COMMENT, RECEIVE_COMMENTS, REMOVE_COMMENT, receiveComments, receiveComment, removeComment, createComment, showComments, deleteComment, editComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENT", function() { return RECEIVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_COMMENTS", function() { return RECEIVE_COMMENTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_COMMENT", function() { return REMOVE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComments", function() { return receiveComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveComment", function() { return receiveComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeComment", function() { return removeComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showComments", function() { return showComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
+/* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/comment_util */ "./frontend/util/comment_util.js");
+ // constants
+
+var RECEIVE_COMMENT = "RECEIVE_COMMENT";
+var RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+var REMOVE_COMMENT = "REMOVE_COMMENT"; // regular thunk creators
+
+var receiveComments = function receiveComments(comments) {
+  return {
+    type: RECEIVE_COMMENTS,
+    comments: comments
+  };
+};
+var receiveComment = function receiveComment(comment) {
+  return {
+    type: RECEIVE_COMMENT,
+    comment: comment
+  };
+};
+var removeComment = function removeComment(commentId) {
+  return {
+    type: REMOVE_COMMENT,
+    commentId: commentId
+  };
+}; // thunk action creators
+
+var createComment = function createComment(answerId, comment) {
+  return function (dispatch) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](answerId, comment).then(function (commentRes) {
+      return dispatch(receiveComment(commentRes));
+    });
+  };
+};
+var showComments = function showComments(answerId) {
+  return function (dispatch) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["showComments"](answerId).then(function (comments) {
+      return dispatch(receiveComments(comments));
+    });
+  };
+};
+var deleteComment = function deleteComment(commentId) {
+  return function (dispatch) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["removeComment"](commentId).then(function (comment) {
+      return dispatch(removeComment(comment));
+    });
+  };
+};
+var editComment = function editComment(commentId, comment) {
+  return function (dispatch) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["editComment"](commentId, comment).then(function (commentRes) {
+      return dispatch(receiveComment(commentRes));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/question_actions.js":
 /*!**********************************************!*\
   !*** ./frontend/actions/question_actions.js ***!
@@ -943,7 +1019,6 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Homepage).call(this, props));
     _this.state = {
-      questions: [],
       answers: []
     };
     return _this;
@@ -952,16 +1027,10 @@ function (_React$Component) {
   _createClass(Homepage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
       var tab = document.getElementById("home-nav");
       tab.style.color = "rgb(185, 43, 39)";
       tab.style.borderBottom = "2px solid rgb(185, 43, 39)";
-      this.props.fetchAllQuestions().then(function (res) {
-        return _this2.setState({
-          questions: Object.values(res.questions)
-        });
-      });
+      this.props.fetchAllQuestions();
     }
   }, {
     key: "componentWillUnmount",
@@ -973,34 +1042,32 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var currentUser = window.currentUser;
-
-      if (currentUser !== undefined) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "homepage-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "topics-container"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "answer-feed-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "outter-question-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-          id: "asker-container",
-          className: "question-container"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          className: "profile-image",
-          src: window.defaultImage
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          id: "question"
-        }, "What is your question?")), this.state.questions.map(function (question) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            key: question.id,
-            question: question
-          });
-        })));
-      } else {
-        window.location.reload();
+      if (!this.props.questions) {
+        return null;
       }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "homepage-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "topics-container"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "answer-feed-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "outter-question-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "asker-container",
+        className: "question-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "profile-image",
+        src: window.defaultImage
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, this.props.currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "question"
+      }, "What is your question?")), this.props.questions.map(function (question) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: question.id,
+          question: question
+        });
+      })));
     }
   }]);
 
@@ -1029,7 +1096,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    questions: Object.values(state.entities.questions)
   };
 };
 
@@ -1862,6 +1930,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/comment_util */ "./frontend/util/comment_util.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1872,15 +1942,23 @@ document.addEventListener("DOMContentLoaded", function () {
   var preloadedState = undefined; // to tell the window that the user is logged in
   // (look at the application.html.erb in the app/views folder)
 
+  var store;
+
   if (window.currentUser) {
     preloadedState = {
+      entities: {
+        users: _defineProperty({}, window.currentUser.id, window.currentUser)
+      },
       session: {
         currentUser: window.currentUser
       }
     };
-  }
+    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState);
+    delete window.currentUser; // delete currentUser from the window, but kept in state
+  } else {
+    store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  } // TESTING: BEGIN
 
-  var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState); // TESTING: BEGIN
 
   window.store = store;
   window.createComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["createComment"];
@@ -1934,6 +2012,45 @@ var answerReducer = function answerReducer() {
 
 /***/ }),
 
+/***/ "./frontend/reducers/comment_reducer.js":
+/*!**********************************************!*\
+  !*** ./frontend/reducers/comment_reducer.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
+
+var commentReducer = function commentReducer() {
+  var prevState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(prevState);
+  var newState = Object.assign({}, prevState);
+
+  switch (action.type) {
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_COMMENTS"]:
+      return action.comments;
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_COMMENT"]:
+      newState[action.comment.id] = action.comment;
+      return newState;
+
+    case _actions_comment_actions__WEBPACK_IMPORTED_MODULE_0__["REMOVE_COMMENT"]:
+      newState[action.commentId] = undefined;
+      return newState;
+
+    default:
+      return prevState;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (commentReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -1947,6 +2064,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _user_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_reducer */ "./frontend/reducers/user_reducer.js");
 /* harmony import */ var _question_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./question_reducer */ "./frontend/reducers/question_reducer.js");
 /* harmony import */ var _answer_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./answer_reducer */ "./frontend/reducers/answer_reducer.js");
+/* harmony import */ var _comment_reducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./comment_reducer */ "./frontend/reducers/comment_reducer.js");
+
 
 
 
@@ -1954,8 +2073,8 @@ __webpack_require__.r(__webpack_exports__);
 var entitiesReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   users: _user_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   questions: _question_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  answers: _answer_reducer__WEBPACK_IMPORTED_MODULE_3__["default"] // comments
-
+  answers: _answer_reducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  comments: _comment_reducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (entitiesReducer);
 

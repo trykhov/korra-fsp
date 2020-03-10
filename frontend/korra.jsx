@@ -13,14 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
     // to tell the window that the user is logged in
     // (look at the application.html.erb in the app/views folder)
+    let store;
     if (window.currentUser) {
         preloadedState = {
+            entities: {
+                users: { [window.currentUser.id]: window.currentUser },
+            },
             session: {
                 currentUser: window.currentUser
             }
-        };
+        }
+        store = configureStore(preloadedState);
+        delete window.currentUser; // delete currentUser from the window, but kept in state
+    } else {
+        store = configureStore();
     }
-    const store = configureStore(preloadedState);
     // TESTING: BEGIN
     window.store = store;
     window.createComment = createComment;
