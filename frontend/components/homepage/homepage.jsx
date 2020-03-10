@@ -29,25 +29,29 @@ class Homepage extends React.Component {
 
     render() {
         const currentUser = window.currentUser;
-        return (
-            <div id="homepage-container">
-                <div id="topics-container">
-
-                </div>
-                <div id="answer-feed-container">
-                    <div id="outter-question-container">
-                        <section id="asker-container" className="question-container">
-                            <img className="profile-image" src={window.defaultImage}/>
-                            <span>{currentUser.username}</span>
-                        </section>
-                        <div id="question">What is your question?</div>
+        if(currentUser !== undefined) {
+            return (
+                <div id="homepage-container">
+                    <div id="topics-container">
+    
                     </div>
-                    {this.state.questions.map(question => {
-                        return <AnswerTabContainer key={question.id} question={question}/>
-                    })}
+                    <div id="answer-feed-container">
+                        <div id="outter-question-container">
+                            <section id="asker-container" className="question-container">
+                                <img className="profile-image" src={window.defaultImage}/>
+                                <span>{currentUser.username}</span>
+                            </section>
+                            <div id="question">What is your question?</div>
+                        </div>
+                        {this.state.questions.map(question => {
+                            return <AnswerTabContainer key={question.id} question={question}/>
+                        })}
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            window.location.reload(); 
+        }
     }
 }
 

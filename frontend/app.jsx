@@ -6,16 +6,16 @@ import QuestionPageContainer from './components/questions/question_page_containe
 import HomepageContainer from './components/homepage/homepage_container';
 
 const App = () => {
-    return (
-        <div id="app-container">
-            <NavBar/>
-            <AskQuestionContainer />
-            <Route exact path="/" component={HomepageContainer} />
-            {/* <section className="page-container disappear">    */}
-            <Route path="/question/:questionId" component={QuestionPageContainer}/>
-            {/* </section> */}
-        </div>
-    )
+        return (
+            <div id="app-container">
+                <NavBar/>
+                <AskQuestionContainer />
+                <Route exact path="/" component={HomepageContainer} />
+                {/* <section className="page-container disappear">    */}
+                <Route path="/question/:questionId" component={QuestionPageContainer}/>
+                {/* </section> */}
+            </div>
+        )
 }
 
 export default App;

@@ -25,8 +25,6 @@ class QuestionPage extends React.Component {
         // remplacing box shadow of nav bar
         const navBar = document.getElementById("main-nav-bar")
         navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"
-        const pageContainer = document.getElementById("app-container");
-        pageContainer.style.backgroundColor = "#fff";
         // document.body.style.backgroundColor = "rgb(255, 255, 255)";
         // puts the question into the state
         fetchQuestion(questionId)
@@ -49,44 +47,46 @@ class QuestionPage extends React.Component {
             return null;
         }
         return (
-            <section className="question-answer-page">
-                <div className="QA-container">
-                    <h3>{question.title}</h3>
-                    <div className="interact-options">
-                        <div className="answer-follow-container">
-                            <div className="interact-component answer-button" onClick={this.answerQuestion}>
-                                <i className="far fa-edit" color="#329bff"/>
-                                <span>Answer</span>
+            <section id="question-page-container">
+                <div className="question-answer-page">
+                    <div className="QA-container">
+                        <h3>{question.title}</h3>
+                        <div className="interact-options">
+                            <div className="answer-follow-container">
+                                <div className="interact-component answer-button" onClick={this.answerQuestion}>
+                                    <i className="far fa-edit" color="#329bff"/>
+                                    <span>Answer</span>
+                                </div>
+                                <div className="interact-component">
+                                    <i className="fas fa-rss"/>
+                                    <span>Follow</span>
+                                </div>
+                                <div className="interact-component">
+                                    <i className="fas fa-people-carry"/>
+                                    <span>Request</span>
+                                </div>
                             </div>
-                            <div className="interact-component">
-                                <i className="fas fa-rss"/>
-                                <span>Follow</span>
-                            </div>
-                            <div className="interact-component">
-                                <i className="fas fa-people-carry"/>
-                                <span>Request</span>
+                            <div className="share-options">
+                                {/* icons */}
                             </div>
                         </div>
-                        <div className="share-options">
-                            {/* icons */}
-                        </div>
+                        <section id="write-answer" className="disappear">
+                            <PostAnswerContainer questionId={question.id} currentUser={window.currentUser}/>
+                        </section>
+                        <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
+                        <AnswerContainer questionId={question.id}/>
                     </div>
-                    <section id="write-answer" className="disappear">
-                        <PostAnswerContainer questionId={question.id} currentUser={window.currentUser}/>
-                    </section>
-                    <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
-                    <AnswerContainer questionId={question.id}/>
-                </div>
-                <div id="related-q-container">
-                    <div id="related-questions">
-                        <h6>Related Questions</h6>
-                        <div >
-                            <div>filler</div>
-                            <div>filler</div>
-                            <div>filler</div>
-                            <div>filler</div>
-                            <div>filler</div>
-                            <div>filler</div>
+                    <div id="related-q-container">
+                        <div id="related-questions">
+                            <h6>Related Questions</h6>
+                            <div >
+                                <div>filler</div>
+                                <div>filler</div>
+                                <div>filler</div>
+                                <div>filler</div>
+                                <div>filler</div>
+                                <div>filler</div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -974,28 +974,33 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var currentUser = window.currentUser;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "homepage-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "topics-container"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "answer-feed-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "outter-question-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
-        id: "asker-container",
-        className: "question-container"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-image",
-        src: window.defaultImage
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "question"
-      }, "What is your question?")), this.state.questions.map(function (question) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: question.id,
-          question: question
-        });
-      })));
+
+      if (currentUser !== undefined) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "homepage-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "topics-container"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "answer-feed-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "outter-question-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+          id: "asker-container",
+          className: "question-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          className: "profile-image",
+          src: window.defaultImage
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          id: "question"
+        }, "What is your question?")), this.state.questions.map(function (question) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answers_answer_tab_homepage_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: question.id,
+            question: question
+          });
+        })));
+      } else {
+        window.location.reload();
+      }
     }
   }]);
 
@@ -1474,9 +1479,7 @@ function (_React$Component) {
       var questionId = this.props.match.params.questionId; // remplacing box shadow of nav bar
 
       var navBar = document.getElementById("main-nav-bar");
-      navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)";
-      var pageContainer = document.getElementById("app-container");
-      pageContainer.style.backgroundColor = "#fff"; // document.body.style.backgroundColor = "rgb(255, 255, 255)";
+      navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"; // document.body.style.backgroundColor = "rgb(255, 255, 255)";
       // puts the question into the state
 
       fetchQuestion(questionId); // this.setState({question: this.props.question})
@@ -1504,6 +1507,8 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
+        id: "question-page-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "question-answer-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "QA-container"
@@ -1541,7 +1546,7 @@ function (_React$Component) {
         id: "related-q-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "related-questions"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Related Questions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler")))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Related Questions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "filler"))))));
     }
   }]);
 
@@ -1856,7 +1861,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./root */ "./frontend/root.jsx");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _util_answer_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/answer_util */ "./frontend/util/answer_util.js");
+/* harmony import */ var _util_comment_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./util/comment_util */ "./frontend/util/comment_util.js");
 
 
 
@@ -1878,9 +1883,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState); // TESTING: BEGIN
 
   window.store = store;
-  window.postAnswer = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["postAnswer"];
-  window.fetchAnswer = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["fetchAnswer"];
-  window.fetchAllAnswers = _util_answer_util__WEBPACK_IMPORTED_MODULE_4__["fetchAllAnswers"]; // TESTING: END
+  window.createComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["createComment"];
+  window.deleteComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["deleteComment"];
+  window.editComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["editComment"];
+  window.showComments = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["showComments"]; // TESTING: END
 
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
@@ -2192,6 +2198,52 @@ var fetchAllAnswers = function fetchAllAnswers() {
     method: 'GET'
   });
 }; // will do editting and deleting when front end is up
+
+/***/ }),
+
+/***/ "./frontend/util/comment_util.js":
+/*!***************************************!*\
+  !*** ./frontend/util/comment_util.js ***!
+  \***************************************/
+/*! exports provided: createComment, showComments, deleteComment, editComment */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showComments", function() { return showComments; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
+var createComment = function createComment(answerId, comment) {
+  return $.ajax({
+    url: "/api/answers/".concat(answerId, "/comments"),
+    method: 'POST',
+    data: {
+      comment: comment
+    }
+  });
+};
+var showComments = function showComments(answerId) {
+  return $.ajax({
+    url: "/api/answers/".concat(answerId, "/comments"),
+    method: 'GET'
+  });
+};
+var deleteComment = function deleteComment(commentId) {
+  return $.ajax({
+    url: "/api/comments/".concat(commentId),
+    method: 'DELETE'
+  });
+};
+var editComment = function editComment(commentId, comment) {
+  return $.ajax({
+    url: "/api/comments/".concat(commentId),
+    method: 'PATCH',
+    data: {
+      comment: comment
+    }
+  });
+};
 
 /***/ }),
 

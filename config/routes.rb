@@ -5,18 +5,20 @@ Rails.application.routes.draw do
  
   
     resources :users do 
-      resources :answer, only:[:index] # get all answers from specific user
+      resources :answers, only:[:index] # get all answers from specific user
     end 
+
     
     resources :questions do 
       resources :users, only:[:index]
       resources :answers, only:[:index]
     end 
-
+    
     resources :answers do 
       # comments can only be seen in relation to an answer
-      resources :comments
+      resources :comments, only:[:create, :index]
     end
+    resources :comments, only:[:destroy, :update]
     resources :topics
   end
 

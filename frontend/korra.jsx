@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './root';
 import configureStore from './store/store';
-import { postAnswer, fetchAllAnswers, fetchAnswer } from './util/answer_util';
+import { createComment, deleteComment, editComment, showComments } from './util/comment_util';
 
 
 
@@ -23,9 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const store = configureStore(preloadedState);
     // TESTING: BEGIN
     window.store = store;
-    window.postAnswer = postAnswer;
-    window.fetchAnswer = fetchAnswer;
-    window.fetchAllAnswers = fetchAllAnswers;
+    window.createComment = createComment;
+    window.deleteComment = deleteComment;
+    window.editComment = editComment;
+    window.showComments = showComments;
     // TESTING: END
 
     ReactDOM.render(<Root store={store}/>, root);

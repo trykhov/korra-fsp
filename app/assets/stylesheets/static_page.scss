@@ -5,7 +5,8 @@
 @import './variables';
 
 html {
-    height: auto; // takes the height of the window
+    background-color: #e6e7e8;
+    height: 100%; // takes the height of the window
     overflow: auto;
 }
 
@@ -23,11 +24,15 @@ body {
 }
 
 #root {
+    background-color: #e6e7e8;
     height: inherit; // inherits height of body
 }
 
 #app-container {
+    background-color: #e6e7e8;
     height: auto;
+    width: 100%;
+    overflow: auto;
 }
 
 .logo {

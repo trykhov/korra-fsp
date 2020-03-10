@@ -33,8 +33,6 @@ class Api::AnswersController < ApplicationController
     end
 
 
-
-
     private
     def answer_params
         params.require(:answer).permit(:text, :question_id)
