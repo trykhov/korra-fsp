@@ -1,12 +1,13 @@
 import React from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
+import { fetchQuestion } from '../../util/question_util';
 
 // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 class AskQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            text: ''
+            title: ''
         }
     }
 
@@ -14,21 +15,22 @@ class AskQuestion extends React.Component {
         return (e) => this.setState({title: e.target.value});
     }
 
-    handleSubmit(e) {
+    handleSubmit(e) {        
         e.preventDefault();
         this.props.askQuestion(this.state)
-        .then(this.setState({title: '', text: ''}))
+        .then(res => this.props.history.push(`/question/${res.question.id}`))
+        .then(this.setState({title: ''}))
         .then(this.cancelQuestion());
     }
 
     cancelQuestion() {
         const questionComponent = document.getElementById("question-component");
-        questionComponent.classList.toggle('disappear')
+        questionComponent.classList.toggle('disappear');
     }
 
     render() {
         const { currentUser } = this.props;
-        const questionPlaceholder = 'Start your question with "What", "How", "Why", etc.'
+        const questionPlaceholder = 'Start your question with "What", "How", "Why", etc.';
         return (
             // first div takes up the whole window
             <div id="question-component" className="disappear">
@@ -72,4 +74,5 @@ class AskQuestion extends React.Component {
     }
 }
 
-export default AskQuestion;
+// allows access to the history properties
+export default withRouter(AskQuestion);

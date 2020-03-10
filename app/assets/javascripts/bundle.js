@@ -690,12 +690,12 @@ function (_React$Component) {
           users = _this$state.users,
           answers = _this$state.answers;
 
-      if (users === undefined || answers === undefined) {
+      if (users === undefined || answers === undefined || answers.length === 0) {
         return null;
-      }
+      } // select a random answer
+
 
       var answer = answers[Math.floor(Math.random() * answers.length)];
-      console.log(answer);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
         className: "answer-tab-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -1243,6 +1243,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _util_question_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/question_util */ "./frontend/util/question_util.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1261,6 +1263,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+
+
  // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 
 var AskQuestion =
@@ -1275,8 +1279,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AskQuestion).call(this, props));
     _this.state = {
-      title: '',
-      text: ''
+      title: ''
     };
     return _this;
   }
@@ -1295,10 +1298,13 @@ function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      this.props.askQuestion(this.state).then(this.setState({
-        title: '',
-        text: ''
+      this.props.askQuestion(this.state).then(function (res) {
+        return _this3.props.history.push("/question/".concat(res.question.id));
+      }).then(this.setState({
+        title: ''
       })).then(this.cancelQuestion());
     }
   }, {
@@ -1310,7 +1316,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var currentUser = this.props.currentUser;
       var questionPlaceholder = 'Start your question with "What", "How", "Why", etc.';
@@ -1339,7 +1345,7 @@ function (_React$Component) {
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, currentUser.username, " asked")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
           id: "main-question-container",
           onSubmit: function onSubmit(e) {
-            return _this3.handleSubmit(e);
+            return _this4.handleSubmit(e);
           }
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
           id: "question-area"
@@ -1360,9 +1366,10 @@ function (_React$Component) {
   }]);
 
   return AskQuestion;
-}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component); // allows access to the history properties
 
-/* harmony default export */ __webpack_exports__["default"] = (AskQuestion);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(AskQuestion));
 
 /***/ }),
 
@@ -1458,10 +1465,7 @@ function (_React$Component) {
     value: function answerQuestion() {
       var writeAnswer = document.getElementById("write-answer");
       writeAnswer.classList.remove("disappear");
-    } // componentWillReceiveProps(props) {
-    //     window.location.reload();
-    // }
-
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -2105,9 +2109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app */ "./frontend/app.jsx");
 /* harmony import */ var _components_session_session_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/session/session_container */ "./frontend/components/session/session_container.jsx");
-/* harmony import */ var _components_nav_bar_nav_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/nav_bar/nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
-/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./util/route_util */ "./frontend/util/route_util.js");
-
+/* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/route_util */ "./frontend/util/route_util.js");
 
 
 
@@ -2119,10 +2121,10 @@ var Root = function Root(_ref) {
   var store = _ref.store;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: store
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["HashRouter"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _components_session_session_container__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_6__["ProtectedRoute"], {
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     path: "/",
     component: _app__WEBPACK_IMPORTED_MODULE_3__["default"]
   })));

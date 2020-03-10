@@ -16,10 +16,7 @@ class QuestionPage extends React.Component {
         const writeAnswer = document.getElementById("write-answer");
         writeAnswer.classList.remove("disappear");
     }
-
-    // componentWillReceiveProps(props) {
-    //     window.location.reload();
-    // }
+    
 
     componentDidMount() {
         // remember to put a route for this

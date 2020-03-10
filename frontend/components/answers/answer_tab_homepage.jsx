@@ -24,12 +24,12 @@ class AnswerTab extends React.Component {
     render() {
         const { question } = this.props;
         const {users, answers} = this.state;
-        if(users === undefined || answers === undefined) {
+        if(users === undefined || answers === undefined || answers.length === 0) {
             return null;
         }
-        const answer = answers[Math.floor(Math.random() * answers.length)];
-        console.log(answer);
         
+        // select a random answer
+        const answer = answers[Math.floor(Math.random() * answers.length)];
         return (
             <li className="answer-tab-container">
                 <p className="question-asked">
@@ -39,7 +39,7 @@ class AnswerTab extends React.Component {
                     <img className="profile-image answer-profile-picture" src={window.defaultImage}/>
                     <div className="user-info">
                         <div className="username">
-                            {users[answer.user_id].username}
+                            {users[answer.user_id].username }
                         </div>
                         <div className="answered-date">
                             {"Answer date"}
