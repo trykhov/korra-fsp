@@ -1,4 +1,7 @@
 import React from 'react';
+import CommentContainer from '../comments/comment_container';
+
+
 
 class AnswerIndexItem extends React.Component {
     // return individual answers
@@ -7,7 +10,7 @@ class AnswerIndexItem extends React.Component {
         const { answer, user } = this.props;
         const time = new Date(answer.created_at);
         const dateAnswered = time.toDateString().substring(4);
-        if(user === undefined) {
+        if(user === undefined || answer === undefined) {
             return null;
         }
         return (
@@ -24,6 +27,7 @@ class AnswerIndexItem extends React.Component {
                     </div>
                 </div>
                 <p className="answer">{answer.text}</p>
+                <CommentContainer answer={answer}/>
             </li>
         )
     }
