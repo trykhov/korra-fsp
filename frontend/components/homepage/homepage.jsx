@@ -25,6 +25,8 @@ class Homepage extends React.Component {
         tab.style.borderBottom = "none";
     }
 
+    
+
     render() {
         const currentUser = window.currentUser;
         return (

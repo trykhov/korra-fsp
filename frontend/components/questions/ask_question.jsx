@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
-import { fetchQuestion } from '../../util/question_util';
+import { withRouter } from 'react-router-dom';
 
 // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 class AskQuestion extends React.Component {

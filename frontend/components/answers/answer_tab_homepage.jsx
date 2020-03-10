@@ -24,12 +24,14 @@ class AnswerTab extends React.Component {
     render() {
         const { question } = this.props;
         const {users, answers} = this.state;
+        // don't render until the users and the answers have values
         if(users === undefined || answers === undefined || answers.length === 0) {
             return null;
         }
-        
         // select a random answer
         const answer = answers[Math.floor(Math.random() * answers.length)];
+        const time = new Date(answer.created_at);
+        const dateAnswered = time.toDateString().substring(4);
         return (
             <li className="answer-tab-container">
                 <p className="question-asked">
@@ -42,7 +44,7 @@ class AnswerTab extends React.Component {
                             {users[answer.user_id].username }
                         </div>
                         <div className="answered-date">
-                            {"Answer date"}
+                            Answered { dateAnswered }
                         </div>
                     </div>
                 </div>
