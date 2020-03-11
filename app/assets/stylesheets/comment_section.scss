@@ -1,0 +1,29 @@
+@import './mixins';
+@import './variables';
+
+.comment-index-container {
+    background-color: #fafafa;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    padding: 2%;
+}
+
+.add-comment-container {
+    .comment-user {
+        margin-right: 2%;
+        width: 4.5%;
+    }
+    .comment-input-container {
+        background-color: #fff;
+        border: 1px solid #e2e2e2;
+        border-radius: 20px;
+        padding: 1% 2%;
+        width: 92%;
+        input {
+            @include removeFocus;
+            border: none;
+            font-size: 1.25vw;
+            width: 100%;
+        }
+    }
+}

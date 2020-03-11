@@ -38,7 +38,7 @@ class AnswerTab extends React.Component {
                     <Link to={`/question/${question.id}`}>{question.title}</Link>
                 </p>
                 <div className="answer-user-container">
-                    <img className="profile-image answer-profile-picture" src={window.defaultImage}/>
+                    <img className="profile-image" src={window.defaultImage}/>
                     <div className="user-info">
                         <div className="username">
                             {users[answer.user_id].username }

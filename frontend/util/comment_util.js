@@ -6,14 +6,14 @@ export const createComment = (answerId, comment) => (
     })
 )
 
-export const showComments = answerId => (
+export const showComments = questionId => (
     $.ajax({
-        url: `/api/answers/${answerId}/comments`,
+        url: `/api/questions/${questionId}/comments`,
         method: 'GET'
     })
 )
 
-export const deleteComment = commentId => (
+export const removeComment = commentId => (
     $.ajax({
         url: `/api/comments/${commentId}`,
         method: 'DELETE'

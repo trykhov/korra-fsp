@@ -486,6 +486,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/question_answer_util */ "./frontend/util/question_answer_util.js");
 /* harmony import */ var _actions_answer_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/answer_actions */ "./frontend/actions/answer_actions.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
 
 
 
@@ -496,7 +498,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     questionId: ownProps.questionId,
     answers: state.entities.answers,
-    users: state.entities.users
+    users: state.entities.users,
+    comments: state.entities.comments
   };
 };
 
@@ -511,6 +514,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return Object(_util_question_answer_util__WEBPACK_IMPORTED_MODULE_2__["fetchAllAnswerers"])(questionId).then(function (users) {
         return dispatch(Object(_actions_user_actions__WEBPACK_IMPORTED_MODULE_4__["receiveAllUsers"])(users));
       });
+    },
+    showComments: function showComments(questionId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_5__["showComments"])(questionId));
     }
   };
 };
@@ -566,16 +572,23 @@ function (_React$Component) {
   _createClass(AnswerIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchAllQuestionAnswers(this.props.questionId);
-      this.props.fetchAllAnswerers(this.props.questionId);
+      var _this$props = this.props,
+          fetchAllQuestionAnswers = _this$props.fetchAllQuestionAnswers,
+          fetchAllAnswerers = _this$props.fetchAllAnswerers,
+          showComments = _this$props.showComments,
+          questionId = _this$props.questionId;
+      fetchAllQuestionAnswers(questionId);
+      fetchAllAnswerers(questionId);
+      showComments(questionId);
     } // should return a list of answer index items
 
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          answers = _this$props.answers,
-          users = _this$props.users; // have the answers and the people that answered already loaded
+      var _this$props2 = this.props,
+          answers = _this$props2.answers,
+          users = _this$props2.users,
+          comments = _this$props2.comments; // have the answers and the people that answered already loaded
 
       var shouldRender = Object.keys(answers).length && Object.keys(users).length;
 
@@ -588,7 +601,8 @@ function (_React$Component) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_answer_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
             key: id,
             answer: answer,
-            user: user
+            user: user,
+            comments: comments
           });
         }));
       }
@@ -658,7 +672,7 @@ function (_React$Component) {
       var time = new Date(answer.created_at);
       var dateAnswered = time.toDateString().substring(4);
 
-      if (user === undefined || answer === undefined) {
+      if (user === undefined) {
         return null;
       }
 
@@ -667,7 +681,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-user-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-image answer-profile-picture",
+        className: "profile-image",
         src: window.defaultImage
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-info"
@@ -678,7 +692,7 @@ function (_React$Component) {
       }, "Answered ", dateAnswered))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "answer"
       }, answer.text), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comments_comment_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        answer: answer
+        answerId: answer.id
       }));
     }
   }]);
@@ -787,7 +801,7 @@ function (_React$Component) {
       }, question.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "answer-user-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-image answer-profile-picture",
+        className: "profile-image",
         src: window.defaultImage
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "user-info"
@@ -994,20 +1008,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    answerId: ownProps.answer.id,
+    answerId: ownProps.answerId,
     comments: state.entities.comments
   };
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    showComments: function showComments(answerId) {
-      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["showComments"])(answerId));
-    }
-  };
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_comment_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_comment_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1056,19 +1062,11 @@ function (_React$Component) {
   }
 
   _createClass(CommentIndex, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this$props = this.props,
-          showComments = _this$props.showComments,
-          answerId = _this$props.answerId;
-      showComments(answerId);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var _this$props2 = this.props,
-          comments = _this$props2.comments,
-          answerId = _this$props2.answerId;
+      var _this$props = this.props,
+          comments = _this$props.comments,
+          answerId = _this$props.answerId;
 
       if (!comments) {
         return null;
@@ -1083,11 +1081,14 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "add-comment-container answer-user-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        className: "profile-image",
+        className: "profile-image comment-user",
         src: window.defaultImage
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-input-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "Add a comment..."
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-index-list-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, commentsList.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1151,7 +1152,7 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var comment = this.props.comment;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, comment.text);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, comment.text));
     }
   }]);
 
@@ -2151,8 +2152,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   window.store = store;
-  window.createComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["createComment"];
-  window.deleteComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["deleteComment"];
+  window.createComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["createComment"]; // window.deleteComment = deleteComment;
+
   window.editComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["editComment"];
   window.showComments = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["showComments"]; // TESTING: END
 
@@ -2514,14 +2515,14 @@ var fetchAllAnswers = function fetchAllAnswers() {
 /*!***************************************!*\
   !*** ./frontend/util/comment_util.js ***!
   \***************************************/
-/*! exports provided: createComment, showComments, deleteComment, editComment */
+/*! exports provided: createComment, showComments, removeComment, editComment */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createComment", function() { return createComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showComments", function() { return showComments; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteComment", function() { return deleteComment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeComment", function() { return removeComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
 var createComment = function createComment(answerId, comment) {
   return $.ajax({
@@ -2532,13 +2533,13 @@ var createComment = function createComment(answerId, comment) {
     }
   });
 };
-var showComments = function showComments(answerId) {
+var showComments = function showComments(questionId) {
   return $.ajax({
-    url: "/api/answers/".concat(answerId, "/comments"),
+    url: "/api/questions/".concat(questionId, "/comments"),
     method: 'GET'
   });
 };
-var deleteComment = function deleteComment(commentId) {
+var removeComment = function removeComment(commentId) {
   return $.ajax({
     url: "/api/comments/".concat(commentId),
     method: 'DELETE'

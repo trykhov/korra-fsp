@@ -10,13 +10,13 @@ class AnswerIndexItem extends React.Component {
         const { answer, user } = this.props;
         const time = new Date(answer.created_at);
         const dateAnswered = time.toDateString().substring(4);
-        if(user === undefined || answer === undefined) {
+        if(user === undefined) {
             return null;
         }
         return (
             <li className="single-answer-container">
                 <div className="answer-user-container">
-                    <img className="profile-image answer-profile-picture" src={window.defaultImage}/>
+                    <img className="profile-image" src={window.defaultImage}/>
                     <div className="user-info">
                         <div className="username">
                             { user.username }
@@ -27,7 +27,7 @@ class AnswerIndexItem extends React.Component {
                     </div>
                 </div>
                 <p className="answer">{answer.text}</p>
-                <CommentContainer answer={answer}/>
+                <CommentContainer answerId={answer.id}/>
             </li>
         )
     }

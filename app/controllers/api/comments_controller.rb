@@ -27,8 +27,8 @@ class Api::CommentsController < ApplicationController
     end 
 
     def index
-        answer = Answer.find_by(id: params[:answer_id])
-        @comments = answer.comments
+        question = Question.find_by(id: params[:question_id])
+        @comments = question.comments
         if @comments
             render :index
         else  

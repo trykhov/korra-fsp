@@ -3,13 +3,15 @@ import AnswerIndexItem from './answer_index_item';
 
 class AnswerIndex extends React.Component {
     componentDidMount() {
-        this.props.fetchAllQuestionAnswers(this.props.questionId);
-        this.props.fetchAllAnswerers(this.props.questionId);
+        const { fetchAllQuestionAnswers, fetchAllAnswerers, showComments, questionId } = this.props;
+        fetchAllQuestionAnswers(questionId);
+        fetchAllAnswerers(questionId);
+        showComments(questionId);
     }
 
     // should return a list of answer index items
     render() {
-        const { answers, users } = this.props;
+        const { answers, users, comments } = this.props;
         // have the answers and the people that answered already loaded
         const shouldRender = Object.keys(answers).length && Object.keys(users).length;
         if(shouldRender) {
@@ -19,7 +21,7 @@ class AnswerIndex extends React.Component {
                         Object.keys(answers).map(id => {
                                 const answer = answers[id];
                                 const user = users[answer.user_id];
-                                return <AnswerIndexItem key={id} answer={answer} user={user}/>
+                                return <AnswerIndexItem key={id} answer={answer} user={user} comments={comments}/>
                             }
                         )
                     }

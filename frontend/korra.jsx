@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // TESTING: BEGIN
     window.store = store;
     window.createComment = createComment;
-    window.deleteComment = deleteComment;
+    // window.deleteComment = deleteComment;
     window.editComment = editComment;
     window.showComments = showComments;
     // TESTING: END

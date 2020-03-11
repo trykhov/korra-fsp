@@ -4,14 +4,10 @@ import { showComments } from "../../actions/comment_actions";
 
 
 const mapStateToProps = (state, ownProps) => ({
-    answerId: ownProps.answer.id,
+    answerId: ownProps.answerId,
     comments: state.entities.comments
 })
 
 
-const mapDispatchToProps = dispatch => ({
-    showComments: answerId => dispatch(showComments(answerId)),
-})
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentIndex)
+export default connect(mapStateToProps, null)(CommentIndex);

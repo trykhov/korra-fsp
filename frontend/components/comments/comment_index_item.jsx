@@ -4,10 +4,13 @@ class CommentIndexItem extends React.Component {
 
 
     render() {
-        
         const { comment } = this.props;
         return (
-            <div>{comment.text}</div>
+            <li>
+                <div>
+                    {comment.text}
+                </div>
+            </li>
         )
     }
 }

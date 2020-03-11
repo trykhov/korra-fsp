@@ -21,4 +21,8 @@ class Question < ApplicationRecord
     has_many :people_who_answered,
         through: :answers,
         source: :user
+
+    has_many :comments,
+        through: :answers,
+        source: :comments
 end
