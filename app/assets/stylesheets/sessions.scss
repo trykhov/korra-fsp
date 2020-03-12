@@ -6,7 +6,7 @@
 
 // the background
 #login-info {
-    background: image-url("login-wallpaper.png") no-repeat center center fixed;
+    background: image-url("cyber-punk-wallpaper.jpeg") no-repeat center center fixed;
     background-size: cover;
     position: relative;
     height: 100%;
@@ -25,7 +25,7 @@
     background-color: $primaryWhite;
     border-radius: 4px;
     box-shadow: 0 0 5px #888;
-    padding: 2%;
+    padding: 3%;
     position: absolute;
     width: 50%;
 }
@@ -38,9 +38,6 @@
     border-right: 1px solid black;
     padding-right: 20px;
     width: 50%;
-    button {
-        display: block;
-    }
 }
 
 
@@ -59,11 +56,31 @@
     }
 }
 
+#demo-button-container, #sign-up-button-container {
+    &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+#demo-button-container {
+    background-color: #df4930;
+}
+
+#sign-up-button-container {
+    background-color: #507cc0;
+}
+
+
 .signup-left-side, .signup-right-side {
-    background-color: greenyellow;
     border-radius: 3px;
     text-align: center;
     margin: 5% 0;
+    padding: 2% 0;
     width: 100%;
 }
 
@@ -98,4 +115,26 @@
 
 #disclaimer {
     font-size: 0.9vw;
+}
+
+.error-message {
+    border: 1px solid #b92b27;
+    color: #b92b27;
+    font-size: 1.25vw;
+    margin-top: 4%;
+    padding: 2% 0;
+    text-align: center;
+    width: 100%;
+}
+
+.signup-error-messages {
+    border: 1px solid #b92b27;
+    color: #b92b27;
+    font-size: 1.25vw;
+    margin-top: 4%;
+    padding: 4% 10%;
+}
+
+.error-list-item {
+    list-style-type: initial;
 }

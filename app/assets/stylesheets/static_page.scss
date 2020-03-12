@@ -63,9 +63,7 @@ p {
 }
 
 .button-container {
-    align-items: baseline;
-    display: flex;
-    justify-content: flex-end;
+    text-align: right;
     a {
         margin-right: 3%;
         @include hover;

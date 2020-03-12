@@ -6,10 +6,14 @@
     margin: 0 auto;
 }
 
+#asker-form-container {
+    padding: 2%;
+}
+
 #asker-container {
     color: $fontColor;
     font-size: 1.5vw;
-    margin-top: 15px;
+    // margin-top: 15px;
     position: relative;
     span {
         position: absolute;
@@ -26,9 +30,7 @@
 }
 
 #question-area {
-    margin: 0 auto;
-    padding-top: 2%;
-    width: 95%;
+    margin-top: 2%;
     textarea {
         border: none;
         border-bottom: 1px $primaryGray solid;
@@ -59,10 +61,10 @@
 }
 
 #question-submit {
-    padding: 1%;
+    margin-top: 1%;
     a {
         color: $fontColor;
-        font-size: 1.5vw;
+        font-size: 1.25vw;
         margin-right: 20px;
         font-weight: 200;
     }

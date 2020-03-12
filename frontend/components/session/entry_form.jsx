@@ -13,14 +13,15 @@ class EntryForm extends React.Component {
                 email: "",
                 password: ""
             },
-            errors: "",
             showSignUp: false
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.demoSession = this.demoSession.bind(this);
     }
 
     leftSideComponent() {
         const { username, email, password } = this.state.signup;
+        const { loginErrors } = this.props;
         if(this.state.showSignUp) {
            return (
             <div>
@@ -62,20 +63,31 @@ class EntryForm extends React.Component {
                             >Cancel</a>
                             <button className="form-button">Sign Up</button>
                     </div>
+                    <ul className={`signup-error-messages ${loginErrors ? "" : "disappear"}`}>
+                        {
+                            loginErrors ? loginErrors.map(error => <li className="error-list-item">{error}</li>) : ""
+                        }
+                    </ul>
                 </form>
             </div>
            );
         } else {
             return (
                 <div>
-                    <div className="signup-left-side">
-                        <a href="">Demo</a>
+                    <div 
+                        id="demo-button-container" 
+                        className="signup-left-side"
+                        onClick={(e) => this.demoSession(e)}
+                    >
+                        <a className="demo-button" href="">Demo</a>
                     </div>
-                    <div className="signup-right-side">
+                    <div 
+                        id="sign-up-button-container" 
+                        className="signup-right-side"
+                        onClick={() => this.setState({showSignUp: true})} 
+                    >
                         <span>
-                            <a id="show-sign-up"
-                                onClick={() => this.setState({showSignUp: true})} 
-                            >Sign Up</a>
+                            <a id="show-sign-up">Sign Up</a>
                         </span>
                     </div>
                 </div>
@@ -92,16 +104,20 @@ class EntryForm extends React.Component {
         e.preventDefault();
         if(formType === "Log In") {
             this.props.login(this.state.login)
-                .then(this.props.history.push("/")); // push to home
         } else {
             this.props.signup(this.state.signup)
-                .then(this.props.history.push("/"))
         }
-        this.setState({[formType]: {username: '', email: '', password: ''}});
     }
 
-    render() {
+    demoSession(e) {
+        e.preventDefault();
+        this.props.login({email:"ultralord@jn.org", password: "imultralord"});
+    }
+
+
+    render() {        
         const { email, password } = this.state.login;
+        const { sessionErrors } = this.props;
         return (
             <main id="login-info">
                 <div id="main-login-container">
@@ -143,6 +159,7 @@ class EntryForm extends React.Component {
                                     />
                                 </div>
                                 <button className="login-form-button form-button">Login</button>
+                                <p className={`error-message ${sessionErrors ? "" : "disappear"}`}>{sessionErrors}</p>
                             </form>
                         </div>
                     </section>

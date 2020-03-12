@@ -28,7 +28,8 @@ class Api::UsersController < ApplicationController
             login(@user)
             render :index
         else  
-            render json: @user.errors.full_messages, status: 422
+            @errors = {errors: @user.errors.full_messages}
+            render 'api/errors/error'
         end 
     end
 

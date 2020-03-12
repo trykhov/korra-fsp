@@ -1,9 +1,11 @@
 import * as UserAPI from '../util/user_util';
+import { receiveSessionErrors } from './session_actions';
 
 // action constants
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
 export const REMOVE_USER = "REMOVE_USER";
+export const RECEIVE_USER_ERROR = "RECEIVE_USER_ERROR";
 
 // regular action creators
 export const receiveUser = user => ({
@@ -21,6 +23,11 @@ export const removeUser = userId => ({
     userId
 })
 
+export const receiveUserError = errors => ({
+    type: RECEIVE_USER_ERROR,
+    errors
+})
+
 
 // thunk action creators
 export const fetchUser = userId => dispatch => (
@@ -35,7 +42,14 @@ export const fetchAllUsers = () => dispatch => (
 
 export const createUser = user => dispatch => (
     UserAPI.createUser(user)
-        .then(resUser => dispatch(receiveUser(resUser)))
+        .then(res => {
+            if(res.errors) {
+                dispatch(receiveUserError(res.errors))
+            } else {
+                dispatch(receiveUser(resUser));
+            }
+        }
+        )
 )
 
 export const updateUser = user => dispatch => (

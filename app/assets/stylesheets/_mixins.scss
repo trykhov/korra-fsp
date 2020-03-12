@@ -21,11 +21,11 @@
     background-color: #3e78ad;
     border-radius: 3px;
     color: $primaryWhite;
-    float: right;
+    display: inline-block;
     font-size: 1.25vw;
     font-weight: bold;
-    padding: 3%;
     overflow: auto;
+    padding: 3%;
     white-space: nowrap;
     &:hover {
         cursor: pointer;

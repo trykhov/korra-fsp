@@ -10,7 +10,8 @@ class Api::SessionsController < ApplicationController
             login(@user)
             render 'api/users/show'; # will call the partial and give us the username and id
         else  
-            render json: @user.errors.full_messages, status: 422
+            @errors = { errors: 'Invalid email or password' }
+            render 'api/errors/error'
         end 
     end 
 

@@ -46,26 +46,28 @@ class AskQuestion extends React.Component {
                                 />    
                             </div>
                         </section>
-                        <section id="asker-container" className="question-container">
-                            <img className="profile-image" src={window.defaultImage}/>
-                            <span>{currentUser.username} asked</span>
-                        </section>
-                        <form id="main-question-container" onSubmit={e => this.handleSubmit(e)}>
-                            <section id="question-area">
-                                <textarea 
-                                    onChange={this.handleInput()} 
-                                    placeholder={questionPlaceholder}
-                                    value={this.state.title}
-                                />
+                        <div id="asker-form-container">
+                            <section id="asker-container">
+                                <img className="profile-image" src={window.defaultImage}/>
+                                <span>{currentUser.username} asked</span>
                             </section>
-                            <div id="question-submit" className="button-container">
-                                <a 
-                                    onClick={this.cancelQuestion}>
-                                        Cancel
-                                </a>
-                                <button className="form-button">Add Question</button>
-                            </div>
-                        </form>
+                            <form id="main-question-container" onSubmit={e => this.handleSubmit(e)}>
+                                <section id="question-area">
+                                    <textarea 
+                                        onChange={this.handleInput()} 
+                                        placeholder={questionPlaceholder}
+                                        value={this.state.title}
+                                    />
+                                </section>
+                                <div id="question-submit" className="button-container">
+                                    <a 
+                                        onClick={this.cancelQuestion}>
+                                            Cancel
+                                    </a>
+                                    <button className="form-button">Add Question</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
