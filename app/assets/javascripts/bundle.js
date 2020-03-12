@@ -1091,12 +1091,15 @@ function (_React$Component) {
     _classCallCheck(this, CommentIndex);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CommentIndex).call(this, props));
+    _this._isMounted = $.ajax({
+      url: "/api/answers/".concat(_this.props.answerId, "/users"),
+      method: 'GET'
+    });
     _this.state = {
       text: '',
       user_id: _this.props.currentUser.id,
       answer_id: _this.props.answerId,
-      usersThatCommented: {},
-      isMounted: false
+      usersThatCommented: {}
     };
     return _this;
   }
@@ -1106,24 +1109,17 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var answerId = this.props.answerId;
-      this.state.isMounted = true;
-
-      if (this._isMounted) {
-        $.ajax({
-          url: "/api/answers/".concat(answerId, "/users"),
-          method: 'GET'
-        }).then(function (users) {
-          return _this2.setState({
-            usersThatCommented: users
-          });
+      this._isMounted.then(function (users) {
+        return _this2.setState({
+          usersThatCommented: users
         });
-      }
+      });
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      this.state.isMounted = false;
+      this._isMounted.abort(); // stop all async calls to prevent memory leak
+
     }
   }, {
     key: "handleInput",

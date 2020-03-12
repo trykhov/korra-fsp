@@ -5,28 +5,24 @@ class CommentIndex extends React.Component {
     
     constructor(props) {
         super(props);
+        this._isMounted = $.ajax({
+            url: `/api/answers/${this.props.answerId}/users`,
+            method: 'GET'
+        });
         this.state = {
             text: '',
             user_id: this.props.currentUser.id,
             answer_id: this.props.answerId,
             usersThatCommented: {},
-            isMounted: false
         }
     }
 
     componentDidMount() {
-        const { answerId } = this.props;
-        this.state.isMounted = true;
-        if(this._isMounted) {
-            $.ajax({
-                url: `/api/answers/${answerId}/users`,
-                method: 'GET'
-            }).then(users => this.setState({usersThatCommented: users}))
-        }
+        this._isMounted.then(users => this.setState({usersThatCommented: users}))
     }
 
     componentWillUnmount() {
-        this.state.isMounted = false;
+        this._isMounted.abort(); // stop all async calls to prevent memory leak
     }
 
     handleInput() {
