@@ -1,6 +1,6 @@
-export const createComment = (answerId, comment) => (
+export const createComment = comment => (
     $.ajax({
-        url: `/api/answers/${answerId}/comments`,
+        url: `/api/comments`,
         method: 'POST',
         data: {comment}
     })

@@ -12,13 +12,14 @@ Rails.application.routes.draw do
     resources :questions do 
       resources :users, only:[:index]
       resources :answers, only:[:index]
-      resources :comments, only:[:create, :index]
+      resources :comments, only:[:index]
     end 
     
-    resources :answers do 
-      # comments can only be seen in relation to an answer
-    end
-    resources :comments, only:[:destroy, :update]
+    resources :answers, only:[:show] do 
+      resources :users, only:[:index]
+    end 
+
+    resources :comments, only:[:destroy, :update, :create]
     resources :topics
   end
 

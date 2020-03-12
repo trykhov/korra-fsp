@@ -199,9 +199,9 @@ var removeComment = function removeComment(commentId) {
   };
 }; // thunk action creators
 
-var createComment = function createComment(answerId, comment) {
+var createComment = function createComment(comment) {
   return function (dispatch) {
-    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](answerId, comment).then(function (commentRes) {
+    return _util_comment_util__WEBPACK_IMPORTED_MODULE_0__["createComment"](comment).then(function (commentRes) {
       return dispatch(receiveComment(commentRes));
     });
   };
@@ -537,6 +537,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _answer_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./answer_index_item */ "./frontend/components/answers/answer_index_item.jsx");
+/* harmony import */ var _actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -554,6 +555,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -656,15 +658,35 @@ var AnswerIndexItem =
 function (_React$Component) {
   _inherits(AnswerIndexItem, _React$Component);
 
-  function AnswerIndexItem() {
+  function AnswerIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, AnswerIndexItem);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AnswerIndexItem).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AnswerIndexItem).call(this, props));
+    _this.state = {
+      usersThatCommented: {}
+    };
+    return _this;
   }
 
   _createClass(AnswerIndexItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var answer = this.props.answer;
+      $.ajax({
+        url: "/api/answers/".concat(answer.id, "/users"),
+        method: 'GET'
+      }).then(function (users) {
+        return _this2.setState({
+          usersThatCommented: users
+        });
+      });
+    }
+  }, {
     key: "render",
-    // return individual answers
     value: function render() {
       var _this$props = this.props,
           answer = _this$props.answer,
@@ -840,10 +862,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {};
-};
-
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchAllQuestionAnswers: function fetchAllQuestionAnswers(questionId) {
@@ -855,7 +873,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(null, mapDispatchToProps)(_answer_tab_homepage__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1009,11 +1027,23 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     answerId: ownProps.answerId,
-    comments: state.entities.comments
+    comments: state.entities.comments,
+    currentUser: state.session.currentUser
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_comment_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    createComment: function createComment(comment) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["createComment"])(comment));
+    },
+    showComments: function showComments(questionId) {
+      return dispatch(Object(_actions_comment_actions__WEBPACK_IMPORTED_MODULE_2__["showComments"])(questionId));
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_comment_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
 
 /***/ }),
 
@@ -1055,18 +1085,85 @@ var CommentIndex =
 function (_React$Component) {
   _inherits(CommentIndex, _React$Component);
 
-  function CommentIndex() {
+  function CommentIndex(props) {
+    var _this;
+
     _classCallCheck(this, CommentIndex);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CommentIndex).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CommentIndex).call(this, props));
+    _this.state = {
+      text: '',
+      user_id: _this.props.currentUser.id,
+      answer_id: _this.props.answerId,
+      usersThatCommented: {},
+      isMounted: false
+    };
+    return _this;
   }
 
   _createClass(CommentIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var answerId = this.props.answerId;
+      this.state.isMounted = true;
+
+      if (this._isMounted) {
+        $.ajax({
+          url: "/api/answers/".concat(answerId, "/users"),
+          method: 'GET'
+        }).then(function (users) {
+          return _this2.setState({
+            usersThatCommented: users
+          });
+        });
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.state.isMounted = false;
+    }
+  }, {
+    key: "handleInput",
+    value: function handleInput() {
+      var _this3 = this;
+
+      return function (e) {
+        return _this3.setState({
+          text: e.target.value
+        });
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      this.props.createComment(this.state).then(function (res) {
+        return $.ajax({
+          url: "/api/answers/".concat(res.comment.answer_id, "/users"),
+          method: 'GET'
+        });
+      }).then(function (users) {
+        return _this4.setState({
+          usersThatCommented: users
+        });
+      }).then(this.setState({
+        text: ''
+      }));
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var _this$props = this.props,
           comments = _this$props.comments,
           answerId = _this$props.answerId;
+      var usersThatCommented = this.state.usersThatCommented;
 
       if (!comments) {
         return null;
@@ -1087,13 +1184,21 @@ function (_React$Component) {
         className: "comment-input-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
-        placeholder: "Add a comment..."
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        placeholder: "Add a comment...",
+        onChange: this.handleInput(),
+        value: this.state.text
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick(e) {
+          return _this5.handleSubmit(e);
+        },
+        className: "submit-comment ".concat(this.state.text.length ? "" : "disappear")
+      }, "Add Comment")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "comment-index-list-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, commentsList.map(function (comment) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_comment_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: comment.id,
-          comment: comment
+          comment: comment,
+          user: usersThatCommented[comment.user_id]
         });
       }))));
     }
@@ -1151,8 +1256,32 @@ function (_React$Component) {
   _createClass(CommentIndexItem, [{
     key: "render",
     value: function render() {
-      var comment = this.props.comment;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, comment.text));
+      var _this$props = this.props,
+          comment = _this$props.comment,
+          user = _this$props.user;
+
+      if (user === undefined || comment === undefined) {
+        return null;
+      }
+
+      var time = new Date(comment.created_at);
+      var dateCommented = time.toDateString().substring(4);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "single-comment-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "answer-user-container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "profile-image",
+        src: window.defaultImage
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "username"
+      }, user.username), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "comment-date"
+      }, dateCommented))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "user-comment"
+      }, comment.text));
     }
   }]);
 
@@ -2381,6 +2510,12 @@ var sessionReducer = function sessionReducer() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/user_actions */ "./frontend/actions/user_actions.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var userReducer = function userReducer() {
@@ -2391,7 +2526,7 @@ var userReducer = function userReducer() {
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ALL_USERS"]:
-      return action.users;
+      return _objectSpread({}, prevState, {}, action.users);
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_USER"]:
       newState[action.user.id] = action.user;
@@ -2524,9 +2659,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showComments", function() { return showComments; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeComment", function() { return removeComment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editComment", function() { return editComment; });
-var createComment = function createComment(answerId, comment) {
+var createComment = function createComment(comment) {
   return $.ajax({
-    url: "/api/answers/".concat(answerId, "/comments"),
+    url: "/api/comments",
     method: 'POST',
     data: {
       comment: comment

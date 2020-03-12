@@ -4,7 +4,6 @@ class Api::CommentsController < ApplicationController
     def create
         @comment = Comment.new(comment_params)
         @comment.user_id = current_user.id
-        @comment.answer_id = params[:answer_id]
         if @comment.save
             render :show 
         else  
@@ -32,13 +31,13 @@ class Api::CommentsController < ApplicationController
         if @comments
             render :index
         else  
-            rrender json: @comment.errors.full_message, status: 422
+            render json: @comment.errors.full_message, status: 422
         end
     end
 
     private
     def comment_params
-        params.require(:comment).permit(:text)
+        params.require(:comment).permit(:text, :answer_id)
     end
 
 end

@@ -1,10 +1,22 @@
 import React from 'react';
 import CommentContainer from '../comments/comment_container';
 
-
-
 class AnswerIndexItem extends React.Component {
-    // return individual answers
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            usersThatCommented: {}
+        }
+    }
+
+    componentDidMount() {
+        const { answer } = this.props;
+        $.ajax({
+            url: `/api/answers/${answer.id}/users`,
+            method: 'GET'
+        }).then(users => this.setState({usersThatCommented: users}))
+    }
 
     render() {
         const { answer, user } = this.props;
@@ -27,7 +39,7 @@ class AnswerIndexItem extends React.Component {
                     </div>
                 </div>
                 <p className="answer">{answer.text}</p>
-                <CommentContainer answerId={answer.id}/>
+                <CommentContainer answerId={answer.id} />
             </li>
         )
     }

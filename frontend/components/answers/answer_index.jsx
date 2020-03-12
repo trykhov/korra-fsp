@@ -1,12 +1,14 @@
 import React from 'react';
 import AnswerIndexItem from './answer_index_item';
+import { showComments } from '../../actions/comment_actions';
 
 class AnswerIndex extends React.Component {
+
     componentDidMount() {
         const { fetchAllQuestionAnswers, fetchAllAnswerers, showComments, questionId } = this.props;
         fetchAllQuestionAnswers(questionId);
         fetchAllAnswerers(questionId);
-        showComments(questionId);
+        showComments(questionId);        
     }
 
     // should return a list of answer index items

@@ -23,8 +23,8 @@ export const removeComment = commentId => ({
 })
 
 // thunk action creators
-export const createComment = (answerId, comment) => dispatch => (
-    CommentAPI.createComment(answerId, comment)
+export const createComment = comment => dispatch => (
+    CommentAPI.createComment(comment)
         .then(commentRes => dispatch(receiveComment(commentRes)))
 )
 
