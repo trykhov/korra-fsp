@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProfileDropdown = props => (
-    <div id="profile-dropdown" className="disappear">
+    <div id="profile-dropdown" className="disappear modal">
         <section id="profile-info-container">
             <div>{/* user profile picture */}</div>
             <div>

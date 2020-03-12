@@ -29,12 +29,14 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
     }
     // TESTING: BEGIN
-    window.store = store;
-    window.createComment = createComment;
-    // window.deleteComment = deleteComment;
-    window.editComment = editComment;
-    window.showComments = showComments;
     // TESTING: END
 
+    // removes the modals when user clicks out of it
+    document.addEventListener("click", () => {
+        const modals = document.getElementsByClassName("modal");
+        for(let i of modals) {
+            i.classList.add("disappear");
+        }
+    })
     ReactDOM.render(<Root store={store}/>, root);
 })

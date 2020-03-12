@@ -32,7 +32,7 @@ class AskQuestion extends React.Component {
         const questionPlaceholder = 'Start your question with "What", "How", "Why", etc.';
         return (
             // first div takes up the whole window
-            <div id="question-component" className="disappear">
+            <div id="question-component" className="disappear modal">
                 <div id="question-overlay-container" >
                     {/* will be the container that holds the container for the question */}
                     {/* will be used to center the container */}

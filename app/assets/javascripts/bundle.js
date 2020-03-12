@@ -1622,7 +1622,7 @@ __webpack_require__.r(__webpack_exports__);
 var ProfileDropdown = function ProfileDropdown(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "profile-dropdown",
-    className: "disappear"
+    className: "disappear modal"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
     id: "profile-info-container"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "User"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Messages"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Partners"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Create Ad"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Stats"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Your Content"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Drafts"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
@@ -1753,7 +1753,7 @@ function (_React$Component) {
       return (// first div takes up the whole window
         react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "question-component",
-          className: "disappear"
+          className: "disappear modal"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           id: "question-overlay-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2342,14 +2342,36 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     store = Object(_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
   } // TESTING: BEGIN
+  // TESTING: END
+  // removes the modals when user clicks out of it
 
 
-  window.store = store;
-  window.createComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["createComment"]; // window.deleteComment = deleteComment;
+  document.addEventListener("click", function () {
+    var modals = document.getElementsByClassName("modal");
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
 
-  window.editComment = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["editComment"];
-  window.showComments = _util_comment_util__WEBPACK_IMPORTED_MODULE_4__["showComments"]; // TESTING: END
-
+    try {
+      for (var _iterator = modals[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var i = _step.value;
+        i.classList.add("disappear");
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  });
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
   }), root);
