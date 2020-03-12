@@ -5,17 +5,21 @@ class AnswerIndexItem extends React.Component {
 
     constructor(props) {
         super(props);
+        this._isMounted = $.ajax({
+            url: `/api/answers/${this.props.answer.id}/users`,
+            method: 'GET'
+        });
         this.state = {
             usersThatCommented: {}
         }
     }
 
     componentDidMount() {
-        const { answer } = this.props;
-        $.ajax({
-            url: `/api/answers/${answer.id}/users`,
-            method: 'GET'
-        }).then(users => this.setState({usersThatCommented: users}))
+        this._isMounted.then(users => this.setState({usersThatCommented: users}))
+    }
+
+    componentWillUnmount() {
+        this._isMounted.abort();
     }
 
     render() {

@@ -30,10 +30,13 @@
         @include verticalCenter; // display renders height useless if put first
         padding: 0.5% 1%;
         text-decoration: none;
-        &:not(#logo-container):hover { // only works on elements not in not()
-            background: $hoverGray;
-            cursor: pointer;
-        }
+    }
+    #home-nav:hover {
+        background: $hoverGray;
+        cursor: pointer;
+    }
+    .no-drop > *:hover, .no-drop:hover {
+        cursor: no-drop;
     }
 }
 

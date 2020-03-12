@@ -35,19 +35,19 @@ class NavBar extends React.Component {
                             <span>Home</span>
                         </div>
                     </Link>
-                    <a href="" id="answer-nav">
+                    <a id="answer-nav" className="no-drop">
                         <div className="inner-container">
                             <i className="far fa-edit"/>
                             <span>Answer</span>
                         </div>
                     </a>
-                    <a href="" id="spaces-nav">
+                    <a id="spaces-nav" className="no-drop">
                         <div className="inner-container">
                             <i className="fas fa-users"/>
                             <span>Spaces</span>
                         </div>
                     </a>
-                    <a href="" id="notifications-nav">
+                    <a id="notifications-nav" className="no-drop">
                         <div className="inner-container">
                             <i className="far fa-bell"></i>
                             <span>Notifications</span>

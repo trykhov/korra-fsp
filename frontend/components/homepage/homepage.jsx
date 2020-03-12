@@ -19,12 +19,17 @@ class Homepage extends React.Component {
     }
 
     componentWillUnmount() {
+        // removes the red highlight from the home button
         const tab = document.getElementById("home-nav");
         tab.style.color = "#636466";
         tab.style.borderBottom = "none";
     }
 
-    
+
+    modalQuestion() {
+        const modalQuestion = document.getElementById("question-component");
+        modalQuestion.classList.toggle("disappear");
+    }
 
     render() {
         if(!this.props.questions) {
@@ -36,7 +41,7 @@ class Homepage extends React.Component {
 
                 </div>
                 <div id="answer-feed-container">
-                    <div id="outter-question-container">
+                    <div id="outter-question-container" onClick={this.modalQuestion}>
                         <section id="asker-container" className="question-container">
                             <img className="profile-image" src={window.defaultImage}/>
                             <span>{this.props.currentUser.username}</span>

@@ -664,6 +664,10 @@ function (_React$Component) {
     _classCallCheck(this, AnswerIndexItem);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AnswerIndexItem).call(this, props));
+    _this._isMounted = $.ajax({
+      url: "/api/answers/".concat(_this.props.answer.id, "/users"),
+      method: 'GET'
+    });
     _this.state = {
       usersThatCommented: {}
     };
@@ -675,15 +679,16 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var answer = this.props.answer;
-      $.ajax({
-        url: "/api/answers/".concat(answer.id, "/users"),
-        method: 'GET'
-      }).then(function (users) {
+      this._isMounted.then(function (users) {
         return _this2.setState({
           usersThatCommented: users
         });
       });
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this._isMounted.abort();
     }
   }, {
     key: "render",
@@ -1351,9 +1356,16 @@ function (_React$Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
+      // removes the red highlight from the home button
       var tab = document.getElementById("home-nav");
       tab.style.color = "#636466";
       tab.style.borderBottom = "none";
+    }
+  }, {
+    key: "modalQuestion",
+    value: function modalQuestion() {
+      var modalQuestion = document.getElementById("question-component");
+      modalQuestion.classList.toggle("disappear");
     }
   }, {
     key: "render",
@@ -1369,7 +1381,8 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "answer-feed-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "outter-question-container"
+        id: "outter-question-container",
+        onClick: this.modalQuestion
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         id: "asker-container",
         className: "question-container"
@@ -1512,22 +1525,22 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-newspaper"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Home"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
-        id: "answer-nav"
+        id: "answer-nav",
+        className: "no-drop"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inner-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "far fa-edit"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Answer"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
-        id: "spaces-nav"
+        id: "spaces-nav",
+        className: "no-drop"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inner-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-users"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Spaces"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "",
-        id: "notifications-nav"
+        id: "notifications-nav",
+        className: "no-drop"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "inner-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
