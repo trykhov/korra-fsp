@@ -12,7 +12,7 @@ const Root = ({store}) => (
         <HashRouter>
             <AuthRoute path="/login" component={SessionContainer}/>
             <ProtectedRoute path="/" component={App} />
-            <Route path="*" component={_404Page} />
+            {/* <Route path="*" component={_404Page} /> */}
         </HashRouter>
     </Provider>
 )
