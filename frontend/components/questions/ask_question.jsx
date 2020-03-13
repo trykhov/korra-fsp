@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 // when user clicks on "Add Question", a pop-up appears asking for user to enter a question
 class AskQuestion extends React.Component {
@@ -8,6 +8,7 @@ class AskQuestion extends React.Component {
         this.state = {
             title: ''
         }
+        this._isMounted = this.props.askQuestion;
     }
 
     handleInput() {
@@ -16,11 +17,16 @@ class AskQuestion extends React.Component {
 
     handleSubmit(e) {        
         e.preventDefault();
-        this.props.askQuestion(this.state)
+        this._isMounted(this.state)
         .then(res => this.props.history.push(`/question/${res.question.id}`))
         .then(this.setState({title: ''}))
-        .then(this.cancelQuestion());
+        .then(this.cancelQuestion())
     }
+
+    componentWillUnmount() {
+        this._isMounted.abort();
+    }
+
 
     cancelQuestion() {
         const questionComponent = document.getElementById("question-component");

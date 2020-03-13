@@ -2,7 +2,9 @@ import React from 'react';
 
 const _404Page = () => {
     return (
-        <div>PlaceHolder</div>
+        <div id="404-container">
+            
+        </div>
     )
 }
 

@@ -9,13 +9,14 @@ class Homepage extends React.Component {
         this.state = {
             answers: []
         };
+        this._isMounted = this.props.fetchAllQuestions;
     }
 
     componentDidMount() {
         const tab = document.getElementById("home-nav");
         tab.style.color = "rgb(185, 43, 39)";
         tab.style.borderBottom = "2px solid rgb(185, 43, 39)";
-        this.props.fetchAllQuestions();
+        this._isMounted();
     }
 
     componentWillUnmount() {

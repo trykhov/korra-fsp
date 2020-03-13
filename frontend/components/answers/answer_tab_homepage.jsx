@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 // this will appear in the home page as an answer to a question
 class AnswerTab extends React.Component {
@@ -20,6 +20,8 @@ class AnswerTab extends React.Component {
         fetchAllQuestionAnswers(question.id)
             .then(answers => this.setState({answers: Object.values(answers)}))
     }
+
+
 
     render() {
         const { question } = this.props;
@@ -58,4 +60,6 @@ class AnswerTab extends React.Component {
     }
 }
 
-export default AnswerTab
+
+
+export default withRouter(AnswerTab);

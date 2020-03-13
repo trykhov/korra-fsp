@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :comments, only:[:index]
     end 
     
-    resources :answers, only:[:show] do 
+    resources :answers do 
       resources :users, only:[:index]
     end 
 

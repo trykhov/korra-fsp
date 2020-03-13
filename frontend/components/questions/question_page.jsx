@@ -6,10 +6,6 @@ class QuestionPage extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            question: '',
-            clickAnswer: false
-        }
     }
 
     answerQuestion() {
@@ -35,7 +31,7 @@ class QuestionPage extends React.Component {
         const { fetchQuestion } = this.props;
         const questionId = this.props.match.params.questionId
         if(prevProps.match.params.questionId !== questionId) {
-            fetchQuestion(questionId)
+            fetchQuestion(questionId);
         }
     }
 

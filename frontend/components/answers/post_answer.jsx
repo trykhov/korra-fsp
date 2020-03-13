@@ -17,9 +17,8 @@ class PostAnswer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.postAnswer(this.state);
-        // reloads the page and refetches the answers, people that answered, etc.
-        window.location.reload(); 
+        this.props.postAnswer(this.state)
+            .then(this.setState({text: ''}));
     }
 
     render() {
@@ -28,7 +27,7 @@ class PostAnswer extends React.Component {
                 <textarea 
                     placeholder="Write your answer"
                     onChange={this.handleInput()}
-                    value={this.state.answerText}
+                    value={this.state.text}
                 >    
                 </textarea>
                 <div className="answer-submit-container">

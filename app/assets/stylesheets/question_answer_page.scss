@@ -33,12 +33,15 @@
 
 #question-page-container {
     background: #fff;
+    height: 100%;
+    overflow: auto;
     width: 100%;
 }
 
 .question-answer-page {
     color: black;
     display: flex;
+    height: 100%;
     margin: 0 auto;
     padding-top: 6%;
     padding-left: 1%;

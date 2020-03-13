@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
     }
     // TESTING: BEGIN
+    window.store = store;
     // TESTING: END
 
     // removes the dropdown modal when user clicks on it
