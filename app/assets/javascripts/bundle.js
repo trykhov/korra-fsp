@@ -1971,7 +1971,7 @@ function (_React$Component) {
         id: "related-q-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "related-questions"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Related Questions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Tacos or burritos?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Is mayonnaise an instrument?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "What language should I learn after JavaScript?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Where is Waldo?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "What should I eat tonight?"))))));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, "Related Questions"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Pick one: Tacos or burritos?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Is mayonnaise an instrument?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "What language should I learn after JavaScript?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Where is Waldo?"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "What should I eat tonight?"))))));
     }
   }]);
 

@@ -80,7 +80,7 @@ class QuestionPage extends React.Component {
                         <div id="related-questions">
                             <h6>Related Questions</h6>
                             <div>
-                                <div>Tacos or burritos?</div>
+                                <div>Pick one: Tacos or burritos?</div>
                                 <div>Is mayonnaise an instrument?</div>
                                 <div>What language should I learn after JavaScript?</div>
                                 <div>Where is Waldo?</div>
