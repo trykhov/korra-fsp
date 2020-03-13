@@ -1,0 +1,29 @@
+@import './variables';
+
+#profile-dropdown {
+    background-color: $primaryWhite;
+    padding: 30% 0;
+    position: absolute;
+    top: 100%;
+    ul {
+        margin: 0;
+        padding: 0;
+        font-size: 1.5vw;
+        li:hover {
+            background-color: $hoverGray;
+        }
+    }
+    // div {
+    //     list-style: none;
+    //     text-align: center;
+    //     width: 100%;
+    //     &:hover {
+    //         background-color: green;
+    //     }
+    // }
+    // section {
+    //     // border-top: 1px solid black;
+    //     // width: 100%;
+    //     // padding: 0 15px;
+    // }
+}

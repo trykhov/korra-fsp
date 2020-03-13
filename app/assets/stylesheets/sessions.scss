@@ -1,0 +1,140 @@
+// Place all the styles related to the api/session controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import './variables';
+@import './mixins';
+
+// the background
+#login-info {
+    background: image-url("cyber-punk-wallpaper.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    height: 100%;
+    @include verticalCenter;
+    width: 100%;
+}
+
+
+#login-input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+// the main container that holds the content
+#main-login-container {
+    background-color: $primaryWhite;
+    border-radius: 4px;
+    box-shadow: 0 0 5px #888;
+    padding: 3%;
+    position: absolute;
+    width: 50%;
+}
+
+#logo-info {
+    text-align: center;
+}
+
+#signup-demo-container {
+    border-right: 1px solid black;
+    padding-right: 20px;
+    width: 50%;
+}
+
+
+
+#login-form-container {
+    padding-left: 20px;
+    width: 50%;
+    #login-title { 
+        color: #333;
+        font-size: 1.5vw;
+        font-weight: bold; 
+    }
+    input {
+        @include inputDesign($primaryGray);
+        margin: 5% 0;
+    }
+}
+
+#demo-button-container, #sign-up-button-container {
+    &:hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+#demo-button-container {
+    background-color: #df4930;
+}
+
+#sign-up-button-container {
+    background-color: #507cc0;
+}
+
+
+.signup-left-side, .signup-right-side {
+    border-radius: 3px;
+    text-align: center;
+    margin: 5% 0;
+    padding: 2% 0;
+    width: 100%;
+}
+
+#sign-up-header {
+    color: #333;
+    font-size: 1.5vw;
+    margin: 0;
+}
+
+#sign-up-form {
+    & > div {
+        margin: 5% 0;
+    }
+    input {
+        @include inputDesign(#fafafa);
+    }
+    label {
+        font-size: 1.25vw;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    a {
+        color: #2b6dad;
+        font-size: 1vw;
+    }
+}
+
+#show-sign-up {
+    @include hover;
+}
+
+
+#disclaimer {
+    font-size: 0.9vw;
+}
+
+.error-message {
+    border: 1px solid #b92b27;
+    color: #b92b27;
+    font-size: 1.25vw;
+    margin-top: 4%;
+    padding: 2% 0;
+    text-align: center;
+    width: 100%;
+}
+
+.signup-error-messages {
+    border: 1px solid #b92b27;
+    color: #b92b27;
+    font-size: 1.25vw;
+    margin-top: 4%;
+    padding: 4% 10%;
+}
+
+.error-list-item {
+    list-style-type: initial;
+}

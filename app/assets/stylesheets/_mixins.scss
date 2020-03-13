@@ -1,0 +1,45 @@
+@mixin verticalCenter() {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@mixin inputDesign($backgroundColor) {
+    background-color: $backgroundColor;
+    border: 1px solid #e2e2e2;
+    border-radius: 3px;
+    font-size: 1.5vw;
+    padding: 0 4%;
+    overflow: auto; // keeps the width inside the parent
+    width: 92%;
+    &:focus {
+        outline: none; // removes the active highlight
+    }
+}
+
+@mixin buttonDesign() {
+    background-color: #3e78ad;
+    border-radius: 3px;
+    color: $primaryWhite;
+    display: inline-block;
+    font-size: 1.25vw;
+    font-weight: bold;
+    overflow: auto;
+    padding: 3%;
+    white-space: nowrap;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin hover {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin removeFocus {
+    &:focus {
+        outline: none;
+    }
+}
