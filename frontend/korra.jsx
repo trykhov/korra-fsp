@@ -31,12 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // TESTING: BEGIN
     // TESTING: END
 
-    // removes the modals when user clicks out of it
-    document.addEventListener("click", () => {
-        const modals = document.getElementsByClassName("modal");
-        for(let i of modals) {
-            i.classList.add("disappear");
-        }
+    // removes the dropdown modal when user clicks on it
+    document.addEventListener("click", e => {
+        const modals = document.querySelector(".modal");
+        modals.classList.add("disappear");
     })
     ReactDOM.render(<Root store={store}/>, root);
 })

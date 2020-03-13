@@ -7,7 +7,7 @@ import HomepageContainer from './components/homepage/homepage_container';
 
 const App = () => {
         return (
-            <div id="app-container">
+            <div id="app-container" className="night-mode">
                 <NavBar/>
                 <AskQuestionContainer />
                 <Route exact path="/" component={HomepageContainer} />

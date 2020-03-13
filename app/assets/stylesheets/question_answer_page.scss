@@ -73,13 +73,14 @@
     margin-left: 4%;
     position: relative;
     #related-questions {
+        position: fixed;
+        width: 30%;
         h6 {
             border-bottom: 1px solid #e2e2e2;
             padding-bottom: 5%;
         }
-        position: fixed;
-        width: 30%;
         div {
+            font-size: 1.5vw;
             margin: 2% 0 0;
             width: 100%;
         }

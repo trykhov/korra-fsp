@@ -79,7 +79,9 @@
     @include verticalCenter;
     padding: 2% 0;
     width: 100%;
-    @include hover;
+    i {
+        @include hover;
+    }
     #add-question-container {
         display: flex;
         justify-content: space-between;

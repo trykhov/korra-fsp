@@ -1,12 +1,12 @@
 import React from 'react';
 
+
 const ProfileDropdown = props => (
     <div id="profile-dropdown" className="disappear modal">
-        <section id="profile-info-container">
-            <div>{/* user profile picture */}</div>
+        {/* <section id="profile-info-container">
+            <div>user profile picture</div>
             <div>
                 <div>User</div>
-                <div>{/* arrow */}</div>
             </div>
         </section>
         <section>
@@ -18,14 +18,14 @@ const ProfileDropdown = props => (
                 <li>Your Content</li>
                 <li>Drafts</li>
             </ul>
-        </section>
+        </section> */}
         <section id="logout-setting">
             <ul>
-                <li>Settings</li>
-                <li>Languages</li>
-                <li>Help</li>
                 <li onClick={props.signOutUser}>Logout</li>
             </ul>
+                {/* <li>Settings</li>
+                <li>Languages</li>
+                <li>Help</li> */}
         </section>
     </div>
 )

@@ -2,20 +2,28 @@
 
 #profile-dropdown {
     background-color: $primaryWhite;
+    padding: 30% 0;
     position: absolute;
     top: 100%;
     ul {
         margin: 0;
         padding: 0;
-    }
-    li {
-        list-style: none;
-        &:hover {
-            background-color: green;
+        font-size: 1.5vw;
+        li:hover {
+            background-color: $hoverGray;
         }
     }
-    section {
-        border-top: 1px solid black;
-        padding: 0 15px;
-    }
+    // div {
+    //     list-style: none;
+    //     text-align: center;
+    //     width: 100%;
+    //     &:hover {
+    //         background-color: green;
+    //     }
+    // }
+    // section {
+    //     // border-top: 1px solid black;
+    //     // width: 100%;
+    //     // padding: 0 15px;
+    // }
 }
