@@ -1,6 +1,7 @@
 import React from 'react';
 import AnswerContainer from '../answers/answer_container';
 import PostAnswerContainer from '../answers/post_answer_container';
+import { Link } from 'react-router-dom';
 
 class QuestionPage extends React.Component {
 
@@ -76,11 +77,10 @@ class QuestionPage extends React.Component {
                         <div id="related-questions">
                             <h6>Related Questions</h6>
                             <div>
-                                <div>Pick one: Tacos or burritos?</div>
-                                <div>Is mayonnaise an instrument?</div>
-                                <div>What language should I learn after JavaScript?</div>
-                                <div>Where is Waldo?</div>
-                                <div>What should I eat tonight?</div>
+                                <Link to="/question/7" className="related-question">Where and why did Try learn how to code?</Link>
+                                <Link to="/question/8" className="related-question">What are Try's experiences as a software engineer?</Link>
+                                <Link to="/question/9" className="related-question">Where can I find Try's portfolio?</Link>
+                                <Link to="/question/10" className="related-question">How can we best contact Try?</Link>
                             </div>
                         </div>
                     </div>

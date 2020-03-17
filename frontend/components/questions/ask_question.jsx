@@ -8,7 +8,7 @@ class AskQuestion extends React.Component {
         this.state = {
             title: ''
         }
-        this._isMounted = this.props.askQuestion;
+        // this._isMounted = this.props.askQuestion;
     }
 
     handleInput() {
@@ -17,14 +17,14 @@ class AskQuestion extends React.Component {
 
     handleSubmit(e) {        
         e.preventDefault();
-        this._isMounted(this.state)
-        .then(res => this.props.history.push(`/question/${res.question.id}`))
-        .then(this.setState({title: ''}))
-        .then(this.cancelQuestion())
+        this.props.askQuestion(this.state)
+            .then(res => this.props.history.push(`/question/${res.question.id}`))
+            .then(this.setState({title: ''}))
+            .then(this.cancelQuestion())
     }
 
     componentWillUnmount() {
-        this._isMounted.abort();
+        // this._isMounted.abort();
     }
 
 

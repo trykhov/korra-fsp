@@ -82,10 +82,16 @@
             border-bottom: 1px solid #e2e2e2;
             padding-bottom: 5%;
         }
-        div {
+        .related-question {
+            color: #2b6dad;
+            display: block;
             font-size: 1.5vw;
-            margin: 2% 0 0;
+            margin: 5% 0;
+            text-decoration: none;
             width: 100%;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }

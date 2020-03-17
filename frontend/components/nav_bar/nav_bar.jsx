@@ -29,28 +29,28 @@ class NavBar extends React.Component {
                     <Link to="/" id="logo-container">
                         <h1 className="logo">Korra</h1>  
                     </Link>
-                    <Link to="/" id="home-nav">
+                    <Link to="/" id="home-nav" className="nav-icon">
                         <div className="inner-container">
                             <i className="far fa-newspaper"/>
                             <span>Home</span>
                         </div>
                     </Link>
-                    <a id="answer-nav" className="no-drop">
+                    <a href="https://www.linkedin.com/in/tckhov" id="linkedin-nav" className="nav-icon">
                         <div className="inner-container">
-                            <i className="far fa-edit"/>
-                            <span>Answer</span>
+                            <i className="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
                         </div>
                     </a>
-                    <a id="spaces-nav" className="no-drop">
+                    <a href="https://github.com/trykhov/korra-fsp" id="github-nav" className="nav-icon">
                         <div className="inner-container">
-                            <i className="fas fa-users"/>
-                            <span>Spaces</span>
+                            <i className="fab fa-github"></i>
+                            <span>Github</span>
                         </div>
                     </a>
-                    <a id="notifications-nav" className="no-drop">
+                    <a href="https://www.trykhov.com/" id="portfolio-nav" className="nav-icon">
                         <div className="inner-container">
-                            <i className="far fa-bell"></i>
-                            <span>Notifications</span>
+                            <i className="fas fa-portrait"></i>
+                            <span>Portfolio</span>
                         </div>
                     </a>
 
@@ -63,8 +63,8 @@ class NavBar extends React.Component {
                     </div>
                     <div onClick={this.callDropDown} id="profile-icon">
                         <img src={window.defaultImage} alt=""/>
-                        <ProfileDropdownContainer />
                     </div>
+                    <ProfileDropdownContainer />
                     <div id="ask-question">
                         <div id="ask-button-container">
                             <button

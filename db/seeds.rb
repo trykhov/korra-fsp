@@ -14,7 +14,7 @@ user_5 = User.create({ email:"spiderman@avg.org", username: "Spider Man", passwo
 user_6 = User.create({ email:"pika@poke.com", username: "Pikachu", password: "pikapi" })
 user_7 = User.create({ email:"yugi@duel.org", username: "Jaden Yuki", password: "eleneos" })
 user_8 = User.create({ email:"shingi@jn.org", username: "Shingi", password: "evangelion" })
-
+try = User.create({email: "try@try.com", username: "Try Khov", password: "my_Project_183"})
 
 question_1 = Question.create({
     title: "Did the first trailer of Avengers: Endgame meet your expectations?",
@@ -293,4 +293,64 @@ comment_6_1 =  Comment.create({
     I really appreciate this answer and your insights. Thank you so much.",
     user_id: user_4.id,
     answer_id: answer_6_1.id
+})
+
+learn_to_code_Q = Question.create({
+    title: "Where and why did Try learn how to code?",
+    user_id: user_1.id
+})
+
+answer_learn_to_code = Answer.create({
+    text: "Prior to App Academy, I was learning to code by myself taking online courses in Data Structures, Algorithms, 
+    and full-stack development using sites such as Coursera and Udemy. 
+
+    I got into coding because I realized that I really enjoying building things. When I work on a project,
+    I get memerised deep into the process, a feeling that I rarely feel doing anything else. 
+    ",
+    question_id: learn_to_code_Q.id,
+    user_id: try.id
+})
+
+
+experiences = Question.create({
+    title: "What are Try's experiences as a software engineer?",
+    user_id: user_2.id
+})
+
+answer_experiences = Answer.create({
+    text: "Prior to App Academy, I worked in a few software-related positions. I started off as a software engineer for a start-up 
+    in Berkeley, CA. There was I worked as a data analyst and a software engineer where I lead a team of engineers in developing an online
+    business intelligence platform. 
+
+    Afterwards, I was hired as a teaching assistant for a data analytics bootcamp where I instructed a class of industry professionals looking into
+    transitioning to a more technical position. There I taught them how to develop graphs and web applications using languages such as Python and JavaScript.
+    
+    During that time, I was also doing some freelance contract work where I developed a website for a trucking company.
+
+    Eventually, I attended App Academy's programming bootcamp in order to solidify my software development foundations.
+    ",
+    question_id: experiences.id,
+    user_id: try.id
+})
+
+portfolio_q = Question.create({
+    title: "Where can I find Try's portfolio?",
+    user_id: user_7.id
+})
+
+answer_portfolio = Answer.create({
+    text: "You can find my portfolio at https://trykhov.com",
+    user_id: try.id,
+    question_id: portfolio_q.id
+})
+
+contact_q = Question.create({
+    title: "How can I best contact Try?",
+    user_id: user_5.id
+})
+
+contact_answer = Answer.create({
+    text: "You can best contact me on my email at khovct@gmail.com or LinkedIn!",
+    user_id: try.id,
+    question_id: contact_q.id
 })
