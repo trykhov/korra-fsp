@@ -1,6 +1,5 @@
 import * as UserAPI from '../util/user_util';
-import { receiveSessionErrors } from './session_actions';
-
+import { receiveSession } from './session_actions';
 // action constants
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
@@ -46,11 +45,13 @@ export const createUser = user => dispatch => (
             if(res.errors) {
                 dispatch(receiveUserError(res.errors))
             } else {
-                dispatch(receiveUser(resUser));
+                dispatch(receiveSession(res))
             }
         }
         )
 )
+
+
 
 export const updateUser = user => dispatch => (
     UserAPI.updateUser(user)

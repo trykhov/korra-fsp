@@ -111,7 +111,7 @@ class EntryForm extends React.Component {
 
     demoSession(e) {
         e.preventDefault();
-        this.props.login({email:"ultralord@jn.org", password: "imultralord"});
+        this.props.login({email:"pika@poke.com", password: "pikapi"});
     }
 
 
