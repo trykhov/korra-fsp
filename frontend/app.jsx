@@ -27,17 +27,5 @@ class App extends React.Component {
         )
     }
 }
-// const App = () => {
-//         return (
-//             <div id="app-container" className="night-mode">
-//                 <NavBar/>
-//                 <AskQuestionContainer />
-//                 <Route exact path="/" component={HomepageContainer} />
-//                 {/* <section className="page-container disappear">    */}
-//                 <Route path="/question/:questionId" component={QuestionPageContainer}/>
-//                 {/* </section> */}
-//             </div>
-//         )
-// }
 
 export default App;
