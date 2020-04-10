@@ -6,12 +6,14 @@ import { fetchAnswerFromUser } from "../../util/answer_util";
 const mapStateToProps = (state, ownProps) => ({
     currentUserId: state.session.currentUser.id,
     questionId: ownProps.questionId,
+    alreadyAnswered: ownProps.state.alreadyAnswered,
+    answerText: ownProps.state.answer,
+    answerID: ownProps.state.answerID
 })
 
 const mapDispatchToProps = dispatch => ({
     postAnswer: answer => dispatch(postAnswer(answer)), 
-    editAnswer: (answerID, answer) => dispatch(editAnswer(answerID, answer)),
-    fetchAnswerFromUser: (questionID, userID) => fetchAnswerFromUser(questionID, userID)
+    editAnswer: (answerID, answer) => dispatch(editAnswer(answerID, answer))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostAnswer);

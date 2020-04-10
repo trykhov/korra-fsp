@@ -4,11 +4,11 @@ class PostAnswer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
+            text: this.props.answerText,
             question_id: this.props.questionId,
             user_id: this.props.currentUserId,
-            alreadyAnswered: false,
-            answerID: null
+            alreadyAnswered: this.props.alreadyAnswered,
+            answerID: this.props.answerID
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -20,21 +20,28 @@ class PostAnswer extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         if(this.state.alreadyAnswered) {
-            this.props.editAnswer(this.state.answerID, {text: this.state.text})
-                .then(() => this.setState({text: ''}))
+            this.props.editAnswer(this.props.answerID, {text: this.state.text})
+                .then(answer => this.setState({text: answer.text}))
         } else {
             this.props.postAnswer(this.state)
-                .then(this.setState({text: ''}));
+                .then(answer => this.setState({text: answer.text, alreadyAnswered: true, answerID: answer.id}));
         }
     }
 
-    componentDidMount() {
-        const { questionId, currentUserId } = this.props;
-        this.props.fetchAnswerFromUser(questionId, currentUserId)
-            .then(answer => this.setState({text: answer.text, alreadyAnswered: true, answerID: answer.id}))
+    // constructor is only created once
+    // need to update the state when the parent component updates state
+    componentDidUpdate(prevProps) {
+        if(prevProps.answerID !== this.props.answerID) {
+            this.setState({
+                text: this.props.answerText,
+                alreadyAnswered: this.props.alreadyAnswered,
+                answerID: this.props.answerID
+            })
+        }
     }
 
     render() {
+        const { alreadyAnswered } = this.state;
         return (
             <form onSubmit={e => this.handleSubmit(e)}>
                 <textarea 
@@ -44,7 +51,7 @@ class PostAnswer extends React.Component {
                 >    
                 </textarea>
                 <div className="answer-submit-container">
-                    <button>Submit</button>
+                    <button>{ alreadyAnswered ? "Update" : "Submit" }</button>
                 </div>
             </form>
         )

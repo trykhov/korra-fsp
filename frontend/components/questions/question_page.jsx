@@ -2,11 +2,17 @@ import React from 'react';
 import AnswerContainer from '../answers/answer_container';
 import PostAnswerContainer from '../answers/post_answer_container';
 import { Link } from 'react-router-dom';
+import { createUser } from '../../util/user_util';
 
 class QuestionPage extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            answer: '',
+            alreadyAnswered: false,
+            answerID: null
+        }
     }
 
     answerQuestion() {
@@ -17,7 +23,7 @@ class QuestionPage extends React.Component {
 
     componentDidMount() {
         // remember to put a route for this
-        const { fetchQuestion } = this.props;
+        const { fetchQuestion, fetchAnswerFromUser, currentUserId } = this.props;
         const questionId = this.props.match.params.questionId;
         // remplacing box shadow of nav bar
         const navBar = document.getElementById("main-nav-bar")
@@ -25,7 +31,8 @@ class QuestionPage extends React.Component {
         // document.body.style.backgroundColor = "rgb(255, 255, 255)";
         // puts the question into the state
         fetchQuestion(questionId)
-        // this.setState({question: this.props.question})
+        fetchAnswerFromUser(questionId, currentUserId)
+            .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
     }
 
     componentDidUpdate(prevProps) {
@@ -33,6 +40,8 @@ class QuestionPage extends React.Component {
         const questionId = this.props.match.params.questionId
         if(prevProps.match.params.questionId !== questionId) {
             fetchQuestion(questionId);
+            fetchAnswerFromUser(questionId, currentUserId)
+                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
         }
     }
 
@@ -43,6 +52,7 @@ class QuestionPage extends React.Component {
         if(question === undefined) {
             return null;
         }
+        console.log("question page", this.state);
         return (
             <section id="question-page-container">
                 <div className="question-answer-page">
@@ -68,7 +78,7 @@ class QuestionPage extends React.Component {
                             </div>
                         </div>
                         <section id="write-answer" className="disappear">
-                            <PostAnswerContainer questionId={question.id} currentUser={window.currentUser}/>
+                            <PostAnswerContainer questionId={question.id} currentUser={window.currentUser} state={this.state}/>
                         </section>
                         <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
                         <AnswerContainer questionId={question.id}/>
