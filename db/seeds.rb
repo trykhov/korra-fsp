@@ -305,7 +305,7 @@ answer_learn_to_code = Answer.create({
     and full-stack development using sites such as Coursera and Udemy. 
 
     I got into coding because I realized that I really enjoying building things. When I work on a project,
-    I get memerised deep into the process, a feeling that I rarely feel doing anything else. 
+    I get mesmerized deep into the process, a feeling that I rarely feel doing anything else. 
     ",
     question_id: learn_to_code_Q.id,
     user_id: try.id
