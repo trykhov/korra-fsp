@@ -37,3 +37,13 @@ export const fetchAllAnswers = () => dispatch => (
     AnswerAPI.fetchAllAnswers()
         .then(answers => dispatch(receiveAllAnswers(answers)))
 )
+
+export const editAnswer = (answerId, answer) => dispatch => (
+    AnswerAPI.editAnswer(answerId, answer)
+        .then(answer => dispatch(receiveAnswer(answer)))
+)
+
+export const deleteAnswer = answerId => dispatch => (
+    AnswerAPI.deleteAnswer(answerId)
+        .then(answer => dispatch(removeAnswer(answer.id)))
+)

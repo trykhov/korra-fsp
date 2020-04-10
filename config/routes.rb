@@ -5,12 +5,14 @@ Rails.application.routes.draw do
  
   
     resources :users do 
-      resources :answers, only:[:index] # get all answers from specific user
+      resources :answers, only:[:index, :show] # get all answers from specific user
     end 
 
     
     resources :questions do 
-      resources :users, only:[:index]
+      resources :users, only:[:index] do 
+        resources :answers, only:[:show]
+      end
       resources :answers, only:[:index]
       resources :comments, only:[:index]
     end 

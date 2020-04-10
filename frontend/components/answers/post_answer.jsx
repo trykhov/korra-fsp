@@ -6,7 +6,9 @@ class PostAnswer extends React.Component {
         this.state = {
             text: '',
             question_id: this.props.questionId,
-            user_id: this.props.currentUserId
+            user_id: this.props.currentUserId,
+            alreadyAnswered: false,
+            answerID: null
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -17,8 +19,19 @@ class PostAnswer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.postAnswer(this.state)
-            .then(this.setState({text: ''}));
+        if(this.state.alreadyAnswered) {
+            this.props.editAnswer(this.state.answerID, {text: this.state.text})
+                .then(() => this.setState({text: ''}))
+        } else {
+            this.props.postAnswer(this.state)
+                .then(this.setState({text: ''}));
+        }
+    }
+
+    componentDidMount() {
+        const { questionId, currentUserId } = this.props;
+        this.props.fetchAnswerFromUser(questionId, currentUserId)
+            .then(answer => this.setState({text: answer.text, alreadyAnswered: true, answerID: answer.id}))
     }
 
     render() {

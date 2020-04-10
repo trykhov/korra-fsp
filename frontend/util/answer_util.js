@@ -20,4 +20,26 @@ export const fetchAllAnswers = () => (
     })
 )
 
-// will do editting and deleting when front end is up
+export const editAnswer = (answerID, answer) => (
+    $.ajax({
+        url: `/api/answers/${answerID}`,
+        method: 'PATCH',
+        data: { answer }
+    })
+)
+
+export const deleteAnswer = answerID => (
+    $.ajax({
+        url: `/api/answers/${answerID}`,
+        method: 'DELETE'
+    })
+)
+
+// will not have an action creator thunk
+// use to allow user to edit or delete an answer
+export const fetchAnswerFromUser = (questionID, userID) => (
+    $.ajax({
+        url: `/api/questions/${questionID}/users/${userID}/answers/:id`,
+        method: 'GET'
+    })
+)

@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './root';
 import configureStore from './store/store';
-import { createComment, deleteComment, editComment, showComments } from './util/comment_util';
-
+import { fetchAnswerFromUser } from './util/answer_util';
 
 
 
@@ -29,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
     }
     // TESTING: BEGIN
+    window.fetchAnswerFromUser = fetchAnswerFromUser;
     window.store = store;
     // TESTING: END
 

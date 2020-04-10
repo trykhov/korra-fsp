@@ -11,6 +11,7 @@ const answerReducer = (prevState = {}, action) => {
             newState[action.answer.id] = action.answer;
             return newState;
         case REMOVE_ANSWER:
+            console.log(action)
             newState[action.answerId] = undefined;
             return newState;
         default:
