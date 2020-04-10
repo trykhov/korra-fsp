@@ -41,18 +41,18 @@ class QuestionPage extends React.Component {
         if(prevProps.match.params.questionId !== questionId) {
             fetchQuestion(questionId);
             fetchAnswerFromUser(questionId, currentUserId)
-                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
+                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}));
         }
     }
 
 
     render() {
         const { question, answers} = this.props;
+        const { alreadyAnswered } = this.state;
         const numAnswers = Object.keys(answers).length;
         if(question === undefined) {
             return null;
         }
-        console.log("question page", this.state);
         return (
             <section id="question-page-container">
                 <div className="question-answer-page">
@@ -62,7 +62,7 @@ class QuestionPage extends React.Component {
                             <div className="answer-follow-container">
                                 <div className="interact-component answer-button" onClick={this.answerQuestion}>
                                     <i className="far fa-edit" color="#329bff"/>
-                                    <span>Answer</span>
+                                    <span>{alreadyAnswered ? "Edit" : "Answer"}</span>
                                 </div>
                                 <div className="interact-component">
                                     <i className="fas fa-rss"/>

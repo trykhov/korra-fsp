@@ -20,11 +20,18 @@ class PostAnswer extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         if(this.state.alreadyAnswered) {
-            this.props.editAnswer(this.props.answerID, {text: this.state.text})
-                .then(answer => this.setState({text: answer.text}))
+            this.props.editAnswer(this.state.answerID, {text: this.state.text})
+                .then(() => {
+                    const writeAnswer = document.getElementById("write-answer");
+                    writeAnswer.classList.add("disappear");
+                })
         } else {
             this.props.postAnswer(this.state)
-                .then(answer => this.setState({text: answer.text, alreadyAnswered: true, answerID: answer.id}));
+                .then(res => this.setState({alreadyAnswered: true, answerID: res.answer.id}))
+                .then(() => {
+                    const writeAnswer = document.getElementById("write-answer");
+                    writeAnswer.classList.add("disappear");
+                })
         }
     }
 
