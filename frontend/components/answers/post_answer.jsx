@@ -17,21 +17,20 @@ class PostAnswer extends React.Component {
         return (e) => this.setState({ text: e.target.value });
     }
 
+    closePost() {
+        const writeAnswer = document.getElementById("write-answer");
+        writeAnswer.classList.add("disappear");
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         if(this.state.alreadyAnswered) {
             this.props.editAnswer(this.state.answerID, {text: this.state.text})
-                .then(() => {
-                    const writeAnswer = document.getElementById("write-answer");
-                    writeAnswer.classList.add("disappear");
-                })
+                .then(() => this.closePost());
         } else {
             this.props.postAnswer(this.state)
                 .then(res => this.setState({alreadyAnswered: true, answerID: res.answer.id}))
-                .then(() => {
-                    const writeAnswer = document.getElementById("write-answer");
-                    writeAnswer.classList.add("disappear");
-                })
+                .then(() => this.closePost())
         }
     }
 
@@ -50,7 +49,7 @@ class PostAnswer extends React.Component {
     render() {
         const { alreadyAnswered } = this.state;
         return (
-            <form onSubmit={e => this.handleSubmit(e)}>
+            <form>
                 <textarea 
                     placeholder="Write your answer"
                     onChange={this.handleInput()}
@@ -58,7 +57,8 @@ class PostAnswer extends React.Component {
                 >    
                 </textarea>
                 <div className="answer-submit-container">
-                    <button>{ alreadyAnswered ? "Update" : "Submit" }</button>
+                    <button id="submit" onClick={e => this.handleSubmit(e)}>{ alreadyAnswered ? "Update" : "Submit" }</button>
+                    <button id="cancel-button" onClick={() => this.closePost()}>Cancel</button>
                 </div>
             </form>
         )
