@@ -7,9 +7,6 @@ class NavBar extends React.Component {
     
     constructor(props) {
         super(props);
-        this.state = {
-            
-        }
     }
 
     callDropDown() {
@@ -53,14 +50,6 @@ class NavBar extends React.Component {
                             <span>Portfolio</span>
                         </div>
                     </a>
-
-                    <div id="search-bar">
-                        {/* will use to expand when clicked on */}
-                        <div id="search-container">
-                            <i id="search-icon" className="fas fa-search"/>
-                            <input type="search" placeholder="Search Quora"/>
-                        </div>
-                    </div>
                     <div onClick={this.callDropDown} id="profile-icon">
                         <img src={window.defaultImage} alt=""/>
                     </div>
