@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import AnswerIndexItem from '../answers/to_question/answer_index_item';
 
 const UserProfile = props => {
 
@@ -26,14 +27,18 @@ const UserProfile = props => {
                         <span>{user.username}</span>
                     </div>
                     <div id="user-post-nav">
-                        <span className="active">{numAnswers} {numAnswers > 1 ? "Answers" : "Answer"}</span>
+                        <span>{numAnswers} {numAnswers > 1 ? "Answers" : "Answer"}</span>
                         <span>{numQuestions} {numQuestions > 1 ? "Questions" : "Question"}</span>
                     </div>
                     <div id="profile-nav-indicator">
                         <span>34 Questions</span>
                     </div>
                     <div id="user-post-content">
-                        
+                        {
+                            answersList.map(ans => {
+                                return <AnswerIndexItem key={ans.id} user={user} answer={ans}/>
+                            })
+                        }
                     </div>
                 </div>
             </section>
