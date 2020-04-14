@@ -36,7 +36,7 @@ class QuestionPage extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { fetchQuestion } = this.props;
+        const { fetchQuestion, currentUserId } = this.props;
         const questionId = this.props.match.params.questionId
         if(prevProps.match.params.questionId !== questionId) {
             fetchQuestion(questionId);
