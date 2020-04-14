@@ -6,7 +6,7 @@ import QuestionPageContainer from './components/questions/question_page_containe
 import HomepageContainer from './components/homepage/homepage_container';
 import { signOutUser } from './actions/session_actions';
 import _404Page from './components/_404_page/_404_page';
-
+import UserProfileContainer from './components/profile/user_profile_container';
 class App extends React.Component {
 
     componentWillUnmount() {
@@ -19,10 +19,9 @@ class App extends React.Component {
                 <NavBar/>
                 <AskQuestionContainer />
                 <Route exact path="/" component={HomepageContainer} />
-                {/* <section className="page-container disappear">    */}
                 <Route path="/question/:questionId" component={QuestionPageContainer}/>
+                <Route path="/user/:userId" component={UserProfileContainer} />
                 <Route path="*" component={_404Page} />
-                {/* </section> */}
             </div>
         )
     }

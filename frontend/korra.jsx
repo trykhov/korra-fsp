@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './root';
 import configureStore from './store/store';
-import { fetchAnswerFromUser } from './util/answer_util';
+import { fetchUserQuestions } from './util/question_util';
 
 
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
     }
     // TESTING: BEGIN
-    window.fetchAnswerFromUser = fetchAnswerFromUser;
+    window.fetchUserQuestions = fetchUserQuestions;
     window.store = store;
     // TESTING: END
 

@@ -37,4 +37,7 @@ export const fetchAllQuestions = () => dispatch => (
         .then(questions => dispatch(receiveAllQuestions(questions)))
 )
 
-// will do delete and edit
+export const fetchUserQuestions = userId => dispatch => (
+    QuestionAPI.fetchUserQuestions(userId)
+        .then(questions => dispatch(receiveAllQuestions(questions)))
+)

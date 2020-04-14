@@ -19,3 +19,11 @@ export const fetchAllQuestions = () => (
         method: 'GET'
     })
 )
+
+// get questions asked by a specific user
+export const fetchUserQuestions = userId => (
+    $.ajax({
+        url: `/api/users/${userId}/questions`,
+        method: 'GET'
+    })
+)

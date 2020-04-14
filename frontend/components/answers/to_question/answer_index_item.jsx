@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentContainer from '../comments/comment_container';
+import CommentContainer from '../../comments/comment_container';
 
 class AnswerIndexItem extends React.Component {
 

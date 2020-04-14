@@ -1,9 +1,7 @@
 import { connect } from "react-redux";
 import QuestionPage from "./question_page";
 import { fetchQuestion } from "../../actions/question_actions";
-import { receiveAllAnswers } from "../../actions/answer_actions";
-import { fetchAllQuestionAnswers } from "../../util/question_answer_util";
-
+import { fetchAnswerFromUser } from "../../util/answer_util";
 
 
 const mapStateToProps = (state, ownProps) => ({

@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import PostAnswer from "./post_answer";
-import { postAnswer, editAnswer } from "../../actions/answer_actions";
-import { fetchAnswerFromUser } from "../../util/answer_util";
+import { postAnswer, editAnswer } from "../../../actions/answer_actions";
 
 const mapStateToProps = (state, ownProps) => ({
     currentUserId: state.session.currentUser.id,

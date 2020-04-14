@@ -47,3 +47,9 @@ export const deleteAnswer = answerId => dispatch => (
     AnswerAPI.deleteAnswer(answerId)
         .then(answer => dispatch(removeAnswer(answer.id)))
 )
+
+// get answers from a specific user
+export const fetchUserAnswers = userId => dispatch => (
+    AnswerAPI.fetchUserAnswers(userId)
+        .then(answers => dispatch(receiveAllAnswers(answers)))
+)

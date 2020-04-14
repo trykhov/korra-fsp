@@ -16,22 +16,13 @@
         li {
             padding: 5% 10%;
         }
+        li div {
+            display: flex;
+            justify-content: space-between;
+        }
         li:hover {
             cursor: pointer;
             background-color: $hoverGray;
         }
     }
-    // div {
-    //     list-style: none;
-    //     text-align: center;
-    //     width: 100%;
-    //     &:hover {
-    //         background-color: green;
-    //     }
-    // }
-    // section {
-    //     // border-top: 1px solid black;
-    //     // width: 100%;
-    //     // padding: 0 15px;
-    // }
 }

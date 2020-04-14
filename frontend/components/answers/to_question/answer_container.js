@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import AnswerIndex from "./answer_index";
-import { fetchAllQuestionAnswers, fetchAllAnswerers } from "../../util/question_answer_util";
-import { receiveAllAnswers } from "../../actions/answer_actions";
-import { receiveAllUsers } from "../../actions/user_actions";
-import { showComments } from "../../actions/comment_actions";
+import { fetchAllQuestionAnswers, fetchAllAnswerers } from "../../../util/question_answer_util";
+import { receiveAllAnswers } from "../../../actions/answer_actions";
+import { receiveAllUsers } from "../../../actions/user_actions";
+import { showComments } from "../../../actions/comment_actions";
 
 const mapStateToProps = (state, ownProps) => ({
     questionId: ownProps.questionId,

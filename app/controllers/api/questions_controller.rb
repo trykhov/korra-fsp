@@ -12,7 +12,12 @@ class Api::QuestionsController < ApplicationController
     end 
 
     def index
-        @questions = Question.all 
+        if params.has_key?(:user_id)
+            user = User.find_by(id: params[:user_id])
+            @questions = user.questions
+        else 
+            @questions = Question.all
+        end
         render :index
     end 
 

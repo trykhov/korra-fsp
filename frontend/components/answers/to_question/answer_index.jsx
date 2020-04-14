@@ -1,6 +1,6 @@
 import React from 'react';
 import AnswerIndexItem from './answer_index_item';
-import { showComments } from '../../actions/comment_actions';
+import { showComments } from '../../../actions/comment_actions';
 
 class AnswerIndex extends React.Component {
 
