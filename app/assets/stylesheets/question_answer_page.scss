@@ -1,30 +1,16 @@
 @import './mixins';
 @import './variables';
 
-.answer-follow-container {
-    display: flex;
-    justify-content: space-between;
+.interact-component {
+    margin: 3% 0;
     overflow: auto;
-    width: 50%;
-    .interact-component {
-        overflow: auto;
-        width: 100%;
-    }
+    width: 100%;
     span {
-        margin-left: 5%;
+        margin-left: 1%;
     }
 }
-
 .answer-button {
     @include hover;
-}
-
-.interact-options {
-    display: flex;
-    font-size: 1.5vw;
-    justify-content: space-between;
-    padding: 2% 0;
-    width: 100%;
 }
 
 .QA-container {

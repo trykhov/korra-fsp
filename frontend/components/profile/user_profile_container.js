@@ -6,14 +6,11 @@ import { fetchUser } from "../../actions/user_actions";
 
 const mapStateToProps = (state, ownProps) => ({
     userId: ownProps.match.params.userId,
-    user: state.entities.users[ownProps.match.params.userId],
-    // questionsUserAsked: state.entities.questions,
-    // answers: state.entities.answers
+    user: state.entities.users[ownProps.match.params.userId]
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchUser: userId => dispatch(fetchUser(userId)),
-    // fetchUserQuestions: userId => dispatch(fetchUserQuestions(userId)),
+    fetchUser: userId => dispatch(fetchUser(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

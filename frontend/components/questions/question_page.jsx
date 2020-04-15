@@ -1,6 +1,6 @@
 import React from 'react';
 import AnswerContainer from '../answers/to_questionpage/answer_container';
-import PostAnswerContainer from '../answers/to_questionpage/post_answer_container';
+import PostAnswerContainer from '../answers/post_answer_container';
 import { Link } from 'react-router-dom';
 import { createUser } from '../../util/user_util';
 
@@ -58,24 +58,9 @@ class QuestionPage extends React.Component {
                 <div className="question-answer-page">
                     <div className="QA-container">
                         <h3>{question.title}</h3>
-                        <div className="interact-options">
-                            <div className="answer-follow-container">
-                                <div className="interact-component answer-button" onClick={this.answerQuestion}>
-                                    <i className="far fa-edit" color="#329bff"/>
-                                    <span>{alreadyAnswered ? "Edit" : "Answer"}</span>
-                                </div>
-                                <div className="interact-component">
-                                    <i className="fas fa-rss"/>
-                                    <span>Follow</span>
-                                </div>
-                                <div className="interact-component">
-                                    <i className="fas fa-people-carry"/>
-                                    <span>Request</span>
-                                </div>
-                            </div>
-                            <div className="share-options">
-                                {/* icons */}
-                            </div>
+                        <div className="interact-component answer-button" onClick={this.answerQuestion}>
+                            <i className="far fa-edit" color="#329bff"/>
+                            <span>{alreadyAnswered ? "Edit" : "Answer"}</span>
                         </div>
                         <section id="write-answer" className="disappear">
                             <PostAnswerContainer questionId={question.id} currentUser={window.currentUser} state={this.state}/>

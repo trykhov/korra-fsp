@@ -1,3 +1,5 @@
+@import './variables';
+
 #user-content {
     height: 100%;
     margin: 0 auto;
@@ -12,7 +14,6 @@
     display: flex;
     font-size: 2vw;
     font-weight: bold;
-    margin-bottom: 2%;
     padding-bottom: 2%;
 }
 
@@ -32,11 +33,16 @@
 
 #user-post-nav {
     border-bottom: 2px solid  rgb(230, 231, 232);
-    padding-bottom: 3%;
-    span {
+    div {
+        display: inline-block;
+        padding: 3% 1%;
         box-sizing: border-box;
         font-size: 1.5vw;
         margin-right: 5%;
+        &:hover {
+            cursor: pointer;
+            background-color: $hoverGray;
+        }
     }
 }
 
