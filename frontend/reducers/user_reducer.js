@@ -2,7 +2,7 @@ import { RECEIVE_ALL_USERS, RECEIVE_USER, REMOVE_USER } from "../actions/user_ac
 
 const userReducer = (prevState = {}, action) => {
     Object.freeze(prevState);
-    const newState = Object.assign({}, prevState);
+    const newState = {};
     switch (action.type) {
         case RECEIVE_ALL_USERS:
             return {...prevState, ...action.users}

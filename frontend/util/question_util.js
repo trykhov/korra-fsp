@@ -27,3 +27,10 @@ export const fetchUserQuestions = userId => (
         method: 'GET'
     })
 )
+
+export const fetchQuestionUserAnswered = userId => (
+    $.ajax({
+        url: `/api/users/${userId}/answers/1/questions`,
+        method: 'GET'
+    })
+)

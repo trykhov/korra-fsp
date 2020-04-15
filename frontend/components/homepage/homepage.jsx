@@ -1,6 +1,6 @@
 import React from 'react';
 // import AnswerTab from '../answers/answer_tab_homepage';
-import AnswerTabContainer from '../answers/to_question/answer_tab_homepage_container';
+import AnswerTabContainer from '../answers/to_homepage/answer_tab_homepage_container';
 class Homepage extends React.Component {
 
     // generate an infinite scroll

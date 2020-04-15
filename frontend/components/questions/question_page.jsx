@@ -1,6 +1,6 @@
 import React from 'react';
-import AnswerContainer from '../answers/to_question/answer_container';
-import PostAnswerContainer from '../answers/to_question/post_answer_container';
+import AnswerContainer from '../answers/to_questionpage/answer_container';
+import PostAnswerContainer from '../answers/to_questionpage/post_answer_container';
 import { Link } from 'react-router-dom';
 import { createUser } from '../../util/user_util';
 

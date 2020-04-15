@@ -23,6 +23,10 @@ class User < ApplicationRecord
     has_many :questions, dependent: :destroy
     has_many :answers, dependent: :destroy
     
+    has_many :questions_user_answered,
+        through: :answers,
+        source: :question
+    
     # user specific logic (password, session_tokens)
 
     def self.find_by_credentials(email, password)

@@ -22,22 +22,32 @@ export const removeQuestion = questionId => ({
 })
 
 // thunk action
+// post a question
 export const askQuestion = question => dispatch => (
     QuestionAPI.askQuestion(question)
         .then(question => dispatch(receiveQuestion(question)))
 )
 
+// get a specific question
 export const fetchQuestion = questionId => dispatch => (
     QuestionAPI.fetchQuestion(questionId)
         .then(question => dispatch(receiveQuestion(question)))
 )
 
+// get all the questions in the database
 export const fetchAllQuestions = () => dispatch => (
     QuestionAPI.fetchAllQuestions()
         .then(questions => dispatch(receiveAllQuestions(questions)))
 )
 
+// gets questions asked by a specific user
 export const fetchUserQuestions = userId => dispatch => (
     QuestionAPI.fetchUserQuestions(userId)
+        .then(questions => dispatch(receiveAllQuestions(questions)))
+)
+
+// gets the questions that the user answered
+export const fetchQuestionUserAnswered = userId => dispatch => (
+    QuestionAPI.fetchQuestionUserAnswered(userId)
         .then(questions => dispatch(receiveAllQuestions(questions)))
 )
