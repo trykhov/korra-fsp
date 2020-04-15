@@ -14,7 +14,11 @@ class Api::QuestionsController < ApplicationController
     def index
         if params.has_key?(:user_id)
             user = User.find_by(id: params[:user_id])
-            @questions = user.questions
+            if params.has_key?(:answer_id)
+                @questions = user.questions_user_answered
+            else
+                @questions = user.questions
+            end 
         else 
             @questions = Question.all
         end

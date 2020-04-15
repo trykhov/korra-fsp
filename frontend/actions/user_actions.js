@@ -29,6 +29,8 @@ export const receiveUserError = errors => ({
 
 
 // thunk action creators
+
+
 export const fetchUser = userId => dispatch => (
     UserAPI.fetchUser(userId)
         .then(user => dispatch(receiveUser(user)))

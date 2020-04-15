@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import AnswerIndexItem from '../answers/to_question/answer_index_item';
+import UserAnswerInfo from '../answers/user_answer_info';
+import CommentContainer from '../comments/comment_container';
+import { Link } from 'react-router-dom';
+import UserAnswersContainer from '../answers/to_profilepage/user_answers_container';
 
 const UserProfile = props => {
 
-    useEffect(() => {
-        const { user, userId } = props;
-        if(user === undefined) {
-            props.fetchUser(userId);
-            props.fetchUserQuestions(userId);
-            props.fetchUserAnswers(userId);
-        }
-    })
+    const [tab, setTab] = useState("answer"); 
 
-    const { user, questions, answers } = props;
-    const answersList = Object.values(answers);
-    const questionsList = Object.values(questions);
-    const numAnswers = answersList.length;
-    const numQuestions = questionsList.length;
-    const ready = numAnswers > 0 && numQuestions > 0;
-    if(ready) {
+    const { userId, user } = props;
+
+    useEffect(() => {
+        props.fetchUser(userId);
+    }, [userId])
+    
+    function selectTab(tab) {
+        if(tab === "answer") {
+
+            return //
+        } else {
+            return //
+        }
+    }
+
+
+    if(user) {
         return (
             <section id="user-page-container">
                 <div id="user-content">
@@ -27,19 +33,13 @@ const UserProfile = props => {
                         <span>{user.username}</span>
                     </div>
                     <div id="user-post-nav">
-                        <span>{numAnswers} {numAnswers > 1 ? "Answers" : "Answer"}</span>
-                        <span>{numQuestions} {numQuestions > 1 ? "Questions" : "Question"}</span>
+                        <span onClick={() => setTab("answers")}>Answers</span>
+                        <span onClick={() => setTab("questions")}>Questions</span>
                     </div>
                     <div id="profile-nav-indicator">
-                        <span>34 Questions</span>
+                        {/* <span>{numQuestions} {numQuestions === 1 ? "Question" : "Questions"}</span> */}
                     </div>
-                    <div id="user-post-content">
-                        {
-                            answersList.map(ans => {
-                                return <AnswerIndexItem key={ans.id} user={user} answer={ans}/>
-                            })
-                        }
-                    </div>
+                    <UserAnswersContainer user={user}/>
                 </div>
             </section>
         )
