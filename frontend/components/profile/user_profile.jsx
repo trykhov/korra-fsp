@@ -3,10 +3,12 @@ import UserAnswerInfo from '../answers/user_answer_info';
 import CommentContainer from '../comments/comment_container';
 import { Link } from 'react-router-dom';
 import UserAnswersContainer from '../answers/to_profilepage/user_answers_container';
+import UserQuestionsContainer from '../questions/user_questions_container';
+
 
 const UserProfile = props => {
 
-    const [tab, setTab] = useState("answer"); 
+    const [tab, setTab] = useState("answers"); 
 
     const { userId, user } = props;
 
@@ -15,11 +17,10 @@ const UserProfile = props => {
     }, [userId])
     
     function selectTab(tab) {
-        if(tab === "answer") {
-
-            return //
+        if(tab === "answers") {
+            return <UserAnswersContainer user={user}/>
         } else {
-            return //
+            return <UserQuestionsContainer user={user}/>
         }
     }
 
@@ -33,13 +34,10 @@ const UserProfile = props => {
                         <span>{user.username}</span>
                     </div>
                     <div id="user-post-nav">
-                        <span onClick={() => setTab("answers")}>Answers</span>
-                        <span onClick={() => setTab("questions")}>Questions</span>
+                        <div className="active" onClick={() => setTab("answers")}>Answers</div>
+                        <div onClick={() => setTab("questions")}>Questions</div>
                     </div>
-                    <div id="profile-nav-indicator">
-                        {/* <span>{numQuestions} {numQuestions === 1 ? "Question" : "Questions"}</span> */}
-                    </div>
-                    <UserAnswersContainer user={user}/>
+                    {selectTab(tab)}
                 </div>
             </section>
         )
