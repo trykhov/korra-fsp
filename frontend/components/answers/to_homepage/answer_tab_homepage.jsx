@@ -43,7 +43,7 @@ class AnswerTab extends React.Component {
                     <img className="profile-image" src={window.defaultImage}/>
                     <div className="user-info">
                         <div className="username">
-                            {users[answer.user_id].username }
+                            <Link to={`/user/${users[answer.user_id].id}`}>{users[answer.user_id].username }</Link>
                         </div>
                         <div className="answered-date">
                             Answered { dateAnswered }

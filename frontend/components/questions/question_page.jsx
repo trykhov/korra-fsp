@@ -36,12 +36,13 @@ class QuestionPage extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { fetchQuestion, currentUserId } = this.props;
+        const { fetchQuestion, fetchAnswerFromUser, currentUserId } = this.props;
         const questionId = this.props.match.params.questionId
         if(prevProps.match.params.questionId !== questionId) {
             fetchQuestion(questionId);
             fetchAnswerFromUser(questionId, currentUserId)
-                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}));
+                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
+                .fail(() => this.setState({answer: '', alreadyAnswered: false, answerID: null}))
         }
     }
 

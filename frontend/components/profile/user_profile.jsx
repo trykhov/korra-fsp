@@ -17,9 +17,15 @@ const UserProfile = props => {
     }, [userId])
     
     function selectTab(tab) {
+        const currActive = document.querySelector(".active");
+        if(currActive) currActive.classList.remove("active");
         if(tab === "answers") {
+            const userAnswersDiv = document.querySelector("#user-answers");
+            if(userAnswersDiv) userAnswersDiv.classList.add("active");
             return <UserAnswersContainer user={user}/>
         } else {
+            const userQuestionsDiv = document.querySelector("#user-questions");
+            if(userQuestionsDiv) userQuestionsDiv.classList.add("active");
             return <UserQuestionsContainer user={user}/>
         }
     }
@@ -34,8 +40,8 @@ const UserProfile = props => {
                         <span>{user.username}</span>
                     </div>
                     <div id="user-post-nav">
-                        <div className="active" onClick={() => setTab("answers")}>Answers</div>
-                        <div onClick={() => setTab("questions")}>Questions</div>
+                        <div id="user-answers" className="active" onClick={() => setTab("answers")}>Answers</div>
+                        <div id="user-questions" onClick={() => setTab("questions")}>Questions</div>
                     </div>
                     {selectTab(tab)}
                 </div>

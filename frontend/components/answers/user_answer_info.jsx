@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const UserAnswerInfo = props => {
     const { answer, user } = props;
@@ -8,9 +9,9 @@ const UserAnswerInfo = props => {
         <div className="answer-user-container">
             <img className="profile-image" src={window.defaultImage}/>
             <div className="user-info">
-                <div className="username">
+                <Link className="username" to={`/user/${user.id}`}>
                     { user.username }
-                </div>
+                </Link>
                 <div className="answered-date">
                     Answered { dateAnswered }
                 </div>

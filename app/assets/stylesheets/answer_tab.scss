@@ -14,20 +14,17 @@
         margin: 1.5% auto;
         width: 95%;
     }
-    .username, .user-answer {
-        color: black;
-    }
+}
+
+.username, .user-answer {
+    color: black;
 }
 
 .question-asked {
     a {
-        color: black;
         font-size: 2vw;
         font-weight: bold;
         text-decoration: none;
-        &:hover {
-            text-decoration: underline;
-        }
     }
 }
 

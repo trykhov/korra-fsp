@@ -35,7 +35,7 @@ const UserAnswers = props => {
     const numAnswers = answersList.length;
     if(ready) {
         return (
-            <ul id="user-post-content">
+            <ul>
                 <div id="profile-nav-indicator">
                     <span>{numAnswers} {numAnswers === 1 ? "Answer" : "Answers"}</span>
                 </div>

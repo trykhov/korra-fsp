@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 const UserQuestions = props => {
 
     const {user, questions} = props;
-    const [answerInfo, setAnswer] = useState({
-    })
 
     useEffect(() => {
         props.fetchUserQuestions(user.id);
