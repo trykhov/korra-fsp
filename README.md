@@ -22,7 +22,15 @@ Link: https://korra-fsp.herokuapp.com/
 
 The app utilizes Ruby on Rails as a back-end where PostgreSQL is used to store data for the app. Using the JavaScript AJAX library, React is able to fetch the data and render it on the front-end.
 
-Through this, users are able to post questions, answers, and comments that will appear in real time. 
+Through this, users are able to post questions, answers, and comments that will appear in real time. One obstacle that was difficult to overcome was how to render so many interconnected database queries. 
+
+![Ruby](question_ruby.png)
+
+For example, to render the question page, I needed to separate my page into multiple components so that they were mounted and rendered at different times so that the program doesn't break because one component didn't render in time of loading.
+
+
+![React](question_react.png)
+
 
 In addition, the original Quora site is not responsive both for mobile and larger screens. My attempt to make this site responsive for larger screens was to practice learning responsive design as well as prepare for possible future presentations of varying screen size. In the future, I may consider doing it for mobile that allows users to access the site from their phones.
 
