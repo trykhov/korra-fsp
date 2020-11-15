@@ -27,13 +27,13 @@ module.exports = {
         use: [{loader: 'url-loader'}]
       },
       {
-                 test: /\.s[ac]ss$/,
-                 use: [
-                   'style-loader',
-                   'css-loader',
-                   'sass-loader'
-                 ],
-               }
+        test: /\.s[ac]ss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ],
+      }
     ]
   },
   devtool: 'source-map'
