@@ -3,10 +3,9 @@ import PostAnswer from "./post_answer";
 import { postAnswer, editAnswer } from "../../actions/answer_actions";
 
 const mapStateToProps = (state, ownProps) => ({
-    currentUserId: state.session.currentUser.id,
+    // questionID should be retrieved by context provider
     questionId: ownProps.questionId,
     alreadyAnswered: ownProps.state.alreadyAnswered,
-    answerText: ownProps.state.answer,
     answerID: ownProps.state.answerID
 })
 

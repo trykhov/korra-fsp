@@ -7,14 +7,18 @@ import { ProtectedRoute, AuthRoute } from './util/route_util';
 import _404Page from './components/_404_page/_404_page';
 
 
-const Root = ({store}) => (
-    <Provider store={store}>
-        <HashRouter>
-            <AuthRoute path="/login" component={SessionContainer}/>
-            <ProtectedRoute path="/" component={App} />
-        </HashRouter>
-    </Provider>
-)
+
+const Root = ({store}) => {
+
+    return (
+        <Provider store={store}>
+            <HashRouter>
+                <AuthRoute path="/login" component={SessionContainer}/>
+                <ProtectedRoute path="/" component={App} />
+            </HashRouter>
+        </Provider>
+    )
+}
 
 export default Root;
 
