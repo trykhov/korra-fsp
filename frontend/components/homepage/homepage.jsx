@@ -5,7 +5,7 @@ import { fetchAllQuestions } from "../../util/question_util";
 
 function Homepage() {
 
-    const [questions, setQuestions] = useState([]);
+    const [displayAnswers, setDisplayAnswers] = useState([]);
 
     useEffect(() => {
         const tab = document.getElementById("home-nav");
@@ -14,7 +14,8 @@ function Homepage() {
         fetchAllQuestions()
             .then(res => {
                 const questions = Object.values(res);
-                setQuestions(questions);
+                const answers = questions.map(question => <AnswerTabContainer key={question.id} question={question}/>)
+                setDisplayAnswers(answers);
             })
         return () => {
             const tab = document.getElementById("home-nav");
@@ -42,9 +43,7 @@ function Homepage() {
                                 </section>
                                 <div id="question">What is your question?</div>
                             </div>
-                            {questions.map(question => {
-                                return <AnswerTabContainer key={question.id} question={question}/>
-                            })}
+                            {displayAnswers}
                         </div>
                     </div>
                 )
