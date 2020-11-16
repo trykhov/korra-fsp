@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { fetchAllQuestionAnswers, fetchAllAnswerers } from "../../../util/question_answer_util";
 
 // this will appear in the home page as an answer to a question
-class AnswerTab extends React.Component {
+function AnswerTab(props) {
+    const { question } = props;
+    const questionID = question.id;
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: undefined,
-            answers: undefined
-        }
-    }
+    const [users, setUsers] = useState(null);
+    const [answers, setAnswers] = useState([]);
 
-    componentDidMount() {
-        const { fetchAllQuestionAnswers, fetchAllAnswerers, question } = this.props;
-        // get all the people that answered
-        fetchAllAnswerers(question.id)
-            .then(users => this.setState({users}));
-        fetchAllQuestionAnswers(question.id)
-            .then(answers => this.setState({answers: Object.values(answers)}))
-    }
+    useEffect(() => {
+        fetchAllAnswerers(questionID)
+            .then(users => setUsers(users));
+        fetchAllQuestionAnswers(questionID)
+            .then(res => {
+                const answers = Object.values(res);
+                setAnswers(answers);
+            });
+    }, [])
 
-
-
-    render() {
-        const { question } = this.props;
-        const {users, answers} = this.state;
-        // don't render until the users and the answers have values
-        if(users === undefined || answers === undefined || answers.length === 0) {
-            return null;
-        }
-        // select a random answer
+    if(users && answers.length) {
         const answer = answers[Math.floor(Math.random() * answers.length)];
         const time = new Date(answer.created_at);
         const dateAnswered = time.toDateString().substring(4);
         return (
             <li className="answer-tab-container">
                 <p className="question-asked">
-                    <Link to={`/question/${question.id}`}>{question.title}</Link>
+                    <Link to={`/question/${questionID}`}>{question.title}</Link>
                 </p>
                 <div className="answer-user-container">
                     <img className="profile-image" src={window.defaultImage}/>
@@ -58,8 +48,9 @@ class AnswerTab extends React.Component {
             </li>
         )
     }
+    return null;
+    
+
 }
-
-
 
 export default withRouter(AnswerTab);
