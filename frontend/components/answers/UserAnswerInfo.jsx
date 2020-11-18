@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { fetchUser } from '../../util/user_util';
 
 const UserAnswerInfo = props => {
-    const { answer, user } = props;
-    const time = new Date(answer.created_at);
-    const dateAnswered = time.toDateString().substring(4);
+    const { dateAnswered, userId } = props;
+    const [user, setUser] = useState({username: "", id: ""});
+
+    useEffect(() => {
+        fetchUser(userId)
+            .then(user => setUser(user))
+    }, [userId])
+
+    console.log(user);
     return (
         <div className="answer-user-container">
             <img className="profile-image" src={window.defaultImage}/>

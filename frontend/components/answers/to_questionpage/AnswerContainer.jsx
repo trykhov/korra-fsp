@@ -14,7 +14,7 @@ function AnswersContainer(props) {
         fetchAllQuestionAnswers(question.id)
             .then(res => {
                 const answersArray = Object.values(res);
-                const answers = answersArray.map(ans => <Answer key={ans.id} userId={ans.user_id} answer={ans.text}/>)
+                const answers = answersArray.map(ans => <Answer key={ans.id} userId={ans.user_id} answer={ans}/>)
                 setAnswerList(answers);
             })
         fetchAnswerFromUser(question.id, currentUser.id)
