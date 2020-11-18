@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 
 import AppContext from '../../contexts/AppContext';
@@ -6,32 +6,52 @@ import AppContext from '../../contexts/AppContext';
 function PostAnswer(props) {
     // const { questionId, alreadyAnswered, answerID } = props;
     console.log(props);
+    const { questionID, answerID, fetchAnswerFromUser } = props;
+    const [alreadyAnswered, setAlreadyAnswered] = useState(false);
+
     const formik = useFormik({
-        initialValues: { text: "" }
+        initialValues: { 
+            text: "",
+            questionID,
+            answerID
+        }
     })
+
+    // useEffect(() => {
+    //     fetchAnswerFromUser()
+    // }, [questionID]);
 
     const { text } = formik.values;
 
+    const closePost = () => {
+        const writeAnswer = document.getElementById("write-answer");
+        writeAnswer.classList.add("disappear");
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if(alreadyAnswered) {
+            props.editAnswer(answerID, text)
+                .then(() => closePost());
+        } else {
+            props.postAnswer(formik.values)
+                .then(() => closePost());
+        }
+    }
+    
     return (
-        <AppContext.Consumer>
-            {currentUser => {
-                const { id } = currentUser;
-                return (
-                    <form>
-                        <textarea 
-                            placeholder="Write your answer"
-                            onChange={formik.handleChange}
-                            value={text}
-                        >    
-                        </textarea>
-                        <div className="answer-submit-container">
-                            {/* <button id="submit" onClick={e => this.handleSubmit(e)}>{ alreadyAnswered ? "Update" : "Submit" }</button> */}
-                            {/* <button id="cancel-button" onClick={() => this.closePost()}>Cancel</button> */}
-                        </div>
-                    </form>
-                )
-            }}
-        </AppContext.Consumer>
+        <form>
+            <textarea 
+                placeholder="Write your answer"
+                onChange={formik.handleChange}
+                value={text}
+            >    
+            </textarea>
+            <div className="answer-submit-container">
+                <button id="submit" onClick={e => onSubmit(e)}>{ alreadyAnswered ? "Update" : "Submit" }</button>
+                <button id="cancel-button" >Cancel</button>
+            </div>
+        </form>
     )
 
 }
