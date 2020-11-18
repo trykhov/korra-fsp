@@ -1,74 +1,29 @@
-import React from 'react';
-import AnswerContainer from '../answers/to_questionpage/answer_container';
-import PostAnswerContainer from '../answers/post_answer_container';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createUser } from '../../util/user_util';
 
-class QuestionPage extends React.Component {
+import AnswersContainer from '../answers/to_questionpage/AnswerContainer';
+import { fetchQuestion } from '../../util/question_util';
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            answer: '',
-            alreadyAnswered: false,
-            answerID: null
-        }
-    }
+function QuestionPage(props) {
+    const { currentUser } = props;
+    const { questionId } = props.match.params;
+    const [question, setQuestion] = useState(null);
 
-    answerQuestion() {
-        const writeAnswer = document.getElementById("write-answer");
-        writeAnswer.classList.remove("disappear");
-    }
-    
-
-    componentDidMount() {
-        // remember to put a route for this
-        const { fetchQuestion, fetchAnswerFromUser, currentUserId } = this.props;
-        const questionId = this.props.match.params.questionId;
-        // remplacing box shadow of nav bar
+    useEffect(() => {
+        // replacing box shadow of nav bar
         const navBar = document.getElementById("main-nav-bar")
         navBar.style.boxShadow = "0 3px 2px -2px rgba(200,200,200,0.2)"
-        // document.body.style.backgroundColor = "rgb(255, 255, 255)";
-        // puts the question into the state
+        document.body.style.backgroundColor = "rgb(255, 255, 255)";
         fetchQuestion(questionId)
-        fetchAnswerFromUser(questionId, currentUserId)
-            .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
-    }
-
-    componentDidUpdate(prevProps) {
-        const { fetchQuestion, fetchAnswerFromUser, currentUserId } = this.props;
-        const questionId = this.props.match.params.questionId
-        if(prevProps.match.params.questionId !== questionId) {
-            fetchQuestion(questionId);
-            fetchAnswerFromUser(questionId, currentUserId)
-                .then(answer => this.setState({answer: answer.text, alreadyAnswered: true, answerID: answer.id}))
-                .fail(() => this.setState({answer: '', alreadyAnswered: false, answerID: null}))
-        }
-    }
+            .then(question => setQuestion(question));
+    }, [questionId])
 
 
-    render() {
-        const { question, answers} = this.props;
-        const { alreadyAnswered } = this.state;
-        const numAnswers = Object.keys(answers).length;
-        if(question === undefined) {
-            return null;
-        }
+    if(question) {
         return (
             <section id="question-page-container">
                 <div className="question-answer-page">
-                    <div className="QA-container">
-                        <h3>{question.title}</h3>
-                        <div className="interact-component answer-button" onClick={this.answerQuestion}>
-                            <i className="far fa-edit" color="#329bff"/>
-                            <span>{alreadyAnswered ? "Edit" : "Answer"}</span>
-                        </div>
-                        <section id="write-answer" className="disappear">
-                            <PostAnswerContainer questionId={question.id} currentUser={window.currentUser} state={this.state}/>
-                        </section>
-                        <div id="num-answers">{numAnswers} {numAnswers > 1 ? "Answers" : (numAnswers === 1) ? "Answer" : "No answers"}</div>
-                        <AnswerContainer questionId={question.id}/>
-                    </div>
+                    <AnswersContainer question={question} currentUser={currentUser}/>
                     <div id="related-q-container">
                         <div id="related-questions">
                             <h6>Related Questions</h6>
@@ -81,9 +36,10 @@ class QuestionPage extends React.Component {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section>  
         )
     }
+    return null;
 }
 
 export default QuestionPage;
