@@ -6,7 +6,14 @@ export const createComment = comment => (
     })
 )
 
-export const showComments = questionId => (
+export const fetchAnswerComments = (answerId) => (
+    $.ajax({
+        url: `/api/answers/${answerId}/comments`,
+        method: 'GET'
+    })
+)
+
+export const fetchComments = questionId => (
     $.ajax({
         url: `/api/questions/${questionId}/comments`,
         method: 'GET'
