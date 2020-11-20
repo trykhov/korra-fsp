@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PostAnswerContainer from '../answers/post_answer_container';
+import PostAnswerContainer from '../answers/PostAnswer';
 import { Link } from 'react-router-dom';
 
 const UserQuestions = props => {

@@ -17,11 +17,11 @@ Rails.application.routes.draw do
         resources :answers, only:[:show]
       end
       resources :answers, only:[:index]
-      resources :comments, only:[:index]
     end 
     
     resources :answers do 
       resources :users, only:[:index]
+      resources :comments, only:[:index]
     end 
 
     resources :comments, only:[:destroy, :update, :create]

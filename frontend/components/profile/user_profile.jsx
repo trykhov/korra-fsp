@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import UserAnswerInfo from '../answers/user_answer_info';
-import CommentContainer from '../comments/comment_container';
+import UserAnswerInfo from '../answers/UserAnswerInfo';
+import Commentsontainer from '../comments/CommentsContainer';
 import { Link } from 'react-router-dom';
 import UserAnswersContainer from '../answers/to_profilepage/user_answers_container';
 import UserQuestionsContainer from '../questions/user_questions_container';
