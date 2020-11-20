@@ -4,8 +4,9 @@ import { useFormik } from 'formik';
 import { editAnswer, fetchAnswerFromUser, postAnswer } from '../../util/answer_util';
 
 function PostAnswer(props) {
-    const { question, currentUser } = props;
-    const [userAnswer, setUserAnswer] = useState({text: ""});
+    const defaultAnswer = {text: ""};
+    const { question, currentUser, setRerender } = props;
+    const [userAnswer, setUserAnswer] = useState(defaultAnswer);
 
     const formik = useFormik({
         initialValues: { 
@@ -14,14 +15,19 @@ function PostAnswer(props) {
             user_id: currentUser.id
         }
     })
-    const { text } = formik.values;
 
-    // posting / updating answer should rerender component
     useEffect(() => {
+        const writeAnswer = document.getElementById("write-answer");
+        writeAnswer.classList.add("disappear");
+        formik.setFieldValue("question_id", question.id);
         fetchAnswerFromUser(question.id, currentUser.id)
             .then(ans => {
                 formik.setFieldValue("text", ans.text);
                 setUserAnswer(ans);
+            }).fail(err => {
+                console.log(err);
+                formik.setFieldValue("text", defaultAnswer.text);
+                setUserAnswer(defaultAnswer);
             })
     }, [question]);
 
@@ -38,12 +44,12 @@ function PostAnswer(props) {
         } else {
             response = postAnswer(formik.values);
         }
-        response.then(res => {
-            setUserAnswer(res);
-            togglePost();
-        });
+        response.then(res => setUserAnswer(res));
+        setRerender(true);
+        togglePost(); 
     }
-    
+
+    const { text } = formik.values;
     return (
         <div>  
             <div className="interact-component answer-button" onClick={togglePost}>
@@ -61,7 +67,6 @@ function PostAnswer(props) {
                     </textarea>
                     <div className="answer-submit-container">
                         <button id="submit" type="submit" onClick={e => onSubmit(e)}>{ userAnswer.text ? "Update" : "Submit" }</button>
-                        {/* fix the rerendering issue */}
                         <button id="cancel-button" onClick={() => togglePost()}>Cancel</button>
                     </div>
                 </form>
