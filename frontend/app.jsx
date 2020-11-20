@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 
 import NavBar from './components/nav_bar/nav_bar';
 import AskQuestionContainer from './components/questions/ask_question_container';
-import QuestionPage from './components/questions/question_page';
+import QuestionPage from './components/questions/QuestionPage';
 import HomePage from './components/homepage/HomePage';
 import { signOutUser } from './actions/session_actions';
 import _404Page from './components/_404_page/_404_page';
@@ -26,7 +26,7 @@ const App = () => {
                 <NavBar/>
                 <AskQuestionContainer />
                 <Route exact path="/" component={HomePage} />
-                <Route path="/question/:questionId" component={props => <QuestionPage currentUser={currentUser} {...props}/>}/>
+                <Route path="/question/:questionId" component={QuestionPage}/>
                 <Route path="/user/:userId" component={UserProfileContainer} />
                 <Route path="*" component={_404Page} />
             </div>

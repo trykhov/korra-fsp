@@ -7,7 +7,7 @@ import AppContext from '../../contexts/AppContext';
 
 function QuestionPage(props) {
     const { questionId } = props.match.params;
-    const [question, setQuestion] = useState({title: "", id: 0, user_id: ""});
+    const [question, setQuestion] = useState({title: "", id: questionId, user_id: ""});
 
     useEffect(() => {
         // replacing box shadow of nav bar
