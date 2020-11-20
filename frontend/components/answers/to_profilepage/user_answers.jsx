@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import CommentContainer from '../../comments/comment_container';
+import CommentsContainer from '../../comments/CommentsContainer';
 import { Link } from 'react-router-dom';
-import UserAnswerInfo from '../user_answer_info';
+import UserAnswerInfo from '../UserAnswerInfo';
 
 
 const UserAnswers = props => {
@@ -18,12 +18,12 @@ const UserAnswers = props => {
         if(questions[ans.question_id] !== undefined) {
             return (
                 <li className="single-answer-container" key={ans.id}>
-                    <UserAnswerInfo answer={ans} user={user}/>
+                    {/* <UserAnswerInfo answer={ans} user={user}/> */}
                     <p className="question-asked">
                         <Link to={`/question/${ans.question_id}`}>{questions[ans.question_id].title}</Link>
                     </p>
                     <p className="answer">{ans.text}</p>
-                    <CommentContainer answerId={ans.id} />
+                    <CommentsContainer answerId={ans.id} />
                 </li>
             )
         } else {
