@@ -7,8 +7,7 @@ import QuestionPage from './components/questions/QuestionPage';
 import HomePage from './components/homepage/HomePage';
 import { signOutUser } from './actions/session_actions';
 import _404Page from './components/_404_page/_404_page';
-import UserProfileContainer from './components/profile/user_profile_container';
-
+import UserProfile from './components/profile/UserProfile'
 import AppContext from './contexts/AppContext';
 
 const App = () => {
@@ -27,7 +26,7 @@ const App = () => {
                 <AskQuestionContainer />
                 <Route exact path="/" component={HomePage} />
                 <Route path="/question/:questionId" component={QuestionPage}/>
-                <Route path="/user/:userId" component={UserProfileContainer} />
+                <Route path="/user/:userId" component={UserProfile} />
                 <Route path="*" component={_404Page} />
             </div>
         </AppContext.Provider>
