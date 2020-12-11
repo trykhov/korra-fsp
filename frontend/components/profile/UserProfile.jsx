@@ -4,16 +4,18 @@ import Commentsontainer from '../comments/CommentsContainer';
 import { Link } from 'react-router-dom';
 import UserAnswersContainer from '../answers/to_profilepage/user_answers_container';
 import UserQuestionsContainer from '../questions/user_questions_container';
+import { fetchUser } from '../../util/user_util';
 
-
-const UserProfile = props => {
-
+function UserProfile(props) {
+    
+    const { userId } = props.match.params;
     const [tab, setTab] = useState("answers"); 
-
-    const { userId, user } = props;
+    const [user, setUser] = useState({id: userId, username: ""});
+    
 
     useEffect(() => {
-        props.fetchUser(userId);
+        fetchUser(userId)
+        .then(res => setUser(res));
     }, [userId])
     
     function selectTab(tab) {

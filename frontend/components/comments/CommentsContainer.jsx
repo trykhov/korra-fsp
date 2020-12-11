@@ -7,7 +7,8 @@ import { createComment, fetchAnswerComments } from '../../util/comment_util';
 function CommentsContainer(props) {
 
     const { answerId, currentUserId } = props;
-    const [comments, setComments] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [rerender, setRerender] = useState(false);
 
     useEffect(() => {
         fetchAnswerComments(answerId)
@@ -15,22 +16,29 @@ function CommentsContainer(props) {
                 const commentsArray = Object.values(res);
                 const commentsList = commentsArray.map(el => <Comment key={el.id} comment={el} />)
                 setComments(commentsList);
+                setRerender(false);
             })
-    }, [answerId])
+    }, [answerId, rerender])
 
     const formik = useFormik({
         initialValues: {
             text: "",
-            answerId,
-            currentUserId
+            answer_id: answerId,
+            user_id: currentUserId
         }
     })
+    
+    const { text } = formik.values;
 
-    const handleSubmit = () => {
-        console.log(formik.values);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        createComment(formik.values)
+            .then(() => {
+                formik.setFieldValue("text", "");
+                setRerender(true);
+            })
     }
 
-    const { text } = formik.values;
     return (
         <section className="comment-index-container">
             <div className="add-comment-container answer-user-container">
@@ -41,9 +49,10 @@ function CommentsContainer(props) {
                         placeholder="Add a comment..."
                         onChange={formik.handleChange}
                         name="text"
+                        value={text}
                     />
                 </div>
-                <button onClick={handleSubmit}
+                <button onClick={e => onSubmit(e)}
                     className={`submit-comment ${text ? "" : "disappear"}`}
                 >
                     Add Comment
